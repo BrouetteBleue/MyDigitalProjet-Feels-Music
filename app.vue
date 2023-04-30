@@ -1,5 +1,7 @@
 <template>
   <div>
-    caca
+    <NuxtLayout>
+      <NuxtPage />
+    </NuxtLayout>
   </div>
 </template>
