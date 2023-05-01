@@ -8,7 +8,12 @@ module.exports = {
       './app.vue',
     ],
     theme: {
-        extend: {},
+        extend: {
+            colors: {
+                'primary': '#404040',
+                'secondary': '#1A1A1A',
+            },            
+        },
     },
     plugins: [],
   }

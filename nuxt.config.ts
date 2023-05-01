@@ -2,7 +2,7 @@
 import { resolve } from "path";
 export default defineNuxtConfig({
     alias: {
-        '@': resolve(__dirname, './src'),
+       assets: "/<rootDir>/assets",
     },
 
     modules: [
