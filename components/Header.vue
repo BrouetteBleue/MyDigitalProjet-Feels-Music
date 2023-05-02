@@ -1,61 +1,123 @@
 <template>
-    <div class="flex flex-row justify-between pt-5 border-b-2 border-b-[#404040]">
-        <div class="w-[5%] ml-8">
-            <nuxt-link to="/">
-                <IconsLogo class="pb-5" />
-            </nuxt-link>   
+    <div class="flex flex-row justify-between h-[6.5rem] pt-7 border-b-2 border-b-[#404040] bg-[#1A1A1A]">
+      <div class="w-[5%] ml-10">
+        <nuxt-link to="/">
+          <IconsLogo class="pb-5" />
+        </nuxt-link>
+      </div>
+  
+      <!-- Navigation pour les grands écrans -->
+      <div class="hidden md:flex md:w-[95%] justify-between">
+        <div class="flex flex-row justify-between w-[16%]">
+            <div class="w-[50%] pt-1 text-center text-xl">
+                <nuxt-link to="/prods">
+                    Tracks
+                </nuxt-link>
+                </div>
+                <div class="w-[50%] pt-1 text-center text-xl">
+                <nuxt-link to="/beatmakers">
+                    Artistes
+                </nuxt-link>
+            </div>
         </div>
-        <div class="w-[5%] pt-1">
-            <nuxt-link to="/prods">
-                Tracks
-            </nuxt-link>     
+        
+        <SearchBar />
+
+        <div class="w-[13%] ">
+          <nuxt-link to="/profile/prods/add">
+            <ButtonsRoundedButton text="Vendez vos prods" />
+          </nuxt-link>
         </div>
-        <div class="w-[5%] pt-1">
-            <nuxt-link to="/beatmakers">
-                Artistes
-            </nuxt-link>         
-        </div>
-        <div class="flex flex-row w-[50%] h-10 rounded-full border-2 border-[#404040]">
-            <input type="text" class=" w-11/12 rounded-full bg-[#1A1A1A] focus:outline-none focus:ring-0 pl-4">
-            <button class="w-[10%] pt-1 pl-3">
-                <IconsSearch class="w-full"/>
-            </button>
-        </div>
-        <div class="w-[10%] ">
-            <nuxt-link to="/profile/prods/add">
-                <ButtonsRoundedButton  text="Vendez vos prods"/>
-            </nuxt-link>   
-        </div>
-        <div class="w-[5%] text-center">
+        <div class="flex flex-row justify-between w-[15%] pt-1">
+            <div class="w-[33%] text-center">
             <nuxt-link to="/profile/messages">
                 <button class="rounded-full">
                 <IconsChat />
-            </button>
-            </nuxt-link>    
-        </div>
-        <div class="w-[5%] text-center">
+                </button>
+            </nuxt-link>
+            </div>
+            <div class="w-[33%] text-center">
             <nuxt-link to="/profile">
                 <button class="rounded-full">
-                    <IconsProfile />
+                <IconsProfile />
                 </button>
             </nuxt-link>
-            
-        </div>
-        <div class="w-[5%] text-center">
+            </div>
+            <div class="w-[33%] text-center">
             <nuxt-link to="/panier">
                 <button class="rounded-full">
-                    <IconsCart />
+                <IconsCart />
                 </button>
             </nuxt-link>
-            
+            </div>
+        </div>
+        
+      </div>
+  
+      <!-- Bouton du menu latéral pour les petits écrans -->
+      
+      <div class="flex justify-between pr-6 pb-6 md:hidden">
+        <SearchBar class="w-[80%]"/>
+        <button @click="toggleSidebar" class="p-2">
+          <svg class="w-6 h-6" viewBox="0 0 20 20" fill="currentColor">
+            <path
+              d="M0 3h20v2H0zm0 6h20v2H0zm0 6h20v2H0z"
+            ></path>
+          </svg>
+        </button>
+      </div>
+  
+      
+    </div>
+  
+    <!-- Side menu -->
+    <div class="fixed transform top-0 left-0 w-64 h-full bg-[#1A1A1A] overflow-auto ease-in-out transition-all duration-300 z-30" :class="sidebarOpen ? 'translate-x-0' : '-translate-x-full'" >
+      <!-- Contenu du menu latéral -->
+        <div class="flex flex-col items-center justify-center pt-5">
+            <div>
+                <nuxt-link to="/">
+                    <IconsLogo class="mb-10 mr-40" />
+                </nuxt-link>
+            </div>
+            <div class="border-y-2  border-y-[#404040] w-full text-center">
+                <nuxt-link to="/prods">
+                    Tracks
+                </nuxt-link>
+            </div>
+            <div class="border-b-2  border-b-[#404040] w-full text-center">
+                <nuxt-link to="/beatmakers">
+                    Artistes
+                </nuxt-link>
+            </div>
+            <div class="border-b-2  border-b-[#404040] w-full text-center">
+                <nuxt-link to="/profile/prods/add">
+                    Vendez vos prods
+                </nuxt-link>
+            </div>
+            <div class="border-b-2  border-b-[#404040] w-full text-center">
+                <nuxt-link to="/profile/messages">
+                    Messages
+                </nuxt-link>
+            </div>
+            <div class="border-b-2  border-b-[#404040] w-full text-center">
+                <nuxt-link to="/profile">
+                    Profil
+                </nuxt-link>
+            </div>
+
         </div>
     </div>
-</template>
+  </template>
+  
+  <script setup>
+  import { ref } from 'vue';
 
-<script setup>
- 
+const sidebarOpen = ref(false);
+
+const toggleSidebar = () => {
+  sidebarOpen.value = !sidebarOpen.value;
+};
 </script>
 
 <style lang="scss" scoped>
-
 </style>
