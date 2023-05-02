@@ -38,7 +38,37 @@
                     <p class="text-white text-lg font-medium leading-[23px] mb-5 text-center">Découvrez de nouveaux talents et développez votre communauté grâce à votre mise en avant sur FeelsMusic</p>
                     </div>
                 </div>
+            </div>
+
+            <div class="flex flex-col items-center justify-center mt-12 mb-12">
+                <h2 class="font-bold text-3xl">Pourquoi Feels Music ?</h2>
+                <div class="flex justify-around items-center w-9/12 mt-52 mb-12">
+                    <div class="relative w-[30%] p-4 text-left mb-20 rounded-2xl  h-[450px]">
+                        <div class="absolute w-11/12 h-1/3 bg-[#404040] text-orange-400 -mt-48 ml-[-8%] z-2 flex justify-center pt-8 shadow-lg rounded-md">
+                            <icons-music-note />
+                        </div>
+                        <div class="w-5/6">
+                            <p class="text-white font-semibold text-lg pt-28 pl-8  leading-[30px]">Nous proposons une grande variété de beats de qualité pour satisfaire tous les goûts musicaux, permettant ainsi aux artistes de trouver facilement le beat qui correspond à leur style et de créer des projets uniques et originaux.</p>
+                        </div>                              
+                    </div>
+                    <div class="relative w-[30%] p-4  text-left mb-20 bg-[rgb(244,151,67)] text-black rounded-2xl shadow-md h-[450px]">
+                        <div class="absolute w-11/12 h-2/5 bg-[#404040] -mt-[20%] z-2 flex justify-center pt-8 shadow-lg rounded-md">
+                            <icons-light />
+                        </div>
+                        <div class="w-10/12">
+                            <p class="text-black font-semibold text-lg pt-28 pl-8 leading-[30px]">Nous mettons en valeur les petits beatmakers afin qu'ils aient plus de visibilité, car nous croyons en leur potentiel et souhaitons leur offrir une plateforme pour toucher un public plus large et développer leur fan base.</p>
+                        </div> 
+                    </div>
+                    <div class="relative w-[30%] p-4 text-left mb-20 rounded-2xl h-[450px]">
+                        <div class="absolute w-10/12 h-1/3 bg-[#404040] text-orange-400 font-bold -mt-48 ml-[-8%] z-2 flex justify-center pt-8 shadow-lg rounded-md">
+                            <icons-dollar />
+                        </div>
+                        <div class="w-10/12">
+                            <p class="text-white font-semibold text-lg pt-28 pl-8 leading-[30px]">Nous permettons aux beatmakers de développer leur communauté et leur audience en leur offrant une vitrine pour présenter leur travail et en leur donnant la possibilité de se connecter avec des artistes du monde entier, favorisant ainsi les collaborations et les opportunités de carrière.</p>
+                        </div>             
+                    </div>
                 </div>
+            </div>
             
         </body>
     </div>

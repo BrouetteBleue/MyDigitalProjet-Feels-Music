@@ -14,6 +14,8 @@ module.exports = {
                 'secondary': '#1A1A1A',
             },            
         },
+        
     },
     plugins: [],
+    
   }

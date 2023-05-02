@@ -2,9 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-/* body{
-    color: green;
-} */
+body{
+    background-color: #131313;
+}
 
 .bg-img {
     background-image: url(../svg/header.svg);
@@ -22,3 +22,4 @@
     top: 243px;
     background: linear-gradient(0deg, #131313 3.58%, rgba(19, 19, 19, 0.5) 60%, rgba(19, 19, 19, 0) 100%);
   }
+
