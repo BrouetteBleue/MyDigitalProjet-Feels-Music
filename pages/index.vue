@@ -74,16 +74,8 @@
 
 
 
-                <h2 class="text-center">Dernières sorties</h2>
-<div class="w-full flex items-center">
-    <div class="grid grid-cols-4 gap-40 w-1/3">
-        <div> sortie 1mmmmmmmmmmmmmmmmmmmmm</div>
-        <div> sortie 2mmmmmmmmmmmmmmmmmmmmm</div>
-        <div> sortie 3mmmmmmmmmmmmmmmmmmmmm</div>
-        <div> sortie 4mmmmmmmmmmmmmmmmmmmmm</div>
-    </div> 
-</div>
-            
+                <h2 class="text-left font-bold text-3xl ml-72 mb-10">Dernières sorties</h2>
+                <CardsMainCard />            
         </body>
     </div>
 </template>
