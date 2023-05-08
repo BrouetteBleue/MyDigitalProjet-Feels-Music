@@ -42,7 +42,7 @@
                 </div>
             </div>
 
-            <div class="flex flex-col items-center justify-center mt-12 mb-12">
+            <div class="flex flex-col items-center justify-center mt-12">
                 <h2 class="font-bold text-3xl">Pourquoi Feels Music ?</h2>
                 <div class="flex justify-around items-center w-9/12 mt-52 mb-12">
                     <div class="relative w-[30%] p-4 text-left mb-20 rounded-2xl  h-[450px]">

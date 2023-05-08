@@ -1,5 +1,5 @@
 <template lang="">
-    <div class="w-full flex flex-row justify-center items-center mb-48">
+    <div class="w-full flex flex-row justify-center items-center mb-36">
         <div class="grid grid-cols-4 gap-12 w-[78%]">  
             <CardsCardRound />
             <CardsCardRound /> 

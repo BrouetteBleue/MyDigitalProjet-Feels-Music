@@ -1,5 +1,5 @@
 <template>
-    <div class="flex flex-row justify-between h-[6.5rem] pt-7 border-b-2 border-b-[#404040] bg-[#1A1A1A]">
+    <div class="flex flex-row justify-between h-[6.5rem] pt-7 border-b-[1px] border-b-[#404040] bg-[#1A1A1A]">
       <div class="w-[5%] ml-10">
         <nuxt-link to="/">
           <IconsLogo class="pb-5" />
@@ -28,8 +28,8 @@
             <ButtonsRoundedButton text="Vendez vos prods" />
           </nuxt-link>
         </div>
-        <div class="flex flex-row justify-between w-[15%] pt-1">
-            <div class="w-[33%] text-center">
+        <div class="flex flex-row justify-between w-[15%]">
+            <div class="w-[33%] text-center pt-1">
             <nuxt-link to="/profile/messages">
                 <button class="rounded-full">
                 <IconsChat />
