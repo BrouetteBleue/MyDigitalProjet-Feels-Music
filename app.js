@@ -1,48 +1,37 @@
-//server.js
+const express = require('express');
 
-/*****
- * MODULES
-*****/
+const hostname = "0.0.0.0";
+const port = 3000;
 
-let express = require('express')
+const server = express();
 
-//charge le module de database
-//let db = require('./config/database')
+const mongoose = require("mongoose");
+mongoose.connect("mongodb://mongo/apinode");
 
-let session = require('express-session')
+server.use(express.urlencoded());
+server.use(express.json());
 
+const postRoute = require("./api/routes/buyRoute");
+postRoute(server);
 
-/******
- * CONFIG
- * ***////
+const postRoute = require("./api/routes/categorieRoute");
+postRoute(server);
 
-let app = express()
-app.set('view engine', 'ejs')
+const postRoute = require("./api/routes/chatRoute");
+postRoute(server);
 
-//permet de décoder les données de requêtes
-app.use(express.urlencoded({extended: false}))
-app.use(express.json())
+const commentRoute = require("./api/routes/commentRoute");
+commentRoute(server);
 
-app.use('/assets', express.static('public'))
+const postRoute = require("./api/routes/compteRoute");
+postRoute(server);
 
-//pour la session
-app.set('trust proxy', 1)
-app.use(session({
-	secret: 'xyyvuyhfresi2iyd8f', //clé unique
-	resave: false,
-	saveUninitialized: true,
-	cookie : { 
-	secure: false, //false si http, true si https
-	expires : new Date('2023-12-31')
-	} 
-}))
+const postRoute = require("./api/routes/followRoute");
+postRoute(server);
 
-/*****
- * MIDDLEWARS
- * *****/
+const userRoute = require("./api/routes/productionRoute");
+userRoute(server);
 
-app.use(require('./middlewares/user'))
-
-
-//port
-app.listen(8080)
+server.listen(port,hostname, () => {
+    console.log(`Serveur qui tourne sur le port ${port}`)
+});

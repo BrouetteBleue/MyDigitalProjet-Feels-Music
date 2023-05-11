@@ -1,33 +1,33 @@
+const Comment = require('../models/commentModel');
 const Production = require('../models/productionModel');
 const Compte = require('../models/compteModel');
-const Categorie = require('../models/categorieModel');
 
-exports.listAllProductions = (req, res) => {
-    Production.find({production_id: req.params.production_id, compte_id: req.params.compte_id}, (error, productions) => {
+exports.listAllComments = (req, res) => {
+    Comment.find({production_id: req.params.production_id, compte_id: req.params.compte_id}, (error, comments) => {
         if (error) {
             res.status(500);
             console.log(error);
-            res.json({ message: "Erreur serveur." });
+            res.json({ message: "Erreur serveur." }); 
         }
         else {
             res.status(200);
-            res.json(productions);
+            res.json(comments);
         }
     })
 }
 
-exports.createAProduction = (req, res) => {
-    Compte.findById(req.prams.compte_id, (error, compte), 
-    Categorie.findById(req.prams.production_id, (error, categorie)  => {
+exports.createAComment = (req, res) => {
+    Production.findById(req.prams.production_id, (error, production),
+    Compte.findById(req.prams.compte_id, (error, compte)   => {
         if (error) {
             res.status(401);
             console.log(error);
             res.json({ message: "Reqûete invalide." });
         }
         else {
-            let newProduction = new Production({...req.body, compte_id: req.params.compte_id, categorie_id: req.params.categorie_id});
+            let newComment = new Comment({...req.body, production_id: req.params.production_id, compte_id: req.params.compte_id});
           
-            newProduction.save((error, production) => {
+            newComment.save((error, comment) => {
                 if (error) {
                     res.status(401);
                     console.log(error);
@@ -35,15 +35,15 @@ exports.createAProduction = (req, res) => {
                 }
                 else {
                     res.status(201);
-                    res.json(production);
+                    res.json(comment);
                 }
             })
         }
     }))
 }
 
-exports.getAProduction = (req, res) => {
-    Production.findById(req.params.production_id, (error, production) => {
+exports.getAComment = (req, res) => {
+    Comment.findById(req.params.comment_id, (error, comment) => {
         if (error) {
             res.status(500);
             console.log(error);
@@ -51,13 +51,13 @@ exports.getAProduction = (req, res) => {
         }
         else {
             res.status(200);
-            res.json(production);
+            res.json(comment);
         }
     })
 }
 
-exports.updateAProduction = (req, res) => {
-    Production.findByIdAndUpdate(req.params.production_id, req.body, { new: true }, (error, production) => {
+exports.updateAComment = (req, res) => {
+    Comment.findByIdAndUpdate(req.params.comment_id, req.body, { new: true }, (error, comment) => {
         if (error) {
             res.status(500);
             console.log(error);
@@ -65,14 +65,13 @@ exports.updateAProduction = (req, res) => {
         }
         else {
             res.status(200);
-            res.json(production);
+            res.json(comment);
         }
     })
 }
 
-
-exports.deleteAProduction = (req, res) => {
-    Production.findByIdAndRemove(req.params.production_id, (error) => {
+exports.deleteAComment = (req, res) => {
+    Comment.findByIdAndRemove(req.params.comment_id, (error) => {
         if (error) {
             res.status(500);
             console.log(error);
@@ -80,7 +79,7 @@ exports.deleteAProduction = (req, res) => {
         }
         else {
             res.status(200);
-            res.json({message: "Article supprimé"});
+            res.json({message: "Commentaire supprimé"});
         }
     })
 } 

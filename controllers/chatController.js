@@ -1,9 +1,8 @@
-const Production = require('../models/productionModel');
+const Chat = require('../models/chatModel');
 const Compte = require('../models/compteModel');
-const Categorie = require('../models/categorieModel');
 
-exports.listAllProductions = (req, res) => {
-    Production.find({production_id: req.params.production_id, compte_id: req.params.compte_id}, (error, productions) => {
+exports.listAllChats = (req, res) => {
+    Chat.find({compte_id: req.params.compte_id}, (error, chats) => {
         if (error) {
             res.status(500);
             console.log(error);
@@ -11,23 +10,22 @@ exports.listAllProductions = (req, res) => {
         }
         else {
             res.status(200);
-            res.json(productions);
+            res.json(chats);
         }
     })
 }
 
-exports.createAProduction = (req, res) => {
-    Compte.findById(req.prams.compte_id, (error, compte), 
-    Categorie.findById(req.prams.production_id, (error, categorie)  => {
+exports.createAChat = (req, res) => {
+    Compte.findById(req.prams.compte_id, (error, posts) => {
         if (error) {
             res.status(401);
             console.log(error);
             res.json({ message: "Reqûete invalide." });
         }
         else {
-            let newProduction = new Production({...req.body, compte_id: req.params.compte_id, categorie_id: req.params.categorie_id});
+            let newChat = new Chat({...req.body, compte_id: req.params.compte_id});
           
-            newProduction.save((error, production) => {
+            newChat.save((error, chat) => {
                 if (error) {
                     res.status(401);
                     console.log(error);
@@ -35,15 +33,15 @@ exports.createAProduction = (req, res) => {
                 }
                 else {
                     res.status(201);
-                    res.json(production);
+                    res.json(chat);
                 }
             })
         }
-    }))
+    })
 }
 
-exports.getAProduction = (req, res) => {
-    Production.findById(req.params.production_id, (error, production) => {
+exports.getAChat = (req, res) => {
+    Chat.findById(req.params.chat_id, (error, chat) => {
         if (error) {
             res.status(500);
             console.log(error);
@@ -51,13 +49,13 @@ exports.getAProduction = (req, res) => {
         }
         else {
             res.status(200);
-            res.json(production);
+            res.json(chat);
         }
     })
 }
 
-exports.updateAProduction = (req, res) => {
-    Production.findByIdAndUpdate(req.params.production_id, req.body, { new: true }, (error, production) => {
+exports.updateAChat = (req, res) => {
+    Chat.findByIdAndUpdate(req.params.chat_id, req.body, { new: true }, (error, chat) => {
         if (error) {
             res.status(500);
             console.log(error);
@@ -65,14 +63,13 @@ exports.updateAProduction = (req, res) => {
         }
         else {
             res.status(200);
-            res.json(production);
+            res.json(chat);
         }
     })
 }
 
-
-exports.deleteAProduction = (req, res) => {
-    Production.findByIdAndRemove(req.params.production_id, (error) => {
+exports.deleteAChatt = (req, res) => {
+    Chat.findByIdAndRemove(req.params.chat_id, (error) => {
         if (error) {
             res.status(500);
             console.log(error);
@@ -80,7 +77,7 @@ exports.deleteAProduction = (req, res) => {
         }
         else {
             res.status(200);
-            res.json({message: "Article supprimé"});
+            res.json({message: "Conversation supprimé"});
         }
     })
-} 
+}

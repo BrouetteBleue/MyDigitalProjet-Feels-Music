@@ -1,9 +1,9 @@
+const Follow = require('../models/followModel');
 const Production = require('../models/productionModel');
 const Compte = require('../models/compteModel');
-const Categorie = require('../models/categorieModel');
 
-exports.listAllProductions = (req, res) => {
-    Production.find({production_id: req.params.production_id, compte_id: req.params.compte_id}, (error, productions) => {
+exports.listAllFollows = (req, res) => {
+    Follow.find({production_id: req.params.production_id, compte_id: req.params.compte_id}, (error, follows) => {
         if (error) {
             res.status(500);
             console.log(error);
@@ -11,23 +11,23 @@ exports.listAllProductions = (req, res) => {
         }
         else {
             res.status(200);
-            res.json(productions);
+            res.json(follows);
         }
     })
 }
 
-exports.createAProduction = (req, res) => {
-    Compte.findById(req.prams.compte_id, (error, compte), 
-    Categorie.findById(req.prams.production_id, (error, categorie)  => {
+exports.createAFollow = (req, res) => {
+    Production.findById(req.prams.production_id, (error, production),
+    Compte.findById(req.prams.compte_id, (error, compte)   => {
         if (error) {
             res.status(401);
             console.log(error);
             res.json({ message: "Reqûete invalide." });
         }
         else {
-            let newProduction = new Production({...req.body, compte_id: req.params.compte_id, categorie_id: req.params.categorie_id});
+            let newFollow = new Follow({...req.body, production_id: req.params.production_id, compte_id: req.params.compte_id});
           
-            newProduction.save((error, production) => {
+            newFollow.save((error, follow) => {
                 if (error) {
                     res.status(401);
                     console.log(error);
@@ -35,15 +35,15 @@ exports.createAProduction = (req, res) => {
                 }
                 else {
                     res.status(201);
-                    res.json(production);
+                    res.json(follow);
                 }
             })
         }
     }))
 }
 
-exports.getAProduction = (req, res) => {
-    Production.findById(req.params.production_id, (error, production) => {
+exports.getAFollow = (req, res) => {
+    Follow.findById(req.params.follow_id, (error, follow) => {
         if (error) {
             res.status(500);
             console.log(error);
@@ -51,13 +51,13 @@ exports.getAProduction = (req, res) => {
         }
         else {
             res.status(200);
-            res.json(production);
+            res.json(follow);
         }
     })
 }
 
-exports.updateAProduction = (req, res) => {
-    Production.findByIdAndUpdate(req.params.production_id, req.body, { new: true }, (error, production) => {
+exports.updateAFollow = (req, res) => {
+    Follow.findByIdAndUpdate(req.params.follow_id, req.body, { new: true }, (error, follow) => {
         if (error) {
             res.status(500);
             console.log(error);
@@ -65,14 +65,14 @@ exports.updateAProduction = (req, res) => {
         }
         else {
             res.status(200);
-            res.json(production);
+            res.json(follow);
         }
     })
 }
 
 
-exports.deleteAProduction = (req, res) => {
-    Production.findByIdAndRemove(req.params.production_id, (error) => {
+exports.deleteAFollow = (req, res) => {
+    Follow.findByIdAndRemove(req.params.follow_id, (error) => {
         if (error) {
             res.status(500);
             console.log(error);

@@ -18,7 +18,7 @@ class Buy {
 			this._id = d.id
 			this._id_prod = d._id_prod
 			this._id_compte = d._id_compte
-			this._total = d._message
+			this._total = d._total
 			this._created = d.created
 			this._modified = d.modified
 		}
