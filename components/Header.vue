@@ -2,7 +2,8 @@
     <div class="flex flex-row justify-between h-[6.5rem] pt-7 border-b-[1px] border-b-[#404040] bg-[#1A1A1A]">
       <div class="w-[5%] ml-10">
         <nuxt-link to="/">
-          <IconsLogo class="pb-5" />
+          <!-- <IconsLogo class="pb-5" /> -->
+          <img src="@/assets/img/logo_feels_blanc.png" alt="">
         </nuxt-link>
       </div>
   
