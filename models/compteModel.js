@@ -1,5 +1,5 @@
-const mongoose = require("mongoose");
-const Schema = mongoose.Schema;
+const mysql = require("mysql");
+const Schema = mysql.Schema;
 
 let compteSchema = new Schema({
     role: {
@@ -38,4 +38,4 @@ let compteSchema = new Schema({
         type: String
     }
 });
-module.exports = mongoose.model('Compte', compteSchema);
+module.exports = mysql.model('Compte', compteSchema);

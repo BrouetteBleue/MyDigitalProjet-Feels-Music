@@ -1,5 +1,5 @@
-const mongoose = require("mongoose");
-const Schema = mongoose.Schema;
+const mysql = require("mysql");
+const Schema = mysql.Schema;
 
 let chatSchema = new Schema({
     message: {
@@ -24,4 +24,4 @@ let chatSchema = new Schema({
         type: String
     }
 });
-module.exports = mongoose.model('Chat', chatSchema);
+module.exports = mysql.model('Chat', chatSchema);

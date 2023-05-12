@@ -1,5 +1,5 @@
-const mongoose = require("mongoose");
-const Schema = mongoose.Schema;
+const mysql = require("mysql");
+const Schema = mysql.Schema;
 
 let productionSchema = new Schema({
     title: {
@@ -40,4 +40,4 @@ let productionSchema = new Schema({
         type: String
     }
 });
-module.exports = mongoose.model('Production', productionSchema);
+module.exports = mysql.model('Production', productionSchema);

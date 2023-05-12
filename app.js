@@ -5,8 +5,8 @@ const port = 3000;
 
 const server = express();
 
-const mongoose = require("mongoose");
-mongoose.connect("mongodb://mongo/apinode");
+const mysql = require("mysql");
+mysql.connect("mysql://mysql/apinode");
 
 server.use(express.urlencoded());
 server.use(express.json());

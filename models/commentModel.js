@@ -1,5 +1,5 @@
-const mongoose = require("mongoose");
-const Schema = mongoose.Schema;
+const mysql = require("mysql");
+const Schema = mysql.Schema;
 
 let commentSchema = new Schema({
     message: {
@@ -24,4 +24,4 @@ let commentSchema = new Schema({
         type: String
     }
 });
-module.exports = mongoose.model('Comment', commentSchema);
+module.exports = mysql.model('Comment', commentSchema);

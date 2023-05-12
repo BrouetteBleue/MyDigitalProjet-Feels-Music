@@ -1,5 +1,5 @@
-const mongoose = require("mongoose");
-const Schema = mongoose.Schema;
+const mysql = require("mysql");
+const Schema = mysql.Schema;
 
 let categorieSchema = new Schema({
     name: {
@@ -18,4 +18,4 @@ let categorieSchema = new Schema({
         type: String
     }
 });
-module.exports = mongoose.model('Categorie', categorieSchema);
+module.exports = mysql.model('Categorie', categorieSchema);
