@@ -6,7 +6,7 @@
         </div>
         <div class="flex flex-row justify-center mt-2"> 
             <div>
-                UK, @GrosCacapuant
+                UK, @Utilisateur
             </div>
             <!-- <div class="text-orange-400 text-xl font-normal">
                 39.99€

@@ -1,14 +1,14 @@
 <template>
-    <div class="flex flex-row justify-between h-[6.5rem] pt-7 border-b-[1px] border-b-[#404040] bg-[#1A1A1A]">
-      <div class="w-[5%] ml-10">
+    <div class="flex flex-row justify-between h-[6.5rem] border-b-[1px] border-b-[#404040] bg-[#1A1A1A]">
+      <div class="w-[8%] ml-10 pt-3">
         <nuxt-link to="/">
           <!-- <IconsLogo class="pb-5" /> -->
-          <img src="@/assets/img/logo_feels_blanc.png" alt="">
+          <img src="@/assets/img/logo_feels_blanc.png"  alt="">
         </nuxt-link>
       </div>
   
       <!-- Navigation pour les grands écrans -->
-      <div class="hidden md:flex md:w-[95%] justify-between">
+      <div class="hidden md:flex md:w-[95%]  pt-7 justify-between">
         <div class="flex flex-row justify-between w-[16%]">
             <div class="w-[50%] pt-1 text-center text-xl">
                 <nuxt-link to="/prods">

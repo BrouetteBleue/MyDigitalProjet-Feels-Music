@@ -7,7 +7,7 @@
                     Ben Jones Beats
                 </div>
                 <div class="text-xl font-normal text-orange-400">
-                    UK, @Ouialaide
+                    UK, @Utilisateur
                 </div>
             </div> 
         </div> 

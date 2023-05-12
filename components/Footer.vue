@@ -1,6 +1,6 @@
 <template>
     <div class="flex flex-col md:flex-row justify-center items-center bg-[#1A1A1A] md:px-60 md:py-28 py-16">
-        <div class="w-[15%] text-center">
+        <div class="w-[15%] text-center mr-10">
             <nuxt-link to="/">
                 <!-- <IconsLogo width="80%" height="100%" class="pb-5 mt-10" /> -->
                 <img src="@/assets/img/logo_feels_blanc.png" alt="" class="pb-5 mt-10">
@@ -34,7 +34,7 @@
             <p class="font-bold text-2xl pb-4">Contact</p>
             <p class="pb-1">contact@feelsmusic.com</p>
             <p class="pb-1">+33 1 23 45 67 89</p>
-            <p class="pb-1">1 rue du caca</p>
+            <p class="pb-1">44 rue crambrais Paris 75011</p>
         </div>
     </div>
 </template>
