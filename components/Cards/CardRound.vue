@@ -4,18 +4,28 @@
         <div class="text-2xl text-center font-semibold mt-4">
             Ben Jones Beats
         </div>
-        <div class="flex flex-row justify-center mt-2"> 
+        <div class="flex flex-col items-center justify-center mt-2"> 
             <div>
                 UK, @Utilisateur
             </div>
-            <!-- <div class="text-orange-400 text-xl font-normal">
-                39.99€
-            </div> -->
+            <div v-if="Beatmaker == true" class="">
+                25 tracks
+            </div>
         </div>
     </div>
 </template>
 
 <script setup>
+
+    defineProps({
+        Beatmaker: {
+            type: Boolean,
+            default: 'false'
+        }
+    })
+
+
+
 
 </script>
 <style lang="">
