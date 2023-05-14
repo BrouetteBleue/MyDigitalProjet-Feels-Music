@@ -2,7 +2,7 @@
     <div class="flex flex-col justify-center items-center w-full py-20">
 
         <div class="w-5/12 justify-center mb-20">
-            <SearchBar class="h-[35px] w-full" />
+            <SearchBar class="h-[35px] w-full" :smallBar=true /> 
         </div>
 
 

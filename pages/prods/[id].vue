@@ -51,7 +51,7 @@
                     <ButtonsKeyword text="type beat" class="mr-3"/>
                 </div>
 
-                <ButtonsAddToCartBtn text="25,00€" class="mt-10 mb-5" />
+                <ButtonsAddToCartBtn text="25,00€" iconName="Cart" class="mt-10 mb-5" />
             </div>
             
         </div>
@@ -88,7 +88,7 @@
                         </div>
 
                         <div>
-                            <ButtonsAddToCartBtn text="25,00€" class="mt-8 mb-5 invisible lg:visible" />
+                            <ButtonsAddToCartBtn text="25,00€" iconName="Cart" class="mt-8 mb-5 invisible lg:visible" />
                         </div>                       
                     </div>
                     
@@ -112,7 +112,7 @@
                             <input type="text" placeholder="Écrire un commentaire..." class="border-b-2 border-[#3D3D3D] bg-transparent text-[#3D3D3D] w-11/12 ml-6 mr-5">
                         </div>
                         <div > 
-                            <ButtonsAddToCartBtn text="Envoyer" iconName="" class="mt-8 mb-5 mr-8" />
+                            <ButtonsAddToCartBtn text="Envoyer" class="mt-8 mb-5 mr-8" />
                         </div>
                     </div>
                         

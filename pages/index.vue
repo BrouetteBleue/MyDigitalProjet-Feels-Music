@@ -92,8 +92,11 @@
                 <BarsCurrentStars/>     
             </div>
 
-            <div class="flex flex-col items-center justify-center">
-                <h2 class="text-left font-bold text-3xl mb-8 w-[78%]">Les playlists du moment</h2>
+            <div class="flex flex-col items-center justify-start">
+                <nuxt-link to="/playlists" class="w-[78%]">
+                    <h2 class="text-left font-bold text-3xl mb-8">Les playlists du moment</h2>
+                </nuxt-link>
+                
                 <BarsTrendPlaylist/>     
             </div>
                        

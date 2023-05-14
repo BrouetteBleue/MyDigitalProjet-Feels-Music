@@ -1,0 +1,36 @@
+Computed sert a la réactivité ,
+
+    imagine tu as des variables ex : nom prenom age sexe .... 
+
+    et tu veux afficher ces variables dans un composant dans un composant
+
+    tu peux faire {{ nom }} {{ prenom }} {{ age }} {{ sexe }} 
+
+    mais si la la valeur des variables change , le composant ne va pas se mettre a jour et gardera les ancienne valeurs
+
+    ducoup tu peux faire un computed qui va retourner un objet avec les valeurs des variables
+
+    et tu fais {{ infos.nom }} {{ infos.prenom }} {{ infos.age }} {{ infos.sexe }} 
+
+    et la si la valeur des variables change , le composant va se mettre a jour et afficher les nouvelles valeurs
+
+    c'est un peu comme un watch mais en plus simple
+
+
+
+
+
+
+Pour rendre une variable réactive, il faut utiliser ref() 
+
+la variable sera "surveillée" pour chaque changement ce qui permettra de refaire les calculs
+
+et ducoup mettre a jour le DOM
+
+pour accéder la la valeur de la variable ne pas oublier le .value 
+
+
+v-bind = :
+
+pour passer une valeur (variable) a un attribu genre <img :src="imageSrc" />
+parreil pour les classe tu la deja utilisé 

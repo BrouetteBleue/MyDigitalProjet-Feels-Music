@@ -1,6 +1,6 @@
 <template>
     <button class="flex flex-row items-center justify-center rounded-full text-black w-[130px] h-[30px] bg-orange-400 font-medium text-base" >
-        {{ text }} <component :is="icons[iconName]" class="w-[1em] h-[1em] ml-2 text-black"/>  
+        {{ text }} <component v-if="icons[iconName] !== null" :is="icons[iconName]" class="w-[1em] h-[1em] ml-2 text-black"/>  
         </button>
 </template>
 
@@ -15,7 +15,7 @@ const props = defineProps({
         },
         iconName: {
             type: String,
-            default: 'Cart' // default icon
+            default: null // default icon
         }
     })
     const iconsModules = import.meta.glob('@/components/Icons/*.vue', { eager: true })
