@@ -7,7 +7,9 @@
                     Ben Jones Beats
                 </div>
                 <div class="text-xl font-normal text-orange-400">
-                    UK, @Utilisateur
+                    <nuxt-link to="/beatmakers/1">
+                        UK, @Utilisateur
+                    </nuxt-link>
                 </div>
             </div> 
         </div> 

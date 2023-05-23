@@ -4,19 +4,39 @@
                     <h1 class="text-[#9E9E9E] text-3xl font-extrabold">Mes commandes</h1>
                 </div>
                 <div>
-                    <CardsCardTrack CardType="commande" />
-                    <CardsCardTrack CardType="commande" />
-                    <CardsCardTrack CardType="commande" />
-                    <CardsCardTrack CardType="commande" />
-                    <CardsCardTrack CardType="commande" />
-                    <CardsCardTrack CardType="commande" />
-                    <CardsCardTrack CardType="commande" />
-                    <CardsCardTrack CardType="commande" />
-                    <CardsCardTrack CardType="commande" />
-                    <CardsCardTrack CardType="commande" />
-                    <CardsCardTrack CardType="commande" />
-                    <CardsCardTrack CardType="commande" />
-                    <CardsCardTrack CardType="commande" />
+                    <nuxt-link to="/prods/1">
+                        <CardsCardTrack CardType="profil" />
+                    </nuxt-link>
+                    <nuxt-link to="/prods/1">
+                        <CardsCardTrack CardType="profil" />
+                    </nuxt-link>
+                    <nuxt-link to="/prods/1">
+                        <CardsCardTrack CardType="profil" />
+                    </nuxt-link>
+                    <nuxt-link to="/prods/1">
+                        <CardsCardTrack CardType="profil" />
+                    </nuxt-link>
+                    <nuxt-link to="/prods/1">
+                        <CardsCardTrack CardType="profil" />
+                    </nuxt-link>
+                    <nuxt-link to="/prods/1">
+                        <CardsCardTrack CardType="profil" />
+                    </nuxt-link>
+                    <nuxt-link to="/prods/1">
+                        <CardsCardTrack CardType="profil" />
+                    </nuxt-link>
+                    <nuxt-link to="/prods/1">
+                        <CardsCardTrack CardType="profil" />
+                    </nuxt-link>
+                    <nuxt-link to="/prods/1">
+                        <CardsCardTrack CardType="profil" />
+                    </nuxt-link>
+                    <nuxt-link to="/prods/1">
+                        <CardsCardTrack CardType="profil" />
+                    </nuxt-link>
+                    <nuxt-link to="/prods/1">
+                        <CardsCardTrack CardType="profil" />
+                    </nuxt-link>
                 </div>
                 
                 <div class="text-center mt-5">

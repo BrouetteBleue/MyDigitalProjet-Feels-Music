@@ -20,7 +20,10 @@
 
                     <div class="flex flex-col justify-start w-[70%]">
                         <div class="">
-                            <CardsMessageUserList />
+                            <nuxt-link to="/beatmakers/1">
+                                <CardsMessageUserList />
+                            </nuxt-link>
+                            
                         </div>
                         
                         <div class="flex flex-col h-4/5 mb-5 overflow-y-auto">

@@ -5,23 +5,37 @@
                     <ButtonsAddToCartBtn text="Ajouter un beat"  iconName="Plus" class="w-[200px] h-[45px] rounded-xl"/>
                 </div>
                 <div>
-                    <CardsCardTrack CardType="profil" />
-                    <CardsCardTrack CardType="profil" />
-                    <CardsCardTrack CardType="profil" />
-                    <CardsCardTrack CardType="profil" />
-                    <CardsCardTrack CardType="profil" />
-                    <CardsCardTrack CardType="profil" />
-                    <CardsCardTrack CardType="profil" />
-                    <CardsCardTrack CardType="profil" />
-                    <CardsCardTrack CardType="profil" />
-                    <CardsCardTrack CardType="profil" />
-                    <CardsCardTrack CardType="profil" />
-                    <CardsCardTrack CardType="profil" />
-                    <CardsCardTrack CardType="profil" />
-                    <CardsCardTrack CardType="profil" />
-                    <CardsCardTrack CardType="profil" />
-                    <CardsCardTrack CardType="profil" />
-                    <CardsCardTrack CardType="profil" />
+                    <nuxt-link to="/prods/1">
+                        <CardsCardTrack CardType="profil" />
+                    </nuxt-link>
+                    <nuxt-link to="/prods/1">
+                        <CardsCardTrack CardType="profil" />
+                    </nuxt-link>
+                    <nuxt-link to="/prods/1">
+                        <CardsCardTrack CardType="profil" />
+                    </nuxt-link>
+                    <nuxt-link to="/prods/1">
+                        <CardsCardTrack CardType="profil" />
+                    </nuxt-link>
+                    <nuxt-link to="/prods/1">
+                        <CardsCardTrack CardType="profil" />
+                    </nuxt-link>
+                    <nuxt-link to="/prods/1">
+                        <CardsCardTrack CardType="profil" />
+                    </nuxt-link>
+                    <nuxt-link to="/prods/1">
+                        <CardsCardTrack CardType="profil" />
+                    </nuxt-link>
+                    <nuxt-link to="/prods/1">
+                        <CardsCardTrack CardType="profil" />
+                    </nuxt-link>
+                    <nuxt-link to="/prods/1">
+                        <CardsCardTrack CardType="profil" />
+                    </nuxt-link>
+                    <nuxt-link to="/prods/1">
+                        <CardsCardTrack CardType="profil" />
+                    </nuxt-link>
+                    
                 </div>
                 
                 <div class="text-center mt-5">

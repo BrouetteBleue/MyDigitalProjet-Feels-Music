@@ -4,10 +4,36 @@
                     <h1 class="text-[#9E9E9E] text-3xl font-bold">Titres likés</h1>
                 </div>
                 <div>
-                    <CardsCardTrack CardType="like" />
-
-                    <CardsCardTrack CardType="like" />
-                    <CardsCardTrack CardType="like" />
+                    <nuxt-link to="/prods/1">
+                        <CardsCardTrack CardType="like" />
+                    </nuxt-link>
+                    <nuxt-link to="/prods/1">
+                        <CardsCardTrack CardType="like" />
+                    </nuxt-link>
+                    <nuxt-link to="/prods/1">
+                        <CardsCardTrack CardType="like" />
+                    </nuxt-link>
+                    <nuxt-link to="/prods/1">
+                        <CardsCardTrack CardType="like" />
+                    </nuxt-link>
+                    <nuxt-link to="/prods/1">
+                        <CardsCardTrack CardType="like" />
+                    </nuxt-link>
+                    <nuxt-link to="/prods/1">
+                        <CardsCardTrack CardType="like" />
+                    </nuxt-link>
+                    <nuxt-link to="/prods/1">
+                        <CardsCardTrack CardType="like" />
+                    </nuxt-link>
+                    <nuxt-link to="/prods/1">
+                        <CardsCardTrack CardType="like" />
+                    </nuxt-link>
+                    <nuxt-link to="/prods/1">
+                        <CardsCardTrack CardType="like" />
+                    </nuxt-link>
+                    <nuxt-link to="/prods/1">
+                        <CardsCardTrack CardType="like" />
+                    </nuxt-link>
 
                 </div>
                 

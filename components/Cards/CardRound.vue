@@ -9,9 +9,9 @@
             Ben Jones Beats
             </div>
             <div class="flex flex-col items-center justify-center mt-2"> 
-                <div>
+                <nuxt-link to="/beatmakers/1">
                     UK, @Utilisateur
-                </div>
+                </nuxt-link>
                 <div v-if="Beatmaker == true" class="">
                     25 tracks
                 </div>
