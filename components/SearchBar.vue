@@ -14,7 +14,7 @@
     const props = defineProps({
         smallBar: {
             type: Boolean,
-            default: 'false'
+            default: false
         }
     })
 
