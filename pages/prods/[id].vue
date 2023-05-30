@@ -74,9 +74,16 @@
                         <span class="mr-16">2:56</span>
 
                         <div class="flex flex-row justify-between items-center text-white">
-                            <IconsForward class="rotate-180"/>
-                            <IconsPlay class="mx-2" />
-                            <IconsForward  />
+                            <button>
+                                <IconsForward class="rotate-180" />
+                            </button>
+                            <button @click="handlePlay">
+                                <IconsPlay v-if="!isTimerPlaying" class="mx-2" />
+                                <IconsPause v-if="isTimerPlaying" class="mx-2" />
+                            </button>
+                            <button>
+                                <IconsForward />
+                            </button>
                         </div>
                     </div>
 
@@ -138,9 +145,82 @@
 
 <script setup>
 
+import { ref } from 'vue';
+
+
+let tracks = [
+    {
+        name: "Chargé ta grand mere",
+        artist: "Kaaris",
+        cover: "https://images.unsplash.com/photo-1494232410401-ad00d5433cfa?crop=entropy&cs=tinysrgb&fm=jpg",
+        source: "/audio/charge.mp3",
+    },
+    {
+        name: "Hip Hop 02",
+        artist: "Artist 2",
+        cover: "https://images.unsplash.com/photo-1485579149621-3123dd979885?crop=entropy&cs=tinysrgb&fm=jpg",
+        source: "https://assets.mixkit.co/music/download/mixkit-hip-hop-02-738.mp3",
+    },
+    {
+        name: "Dreaming Big",
+        artist: "Artist 3",
+        cover: "https://images.unsplash.com/photo-1516280440614-37939bbacd81?crop=entropy&cs=tinysrgb&fm=jpg",
+        source: "https://assets.mixkit.co/music/download/mixkit-dreaming-big-31.mp3",
+    },
+];
+
+let audio = null,
+    barWidth = null,
+    duration = null,
+    currentTime = null,
+    currentTrackIndex = 0,
+    currentTrack = tracks[0];
+
+    let isTimerPlaying = ref(false);
+
+
+    const handlePlay = () => {
+        if (!audio) { // pour eviter les erreurs 500 au rechargement 
+            audio = new Audio();
+            audio.src = currentTrack.source;
+
+            audio.onloadedmetadata = () => {
+                audio.oncanplay = () => {
+                    // Code à exécuter lorsque l'audio peut être lu
+                };
+            };
+
+            audio.onplay = () => {
+                isTimerPlaying.value = true;
+            };
+
+            audio.onpause = () => {
+                isTimerPlaying.value = false;
+            };
+        }
+
+
+        if (audio.paused) {
+            audio.play();
+            isTimerPlaying.value = true;
+        } else {
+            audio.pause();
+            isTimerPlaying.value = false;
+        }
+    };
+
+    // quand le composant est détruit : on coupe le son sinon ca reste tout le temps en fond
+    onBeforeUnmount(() => { 
+        if (audio) {
+            audio.pause();
+            audio.currentTime = 0;
+
+            // ces deux ligne c pour optimiser la mémoire (on vide la source et on recharge le lecteur) ca peut aider a vider la mémoire plus vite c pas sur a 100% que ce soit vraiment efficace
+            audio.src = '';
+            audio.load();
+        }
+    });
+    
+
+    
 </script>
-
-
-<style>
-
-</style>

@@ -1,18 +1,10 @@
 <template lang="">
     <div class="w-full flex flex-row justify-center items-center mb-28">
         <div class="flex flex-col items w-full">
-            <nuxt-link to="/prods/1">
-                <CardsCardTrack />
-            </nuxt-link>
-            <nuxt-link to="/prods/2">
-                <CardsCardTrack />
-            </nuxt-link>
-            <nuxt-link to="/prods/3">
-                <CardsCardTrack />
-            </nuxt-link>
-            <nuxt-link to="/prods/4">
-                <CardsCardTrack />
-            </nuxt-link> 
+            <CardsCardTrack :idProd="1"/>
+            <CardsCardTrack :idProd="2"/>
+            <CardsCardTrack :idProd="3" />
+            <CardsCardTrack :idProd="4"/>
         </div>  
     </div>
 </template>  
