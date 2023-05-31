@@ -74,7 +74,7 @@
                         <span class="mr-16">2:56</span>
 
                         <div class="flex flex-row justify-between items-center text-white">
-                            <button>
+                            <button @click="handleSkipBackward">
                                 <IconsForward class="rotate-180" />
                             </button>
                             <button @click="handlePlay">
@@ -109,7 +109,7 @@
                         <div class="bg-white h-[1.2rem] w-[1.2rem] translate-x-[-50%] translate-y-[-32%] rounded-full z-10 shadow-xl shadow-orange-400" id="progressHead"></div> 
                     </div> -->
                     <div class="grid grid-cols-2 w-full">
-                        <div class="col-span-2 h-[0.4rem] relative cursor-pointer bg-gray-500 rounded-full mt-5"> 
+                        <div class="col-span-2 h-[0.4rem] relative cursor-pointer bg-gray-500 rounded-full mt-5" id="progressBarContainer" @click="(event) => handleSetTime(event)"> 
                             <div class="h-full bg-white w-0 rounded-full z-20" id="progressBar"></div>
                             <div class="absolute bg-white h-[1.2rem] w-[1.2rem] top-0 left-0 transform -translate-x-1/2 -translate-y-1/2 rounded-full z-10 mt-1" id="progressHead"></div>
                         </div>
@@ -190,10 +190,30 @@ let currentTrack = tracks[0];
 
     const handleSkipForward = () => {
         if (currentTrackIndex < tracks.length - 1) {
-            currentTrackIndex++;
-            currentTrack = tracks[currentTrackIndex];
-            handlePlay();
+            currentTrackIndex++;        
+        } else {
+            currentTrackIndex = 0;
         }
+
+        currentTrack = tracks[currentTrackIndex];
+
+        audio.src = currentTrack.source;
+        handlePlay();
+    }
+
+    const handleSkipBackward = () => {
+        if (currentTrackIndex > 0) {
+            currentTrackIndex--;
+            
+        } else {
+            currentTrackIndex = tracks.length - 1;
+        }
+        
+        currentTrack = tracks[currentTrackIndex];
+
+        audio.src = currentTrack.source;
+
+        handlePlay();
     }
 
 
@@ -234,8 +254,13 @@ let currentTrack = tracks[0];
                         cursec = "0" + cursec;
                     }
 
-                    let duration = durmin + ":" + dursec;
-                    let current
+
+                    // if the song is finished
+                    if (audio.currentTime == audio.duration) {
+                        handleSkipForward();
+                    }
+
+                    audio.volume = 50;
 
 
                 }
@@ -265,6 +290,24 @@ let currentTrack = tracks[0];
             isTimerPlaying.value = false;
         }
     };
+
+
+    const handleSetTime = (x) => {
+        // let maxDuration = audio.duration;
+        let position = x.pageX - document.getElementById("progressBarContainer").offsetLeft;
+        let percentage = (100 * position) / document.getElementById("progressBarContainer").offsetWidth;
+        if(percentage > 100) {
+            percentage = 100;
+        }
+        if(percentage < 0) {
+            percentage = 0;
+        }
+
+        audio.currentTime = (audio.duration * percentage) / 100;
+        document.getElementById('progressHead').style.left = percentage + '%';
+        document.getElementById('progressBar').style.width = percentage + '%';
+    }
+
 
     // quand le composant est détruit : on coupe le son sinon ca reste tout le temps en fond
     onBeforeUnmount(() => { 
