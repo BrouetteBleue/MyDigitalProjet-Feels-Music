@@ -81,7 +81,7 @@
                                 <IconsPlay v-if="!isTimerPlaying" class="mx-2" />
                                 <IconsPause v-if="isTimerPlaying" class="mx-2" />
                             </button>
-                            <button>
+                            <button @click="handleSkipForward">
                                 <IconsForward />
                             </button>
                         </div>
@@ -103,8 +103,17 @@
 
 
 
-                <div class="flex flex-row h-4 w-[99%] justify-center items-center">
-                    <input type="range" />
+                <div class="flex flex-row h-4 w-[99%] justify-start items-center">
+                    <!-- <div class="flex flex-row cursor-pointer relative bg-[#979797] h-[0.4rem] w-full mt-5 z-[1]" id="progress">    
+                        <div class="cursor-pointer relative bg-white h-[0.4rem]" id="progressBar"></div>  
+                        <div class="bg-white h-[1.2rem] w-[1.2rem] translate-x-[-50%] translate-y-[-32%] rounded-full z-10 shadow-xl shadow-orange-400" id="progressHead"></div> 
+                    </div> -->
+                    <div class="grid grid-cols-2 w-full">
+                        <div class="col-span-2 h-[0.4rem] relative cursor-pointer bg-gray-500 rounded-full mt-5"> 
+                            <div class="h-full bg-white w-0 rounded-full z-20" id="progressBar"></div>
+                            <div class="absolute bg-white h-[1.2rem] w-[1.2rem] top-0 left-0 transform -translate-x-1/2 -translate-y-1/2 rounded-full z-10 mt-1" id="progressHead"></div>
+                        </div>
+                    </div>
                 </div>
             </div> <!-- song bar -->
 
@@ -169,14 +178,23 @@ let tracks = [
     },
 ];
 
-let audio = null,
-    barWidth = null,
-    duration = null,
-    currentTime = null,
-    currentTrackIndex = 0,
-    currentTrack = tracks[0];
+let audio = null;
+let barWidth = null;
+let duration = null;
+let currentTime = null;
+let currentTrackIndex = 0;
+let currentTrack = tracks[0];
 
     let isTimerPlaying = ref(false);
+
+
+    const handleSkipForward = () => {
+        if (currentTrackIndex < tracks.length - 1) {
+            currentTrackIndex++;
+            currentTrack = tracks[currentTrackIndex];
+            handlePlay();
+        }
+    }
 
 
     const handlePlay = () => {
@@ -188,6 +206,45 @@ let audio = null,
                 audio.oncanplay = () => {
                     // Code à exécuter lorsque l'audio peut être lu
                 };
+            };
+
+            audio.ontimeupdate = () => {
+                // Code à exécuter pendant la lecture
+
+                if(audio.duration) {
+                    barWidth = (100 / audio.duration) * audio.currentTime;
+
+
+                    // on met a jour le temps (pour l'instant pas besoin)
+                    let durmin = Math.floor(audio.duration / 60);
+                    let dursec = Math.floor(audio.duration - durmin / 60);
+                    let curmin = Math.floor(audio.currentTime / 60);
+                    let cursec = Math.floor(audio.currentTime - curmin / 60);
+
+                    if (durmin < 10) {
+                        durmin = "0" + durmin;
+                    }
+                    if (dursec < 10) {
+                        dursec = "0" + dursec;
+                    }
+                    if (curmin < 10) {
+                        curmin = "0" + curmin;
+                    }
+                    if (cursec < 10) {
+                        cursec = "0" + cursec;
+                    }
+
+                    let duration = durmin + ":" + dursec;
+                    let current
+
+
+                }
+                console.log(barWidth);
+
+                // on met a jour la barre de progression
+                document.getElementById('progressHead').style.left = barWidth + '%';
+                document.getElementById('progressBar').style.width = barWidth + '%';
+                
             };
 
             audio.onplay = () => {
