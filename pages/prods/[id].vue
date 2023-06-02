@@ -90,8 +90,8 @@
                     <div class="flex flex-row justify-between items-center w-[36%]">
                         
                         <div class="flex flex-row text-white">
-                            <IconsVolume class="w-6 h-6 mr-3" /> 
-                            <input type="range">
+                            <IconsVolume class="w-6 h-6 mr-3 mt-1" /> 
+                            <input type="range" id="volume" min="0" max="1" step="0.005" @change="">
                         </div>
 
                         <div>
@@ -260,7 +260,7 @@ let currentTrack = tracks[0];
                         handleSkipForward();
                     }
 
-                    audio.volume = 50;
+                    audio.volume = 0.005;
 
 
                 }
