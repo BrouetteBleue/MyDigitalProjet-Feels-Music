@@ -91,7 +91,7 @@
                         
                         <div class="flex flex-row text-white">
                             <IconsVolume class="w-6 h-6 mr-3 mt-1" /> 
-                            <input type="range" id="volume" min="0" max="1" step="0.005" @change="">
+                            <input type="range" min="0" max="0.3" step="0.005" @input="handleVolume" id="volume">
                         </div>
 
                         <div>
@@ -187,6 +187,12 @@ let currentTrack = tracks[0];
 
     let isTimerPlaying = ref(false);
 
+    const handleVolume = (event) => {
+        audio.volume = event.target.value;
+        console.log("VOLUME AUDIO : "+audio.volume);
+        console.log("valeur input : "+event.target.value);
+    }
+
 
     const handleSkipForward = () => {
         if (currentTrackIndex < tracks.length - 1) {
@@ -225,11 +231,15 @@ let currentTrack = tracks[0];
             audio.onloadedmetadata = () => {
                 audio.oncanplay = () => {
                     // Code à exécuter lorsque l'audio peut être lu
+                    audio.volume = 0.1;
+                    document.getElementById("volume").value = 0.1;
+
                 };
             };
 
             audio.ontimeupdate = () => {
                 // Code à exécuter pendant la lecture
+                console.log(audio.duration);
 
                 if(audio.duration) {
                     barWidth = (100 / audio.duration) * audio.currentTime;
@@ -260,7 +270,7 @@ let currentTrack = tracks[0];
                         handleSkipForward();
                     }
 
-                    audio.volume = 0.005;
+                    // audio.volume = 0.055;
 
 
                 }
