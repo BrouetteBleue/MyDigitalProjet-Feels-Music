@@ -1,5 +1,5 @@
 <template>
-    <input type="text" class="rounded-lg text-white h-[32%] w-[125px] bg-black font-normal text-sm" :placeholder="text">
+    <input type="text" class="rounded-lg text-white h-10 w-full bg-[#262626] border-[1px] border-white font-normal text-sm" :placeholder="text">
 </template>
 
 <script setup>
