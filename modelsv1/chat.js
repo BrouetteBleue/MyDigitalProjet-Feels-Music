@@ -9,15 +9,15 @@ class Chat {
 	constructor(d){
 		if(d== null){
 			this._id = null
-			this._id_compte = null //(expediteur)
-			this._id_compte_2 = null //(destinataire)
+			this._id_account = null //(expediteur)
+			this._id_account_2 = null //(destinataire)
 			this._message = null
 			this._created = null
 			this._modified = null
 		}else{
 			this._id = d.id
-			this._id_compte = d._id_compte
-			this._id_compte_2 = d._id_compte_2
+			this._id_account = d._id_account
+			this._id_account_2 = d._id_account_2
 			this._message = d._message
 			this._created = d.created
 			this._modified = d.modified
@@ -27,11 +27,11 @@ class Chat {
 	get id(){
 		return this._id
 	}
-	get id_compte(){
-		return this._id_compte
+	get id_account(){
+		return this._id_account
 	}
-	get id_compte_2(){
-		return this._id_compte_2
+	get id_account_2(){
+		return this._id_account_2
 	}
 	get message(){
 		return this._message
@@ -46,11 +46,11 @@ class Chat {
 	set id(x){
 		this._id = x
 	}
-    get id_compte(){
-		this._id_compte = x
+    get id_account(){
+		this._id_account = x
 	}
-    get id_compte_2(){
-		this._id_compte_2 = x
+    get id_account_2(){
+		this._id_account_2 = x
 	}
 	get message(){
 		this._message = x
@@ -69,9 +69,9 @@ class Chat {
 			})
 	}
 
-	static create(id_compte, id_compte_2, message, callback){
+	static create(id_account, id_account_2, message, callback){
 		console.log(platform)
-		db.query('INSERT INTO chat (id_compte, id_compte_2, message) VALUES (?, ?, ?)', [id_compte, id_compte_2, message], (err, res) => {
+		db.query('INSERT INTO chat (id_account, id_account_2, message) VALUES (?, ?, ?)', [id_account, id_account_2, message], (err, res) => {
 			callback(res)
 		})
 	}

@@ -9,7 +9,7 @@ class Buy {
 	constructor(d){
 		if(d== null){
 			this._id = null
-			this._id_compte = null 
+			this._id_account = null 
 			this._id_prod = null 
 			this._total = null
 			this._created = null
@@ -17,7 +17,7 @@ class Buy {
 		}else{
 			this._id = d.id
 			this._id_prod = d._id_prod
-			this._id_compte = d._id_compte
+			this._id_account = d._id_account
 			this._total = d._total
 			this._created = d.created
 			this._modified = d.modified
@@ -27,8 +27,8 @@ class Buy {
 	get id(){
 		return this._id
 	}
-	get id_compte(){
-		return this._id_compte
+	get id_account(){
+		return this._id_account
 	}
 	get _id_prod(){
 		return this._id_prod
@@ -46,8 +46,8 @@ class Buy {
 	set id(x){
 		this._id = x
 	}
-    get id_compte(){
-		this._id_compte = x
+    get id_account(){
+		this._id_account = x
 	}
     get _id_prod(){
 		this._id_prod = x
@@ -69,9 +69,9 @@ class Buy {
 			})
 	}
 
-	static create(id_compte, id_prod, total, callback){
+	static create(id_account, id_prod, total, callback){
 		console.log(platform)
-		db.query('INSERT INTO buy (id_compte, id_prod, total) VALUES (?, ?, ?)', [id_compte, id_prod, total], (err, res) => {
+		db.query('INSERT INTO buy (id_account, id_prod, total) VALUES (?, ?, ?)', [id_account, id_prod, total], (err, res) => {
 			callback(res)
 		})
 	}

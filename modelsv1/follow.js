@@ -9,13 +9,13 @@ class Follow {
 	constructor(d){
 		if(d== null){
 			this._id = null
-			this._id_compte = null 
+			this._id_account = null 
 			this._id_prod = null 
 			this._created = null
 		}else{
 			this._id = d.id
 			this._id_prod = d._id_prod
-			this._id_compte = d._id_compte
+			this._id_account = d._id_account
 			this._created = d.created
 		}
 	}
@@ -23,8 +23,8 @@ class Follow {
 	get id(){
 		return this._id
 	}
-	get id_compte(){
-		return this._id_compte
+	get id_account(){
+		return this._id_account
 	}
 	get _id_prod(){
 		return this._id_prod
@@ -36,8 +36,8 @@ class Follow {
 	set id(x){
 		this._id = x
 	}
-    get id_compte(){
-		this._id_compte = x
+    get id_account(){
+		this._id_account = x
 	}
     get _id_prod(){
 		this._id_prod = x
@@ -53,9 +53,9 @@ class Follow {
 			})
 	}
 
-	static create(id_compte, id_prod, callback){
+	static create(id_account, id_prod, callback){
 		console.log(platform)
-		db.query('INSERT INTO follow (id_compte, id_prod) VALUES (?, ?, ?)', [id_compte, id_prod], (err, res) => {
+		db.query('INSERT INTO follow (id_account, id_prod) VALUES (?, ?, ?)', [id_account, id_prod], (err, res) => {
 			callback(res)
 		})
 	}

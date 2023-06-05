@@ -9,7 +9,7 @@ class Prod {
 	constructor(d){
 		if(d== null){
 			this._id = null
-			this._id_compte = null
+			this._id_account = null
 			this._id_categorie = null
 			this._title = null
 			this._sound = null
@@ -20,7 +20,7 @@ class Prod {
 			this._modified = null
 		}else{
 			this._id = d.id
-			this._id_compte = d._id_compte
+			this._id_account = d._id_account
 			this._id_categorie = d._id_categorie
 			this._title = d._title
 			this._sound = d._sound
@@ -35,8 +35,8 @@ class Prod {
 	get id(){
 		return this._id
 	}
-	get id_compte(){
-		return this._id_compte
+	get id_account(){
+		return this._id_account
 	}
 	get id_categorie(){
 		return this._id_categorie
@@ -63,8 +63,8 @@ class Prod {
 	set id(x){
 		this._id = x
 	}
-    get id_compte(){
-		this._id_compte = x
+    get id_account(){
+		this._id_account = x
 	}
 	get id_categorie(){
 		this._id_categorie = x
@@ -95,9 +95,9 @@ class Prod {
 			})
 	}
 
-	static create(id_compte, id_categorie, title, sound, cover, description, callback){
+	static create(id_account, id_categorie, title, sound, cover, description, callback){
 		console.log(platform)
-		db.query('INSERT INTO prod (id_compte, id_categorie, title, sound, cover, description) VALUES (?, ?, ?)', [id_compte, id_categorie, title, sound, cover, description], (err, res) => {
+		db.query('INSERT INTO prod (id_account, id_categorie, title, sound, cover, description) VALUES (?, ?, ?)', [id_account, id_categorie, title, sound, cover, description], (err, res) => {
 			callback(res)
 		})
 	}

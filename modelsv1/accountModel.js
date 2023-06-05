@@ -1,10 +1,10 @@
-// /models/compte.js
+// /models/account.js
 
 let db = require('../config/database')
 let moment = require('moment')
 moment.locale('fr')
 
-class Compte {
+class Account {
     
 	constructor(d){
 		if(d== null){
@@ -88,17 +88,17 @@ class Compte {
 
 	//
 	static all(callback){
-		db.query('SELECT * FROM compte ORDER BY created', function(err, datas){
-				callback( datas.map( (d) => new Compte(d)) )
+		db.query('SELECT * FROM account ORDER BY created', function(err, datas){
+				callback( datas.map( (d) => new account(d)) )
 			})
 	}
 
 	static create(role, pseudo, password, phone, email, country, callback){
 		console.log(platform)
-		db.query('INSERT INTO compte (role, pseudo, password, phone, email, country) VALUES (?, ?, ?)', [role, pseudo, password, phone, email, country], (err, res) => {
+		db.query('INSERT INTO account (role, pseudo, password, phone, email, country) VALUES (?, ?, ?)', [role, pseudo, password, phone, email, country], (err, res) => {
 			callback(res)
 		})
 	}
 }
 
-module.exports = Compte
+module.exports = Account
