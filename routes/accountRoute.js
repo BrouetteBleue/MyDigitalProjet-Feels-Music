@@ -4,7 +4,7 @@ module.exports = (server) => {
     
     server.route("/accounts/:account_id/accounts")
     .get(accountController.listAllAccounts)
-    .post(accountController.createA*account);
+    .post(accountController.createAAccount);
 
     server.route("/accounts/:account_id") // req.params.account_id
     .get(accountController.getAAccount)
