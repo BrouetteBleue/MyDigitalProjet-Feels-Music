@@ -2,7 +2,7 @@ module.exports = (server) => {
     
     const chat_messageController = require("../controllers/chat_messageController");
     
-    server.route("/posts/:post_id/chat_messages")
+    server.route("/accounts/:account_id/chat_messages")
     .get(chat_messageController.listAllchat_messages)
     .post(chat_messageController.createAchat_message);
 
