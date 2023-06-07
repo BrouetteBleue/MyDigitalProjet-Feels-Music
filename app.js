@@ -23,7 +23,7 @@ postRoute(server);
 const commentRoute = require("./api/routes/commentRoute");
 commentRoute(server);
 
-const postRoute = require("./api/routes/compteRoute");
+const postRoute = require("./api/routes/accountRoute");
 postRoute(server);
 
 const postRoute = require("./api/routes/followRoute");

@@ -2,7 +2,7 @@ module.exports = (server) => {
     
     const chatController = require("../controllers/chatController");
     
-    server.route("/posts/:post_id/chats")
+    server.route("/accounts/:account_id/chats")
     .get(chatController.listAllChats)
     .post(chatController.createAChat);
 

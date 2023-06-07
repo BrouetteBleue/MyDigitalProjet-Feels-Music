@@ -2,7 +2,7 @@ module.exports = (server) => {
     
     const productionController = require("../controllers/productionController");
     
-    server.route("/posts/:post_id/productions")
+    server.route("/accounts/:account_id/productions")
     .get(productionController.listAllProductions)
     .post(productionController.createAProduction);
 

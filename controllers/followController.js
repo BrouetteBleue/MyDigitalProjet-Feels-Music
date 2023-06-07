@@ -1,9 +1,9 @@
 const Follow = require('../models/followModel');
 const Production = require('../models/productionModel');
-const Compte = require('../models/compteModel');
+const Account = require('../models/accountModel');
 
 exports.listAllFollows = (req, res) => {
-    Follow.find({production_id: req.params.production_id, compte_id: req.params.compte_id}, (error, follows) => {
+    Follow.find({production_id: req.params.production_id, account_id: req.params.account_id}, (error, follows) => {
         if (error) {
             res.status(500);
             console.log(error);
@@ -18,14 +18,14 @@ exports.listAllFollows = (req, res) => {
 
 exports.createAFollow = (req, res) => {
     Production.findById(req.prams.production_id, (error, production),
-    Compte.findById(req.prams.compte_id, (error, compte)   => {
+    Account.findById(req.prams.account_id, (error, account)   => {
         if (error) {
             res.status(401);
             console.log(error);
             res.json({ message: "Reqûete invalide." });
         }
         else {
-            let newFollow = new Follow({...req.body, production_id: req.params.production_id, compte_id: req.params.compte_id});
+            let newFollow = new Follow({...req.body, production_id: req.params.production_id, account_id: req.params.account_id});
           
             newFollow.save((error, follow) => {
                 if (error) {

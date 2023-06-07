@@ -2,7 +2,7 @@ module.exports = (server) => {
     
     const accountController = require("../controllers/accountController");
     
-    server.route("/posts/:post_id/accounts")
+    server.route("/accounts/:account_id/accounts")
     .get(accountController.listAllAccounts)
     .post(accountController.createA*account);
 

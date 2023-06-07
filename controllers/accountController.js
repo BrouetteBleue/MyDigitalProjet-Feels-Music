@@ -1,7 +1,7 @@
-const Compte = require('../models/compteModel');
+const Account = require('../models/accountModel');
 
-exports.listAllComptes = (req, res) => {
-    Compte.find({}, (error, comptes) => {
+exports.listAllAccounts = (req, res) => {
+    Account.find({}, (error, accounts) => {
         if (error) {
             res.status(500);
             console.log(error);
@@ -9,15 +9,15 @@ exports.listAllComptes = (req, res) => {
         }
         else {
             res.status(200);
-            res.json(comptes);
+            res.json(accounts);
         }
     })
 } 
 
-exports.createACompte = (req, res) => {
-    let newCompte = new Compte(req.body);
+exports.createAAccount = (req, res) => {
+    let newAccount = new Account(req.body);
 
-    newCompte.save((error, compte) => {
+    newAccount.save((error, account) => {
         if (error) {
             res.status(401);
             console.log(error);
@@ -25,13 +25,13 @@ exports.createACompte = (req, res) => {
         }
         else {
             res.status(201);
-            res.json(compte);
+            res.json(account);
         }
     })
 }
 
-exports.getACompte = (req, res) => {
-    Compte.findById(req.params.compte_id, (error, compte) => {
+exports.getAAccount = (req, res) => {
+    Account.findById(req.params.account_id, (error, account) => {
         if (error) {
             res.status(500);
             console.log(error);
@@ -39,13 +39,13 @@ exports.getACompte = (req, res) => {
         }
         else {
             res.status(200);
-            res.json(compte);
+            res.json(account);
         }
     })
 }
 
-exports.updateACompte = (req, res) => {
-    Compte.findByIdAndUpdate(req.params.compte_id, req.body, { new: true }, (error, compte) => {
+exports.updateAAccount = (req, res) => {
+    Account.findByIdAndUpdate(req.params.account_id, req.body, { new: true }, (error, account) => {
         if (error) {
             res.status(500);
             console.log(error);
@@ -53,13 +53,13 @@ exports.updateACompte = (req, res) => {
         }
         else {
             res.status(200);
-            res.json(compte);
+            res.json(account);
         }
     })
 }
 
-exports.deleteACompte = (req, res) => {
-    Compte.findByIdAndRemove(req.params.compte_id, (error) => {
+exports.deleteAAccount = (req, res) => {
+    Account.findByIdAndRemove(req.params.account_id, (error) => {
         if (error) {
             res.status(500);
             console.log(error);

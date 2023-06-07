@@ -1,9 +1,9 @@
 const Buy = require('../models/buyModel');
 const Production = require('../models/productionModel');
-const Compte = require('../models/compteModel');
+const Account = require('../models/accountModel');
 
 exports.listAllBuys = (req, res) => {
-    Buy.find({production_id: req.params.production_id, compte_id: req.params.compte_id}, (error, buys) => {
+    Buy.find({production_id: req.params.production_id, account_id: req.params.account_id}, (error, buys) => {
         if (error) {
             res.status(500);
             console.log(error);
@@ -18,14 +18,14 @@ exports.listAllBuys = (req, res) => {
 
 exports.createABuy = (req, res) => {
     Production.findById(req.prams.production_id, (error, production),
-    Compte.findById(req.prams.compte_id, (error, compte)   => {
+    Account.findById(req.prams.account_id, (error, account)   => {
         if (error) {
             res.status(401);
             console.log(error);
             res.json({ message: "Reqûete invalide." });
         }
         else {
-            let newBuy = new Buy({...req.body, production_id: req.params.production_id, compte_id: req.params.compte_id});
+            let newBuy = new Buy({...req.body, production_id: req.params.production_id, account_id: req.params.account_id});
           
             newBuy.save((error, buy) => {
                 if (error) {

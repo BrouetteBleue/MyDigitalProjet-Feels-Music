@@ -1,9 +1,9 @@
 const Comment = require('../models/commentModel');
 const Production = require('../models/productionModel');
-const Compte = require('../models/compteModel');
+const Account = require('../models/accountModel');
 
 exports.listAllComments = (req, res) => {
-    Comment.find({production_id: req.params.production_id, compte_id: req.params.compte_id}, (error, comments) => {
+    Comment.find({production_id: req.params.production_id, account_id: req.params.account_id}, (error, comments) => {
         if (error) {
             res.status(500);
             console.log(error);
@@ -18,14 +18,14 @@ exports.listAllComments = (req, res) => {
 
 exports.createAComment = (req, res) => {
     Production.findById(req.prams.production_id, (error, production),
-    Compte.findById(req.prams.compte_id, (error, compte)   => {
+    Account.findById(req.prams.account_id, (error, account)   => {
         if (error) {
             res.status(401);
             console.log(error);
             res.json({ message: "Reqûete invalide." });
         }
         else {
-            let newComment = new Comment({...req.body, production_id: req.params.production_id, compte_id: req.params.compte_id});
+            let newComment = new Comment({...req.body, production_id: req.params.production_id, account_id: req.params.account_id});
           
             newComment.save((error, comment) => {
                 if (error) {

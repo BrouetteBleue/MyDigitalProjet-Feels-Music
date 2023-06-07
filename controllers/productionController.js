@@ -1,9 +1,9 @@
 const Production = require('../models/productionModel');
-const Compte = require('../models/compteModel');
+const Account = require('../models/accountModel');
 const Categorie = require('../models/categorieModel');
 
 exports.listAllProductions = (req, res) => {
-    Production.find({production_id: req.params.production_id, compte_id: req.params.compte_id}, (error, productions) => {
+    Production.find({production_id: req.params.production_id, account_id: req.params.account_id}, (error, productions) => {
         if (error) {
             res.status(500);
             console.log(error);
@@ -17,7 +17,7 @@ exports.listAllProductions = (req, res) => {
 }
 
 exports.createAProduction = (req, res) => {
-    Compte.findById(req.prams.compte_id, (error, compte), 
+    Account.findById(req.prams.account_id, (error, account), 
     Categorie.findById(req.prams.production_id, (error, categorie)  => {
         if (error) {
             res.status(401);
@@ -25,7 +25,7 @@ exports.createAProduction = (req, res) => {
             res.json({ message: "Reqûete invalide." });
         }
         else {
-            let newProduction = new Production({...req.body, compte_id: req.params.compte_id, categorie_id: req.params.categorie_id});
+            let newProduction = new Production({...req.body, account_id: req.params.account_id, categorie_id: req.params.categorie_id});
           
             newProduction.save((error, production) => {
                 if (error) {

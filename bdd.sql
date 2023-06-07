@@ -7,7 +7,7 @@ CREATE TABLE `account` (`id` INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	`phone` INT(10) NULL,
 	`email` VARCHAR(255) NOT NULL UNIQUE,
 	`country` VARCHAR(255) NULL,
-	`photo` VARCHAR(255) NULL,
+	`avatar` VARCHAR(255) NULL,
 	`insta` VARCHAR(255) NULL,
 	`open_to_work` BOOLEAN,
 	`created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP(), 
@@ -15,7 +15,7 @@ CREATE TABLE `account` (`id` INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
 
 CREATE TABLE `style` (`id` INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY, 
 	`name` ENUM('Pop', 'Rock', 'Jazz', 'Blues', 'Country', 'Soul', 'R&B', 'Hip-Hop', 'Electro', 'Reggae', 'Métal', 
-		'Classique', 		'Disco', 'Funk', 'Rap', 'Afrobeat', 'K-pop') NOT NULL);
+		'Classique', 'Disco', 'Funk', 'Rap', 'Afrobeat', 'K-pop') NOT NULL);
 
 CREATE TABLE `category` (`id` INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY, 
 	`name` ENUM('Hard Rock', 'Soft Rock', 'Punk Rock', 'Bebop', 'Swing', 'Jazz Fusion', 'Delta Blues', 'Chicago Blues',
@@ -35,7 +35,7 @@ CREATE TABLE `production` (`id` INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	`views` INT NULL,
 	`downloads` INT NULL,
 	`bpm` INT NULL,
-	`length` VARCHAR(10) NULL,
+	`length` VARCHAR(10) NOT NULL,
 	`price` DECIMAL(5,2) NOT NULL,
 	`created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP(), 
 	`modified` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP());
@@ -73,13 +73,13 @@ CREATE TABLE `likes` (`id` INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
 CREATE TABLE `playlists` (`id` INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY, 
 	`title` VARCHAR(255) NOT NULL,
 	`likes` INTEGER NOT NULL,
-	`category_id` INTEGER NOT NULL,
-	`style_id` INTEGER NOT NULL,
 	`created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP(), 
 	`modified` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP());
 
 CREATE TABLE `playlist_songs` (`id` INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY, 
 	`playlist_id` INTEGER NOT NULL,
+	`style_id` INTEGER NOT NULL,
+	`category_id` INTEGER NOT NULL,
 	`created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP(), 
 	`modified` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP());
 
@@ -93,7 +93,7 @@ CREATE TABLE `reports` (`id` INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
 
 
 ALTER TABLE `production` ADD FOREIGN KEY(`account_id`) REFERENCES `account`(`id`) ON DELETE CASCADE;
-ALTER TABLE `production` ADD FOREIGN KEY(`categorie_id`) REFERENCES `categorie`(`id`) ON DELETE NO ACTION;
+ALTER TABLE `production` ADD FOREIGN KEY(`category_id`) REFERENCES `category`(`id`) ON DELETE NO ACTION;
 ALTER TABLE `production` ADD FOREIGN KEY(`style_id`) REFERENCES `style`(`id`) ON DELETE NO ACTION;
 
 ALTER TABLE `comment` ADD FOREIGN KEY(`account_id`) REFERENCES `account`(`id`) ON DELETE NO ACTION;
@@ -112,9 +112,9 @@ ALTER TABLE `likes` ADD FOREIGN KEY(`account_id`) REFERENCES `account`(`id`) ON 
 ALTER TABLE `likes` ADD FOREIGN KEY(`production_id`) REFERENCES `production`(`id`) ON DELETE CASCADE;
 
 ALTER TABLE `playlists` ADD FOREIGN KEY(`style_id`) REFERENCES `style`(`id`) ON DELETE NO ACTION;
-ALTER TABLE `playlists` ADD FOREIGN KEY(`categorie_id`) REFERENCES `categorie`(`id`) ON DELETE NO ACTION;
+ALTER TABLE `playlists` ADD FOREIGN KEY(`category_id`) REFERENCES `category`(`id`) ON DELETE NO ACTION;
 
-ALTER TABLE `playlist_songs` ADD FOREIGN KEY(`playlist_id`) REFERENCES `playlists`(`id`) ON DELETE NO ACTION;
+ALTER TABLE `playlist_songs` ADD FOREIGN KEY(`playlist_id`) REFERENCES `playlists`(`id`) ON DELETE CASCADE;
 
 ALTER TABLE `reports` ADD FOREIGN KEY(`sender`) REFERENCES `account`(`id`) ON DELETE NO ACTION;
 ALTER TABLE `reports` ADD FOREIGN KEY(`accused`) REFERENCES `account`(`id`) ON DELETE NO ACTION;

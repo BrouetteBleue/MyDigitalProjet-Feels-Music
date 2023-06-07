@@ -1,8 +1,8 @@
 const Chat = require('../models/chatModel');
-const Compte = require('../models/compteModel');
+const Account = require('../models/accountModel');
 
 exports.listAllChats = (req, res) => {
-    Chat.find({compte_id: req.params.compte_id}, (error, chats) => {
+    Chat.find({account_id: req.params.account_id}, (error, chats) => {
         if (error) {
             res.status(500);
             console.log(error);
@@ -16,14 +16,14 @@ exports.listAllChats = (req, res) => {
 }
 
 exports.createAChat = (req, res) => {
-    Compte.findById(req.prams.compte_id, (error, posts) => {
+    Account.findById(req.prams.account_id, (error, posts) => {
         if (error) {
             res.status(401);
             console.log(error);
             res.json({ message: "Reqûete invalide." });
         }
         else {
-            let newChat = new Chat({...req.body, compte_id: req.params.compte_id});
+            let newChat = new Chat({...req.body, account_id: req.params.account_id});
           
             newChat.save((error, chat) => {
                 if (error) {
@@ -68,7 +68,7 @@ exports.updateAChat = (req, res) => {
     })
 }
 
-exports.deleteAChatt = (req, res) => {
+exports.deleteAChat = (req, res) => {
     Chat.findByIdAndRemove(req.params.chat_id, (error) => {
         if (error) {
             res.status(500);
