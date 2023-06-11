@@ -1,26 +1,42 @@
 <template>
-    <div class="flex flex-col lg:flex-row justify-center items-center lg:items-start lg:justify-evenly  my-20">
+    <div class="flex flex-col lg:flex-row justify-center items-center lg:items-start lg:justify-evenly my-10 lg:my-20">
         
         <div class="flex flex-col justify-center w-10/12 h-3/4 lg:w-[29%] bg-[#292929] border-2 border-[#3D3D3D] rounded-3xl py-5 ">
-            <div class="flex flex-row justify-center w-full pb-5">
-                <img src="@/assets/img/HARO536707.jpg" alt="" class="w-6/12 rounded-xl h-[280px]">
+            <div class="flex flex-col lg:flex-row justify-center items-center w-full pb-5">
+                <div class="w-8/12 lg:w-6/12 flex flex-row justify-center">
+                    <img src="@/assets/img/HARO536707.jpg" alt="" class="w-full rounded-xl max-h-[280px]">
+                </div>
                 
-                <div class="flex flex-col w-3/12 justify-start ml-10">
-                    <div class="flex flex-row">
-                        <IconsHeart class="mr-3 mb-3 w-[1.5em] h-[1.5em] text-white" /> 345
+                <div class="flex flex-col lg:w-3/12 justify-start lg:ml-10">
+                    <div class="flex flex-row lg:flex-col mt-5">
+                        <div class="flex flex-row  mr-5">
+                        <IconsHeart class="mr-1 lg:mr-3 mb-3 w-[1.5em] h-[1.5em] text-white" /> 345
+                        </div>
+                        <div class="flex flex-row mr-5">
+                            <IconsEye class="mr-1 lg:mr-3 mb-3 w-[1.5em] h-[1.5em]" /> 3,4K
+                        </div>
+                        <div class="flex flex-row mr-5">
+                            <IconsDownload class="mr-1 lg:mr-3 mb-3 w-[1.5em] h-[1.5em]"/> 112
+                        </div>
                     </div>
-                    <div class="flex flex-row">
-                        <IconsEye class="mr-3 mb-3 w-[1.5em] h-[1.5em]" /> 3,4K
-                    </div>
-                    <div class="flex flex-row">
-                        <IconsDownload class="mr-3 mb-3 w-[1.5em] h-[1.5em]"/> 112
-                    </div>
+                    
+                    <!-- mobile -->
+                    <div class="flex flex-row justify-center lg:hidden">
+                        <div class="mr-5">
+                        120 BPM
+                        </div>
+                        <div> 
+                            02/04/2023
+                        </div>
+                    </div> 
+                    <!-- mobile -->
 
-                    <button class="rounded-xl bg-[#181818] text-orange-400 mt-5 flex flex-row justify-evenly w-24 items-center font-medium">
+                    <!-- big -->
+                    <button class="rounded-xl bg-[#181818] text-orange-400 mt-5 flex-row justify-evenly w-24 items-center font-medium hidden lg:flex">
                         share <IconsShare />
                     </button>  
                     
-                    <div class="pt-20">
+                    <div class="pt-20 hidden lg:flex flex-col">
                         <div>
                         120 BPM
                         </div>
@@ -28,11 +44,12 @@
                             02/04/2023
                         </div>
                     </div> 
+                    <!-- big -->
                     
                 </div>
             </div>
-            <div class="flex flex-col pl-11">
-                <div class="text-4xl font-medium mb-6"> 
+            <div class="flex flex-col items-center lg:items-start pl-0 lg:pl-11">
+                <div class="text-2xl lg:text-4xl font-medium mb-3 lg:mb-6"> 
                     Yeh im mad  
                 </div>
 
@@ -44,20 +61,26 @@
                     <span class="text-[#878787] text-base">Catégorie:</span>  <span class="font-medium text-base ml-4">Hip-hop</span>
                 </div>
 
-                <div class="flex flex-row">
-                    <ButtonsKeyword text="808" class="mr-3" />
-                    <ButtonsKeyword text="lil baby" class="mr-3" />
-                    <ButtonsKeyword text="rap" class="mr-3"/>
-                    <ButtonsKeyword text="type beat" class="mr-3"/>
+                <div class="flex flex-row flex-wrap justify-center">
+                    <ButtonsKeyword text="808" class="mr-3 mb-3" />
+                    <ButtonsKeyword text="lil baby" class="mr-3 mb-3" />
+                    <ButtonsKeyword text="rap" class="mr-3 mb-3"/>
+                    <ButtonsKeyword text="type beat" class="mr-3 mb-3"/>
+                    <ButtonsKeyword text="type beat" class="mr-3 mb-3"/>
+                    <ButtonsKeyword text="type beat" class="mr-3 mb-3"/>
                 </div>
 
                 <ButtonsAddToCartBtn text="25,00€" iconName="Cart" class="mt-10 mb-5" />
+
+                <button class="rounded-xl bg-[#181818] text-orange-400 mt-5 flex-row justify-evenly w-24 items-center font-medium flex lg:hidden">
+                        share <IconsShare />
+                </button> 
             </div>
             
         </div>
        
         <div class="w-10/12 lg:w-6/12 flex flex-col">
-            <div class="flex flex-col items-center bg-[#292929] border-2 border-[#3D3D3D] rounded-xl pt-2"> <!-- song bar -->
+            <div class="flex flex-col items-center bg-[#292929] border-2 border-[#3D3D3D] rounded-xl pt-2 min-w-[115%] -ml-6"> <!-- song bar -->
 
 
                 <div class="flex flex-row items-center">
@@ -89,7 +112,7 @@
 
                     <div class="flex flex-row justify-between items-center w-[36%]">
                         
-                        <div class="flex flex-row text-white">
+                        <div class="hidden lg:flex flex-row text-white">
                             <IconsVolume class="w-6 h-6 mr-3 mt-1" /> 
                             <input type="range" min="0" max="0.3" step="0.005" @input="handleVolume" id="volume">
                         </div>
@@ -123,17 +146,15 @@
                 <div class="flex flex-row w-full items-center py-5">
                     <img class="rounded-full w-[60px] h-[60px] ml-6 lg:ml-14" src="@/assets/img/HARO536707.jpg" alt="">
                    
-                    <div class="flex flex-col lg:flex-row w-full items-center py-5">
-                        <div class="text-sm font-normal w-11/12 pl-1 mb-2">
-                            <input type="text" placeholder="Écrire un commentaire..." class="border-b-2 border-[#3D3D3D] bg-transparent text-[#3D3D3D] w-11/12 ml-6 mr-5">
+                    <!-- <div class="flex flex-col lg:flex-row w-full items-center py-5"> -->
+                        <div class="text-sm font-normal w-8/12 lg:w-11/12 pl-1 mb-2">
+                            <input type="text" placeholder="Écrire un commentaire..." class="border-b-2 border-[#3D3D3D] bg-transparent text-white w-11/12 ml-6 mr-5">
                         </div>
                         <div > 
-                            <ButtonsAddToCartBtn text="Envoyer" class="mt-8 mb-5 mr-8" />
+                            <ButtonsAddToCartBtn text="Envoyer" class="mt-8 mb-5 mr-8 hidden lg:flex" />
                         </div>
-                    </div>
-                        
-
-                     
+                    <!-- </div> -->
+                            
                 </div>
     
                 <CardsCardComment />

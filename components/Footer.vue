@@ -1,6 +1,6 @@
 <template>
     <div class="flex flex-col md:flex-row justify-center items-center bg-[#1A1A1A] md:px-60 md:py-28 py-16">
-        <div class="w-[15%] text-center mr-10">
+        <div class="md:w-[15%] w-[45%] text-center mr-10">
             <nuxt-link to="/">
                 <!-- <IconsLogo width="80%" height="100%" class="pb-5 mt-10" /> -->
                 <img src="@/assets/img/logo_feels_blanc.png" alt="" class="pb-5 mt-10">
