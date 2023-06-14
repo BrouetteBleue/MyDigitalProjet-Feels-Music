@@ -1,8 +1,8 @@
 <template>
-    <div class="flex flex-row justify-center py-20">
-        <ProfilePageSideBar :focus="4" />
+    <div class="flex flex-row justify-center py-10 lg:py-20">
+        <ProfilePageSideBar :focus="4" class="hidden lg:flex" />
 
-        <div class="flex flex-col justify-center items-center w-7/12 ">
+        <div class="flex flex-col justify-center items-center w-[88%] lg:w-7/12 ">
             <ProfilePageLikes />
         </div>
     </div>

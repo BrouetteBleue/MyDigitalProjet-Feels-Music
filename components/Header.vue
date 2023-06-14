@@ -10,7 +10,7 @@
         </button>
         <nuxt-link class="flex flex-row justify-center lg:w-full w-1/2" to="/">
           <img class="h-full w-full hidden lg:block" src="@/assets/img/logo_feels_blanc.png"  alt="">
-          <img class="w-[2.5em] h-[2.5em] flex lg:hidden" src="@/assets/img/mobile-logo.png"  alt=""/>
+          <img class="w-[2.3em] h-[2.3em] flex lg:hidden" src="@/assets/img/mobile-logo.png"  alt=""/>
         </nuxt-link>
       </div>
   
@@ -72,11 +72,11 @@
       <div class="flex justify-center items-center w-[75%] lg:pr-6  lg:hidden">
         <SearchBar class="w-[72%]"/>
         <div class="w-[16%] pl-2 lg:pl-0 text-center text-[#A8A8A8]">
-            <nuxt-link to="/profile">
-                <button class="rounded-full">
-                <IconsProfile />
+            <!-- <nuxt-link to="/profile"> -->
+                <button class="rounded-full" >
+                <IconsProfile @Click="HandleProfileDropdown"/>
                 </button>
-            </nuxt-link>
+            <!-- </nuxt-link> -->
             </div>
             <div class="w-[16%] text-center text-[#A8A8A8]">
             <nuxt-link to="/panier">
@@ -95,7 +95,7 @@
       <!-- Contenu du menu latéral -->
         <div class="flex flex-col items-center justify-center pt-5">
             <div class="flex flex-row justify-between items-center mb-10">
-                <nuxt-link class="flex flex-row justify-center items-center w-10/12" to="/">
+                <nuxt-link class="flex flex-row justify-center items-center w-10/12" to="/" @click="toggleSidebar">
                     <img class="mr-20 w-5/12" src="@/assets/img/logo_feels_blanc.png"  alt="" />
                 </nuxt-link>
                 <div class="w-2/12 text-[#F49743] font-bold text-2xl" @click="toggleSidebar">
@@ -103,42 +103,63 @@
                 </div>
             </div>
             <div class="border-b-2 mb-5 pb-3 border-y-[#404040] w-full text-center">
-                <nuxt-link to="/prods">
+                <nuxt-link to="/prods" @click="toggleSidebar">
                     Tracks
                 </nuxt-link>
             </div>
             <div class="border-b-2 mb-5 pb-3 border-b-[#404040] w-full text-center">
-                <nuxt-link to="/beatmakers">
+                <nuxt-link to="/beatmakers" @click="toggleSidebar">
                     Artistes
                 </nuxt-link>
             </div>
             <div class="border-b-2 mb-5 pb-3 border-b-[#404040] w-full text-center">
-                <nuxt-link to="/profile/prods/add">
+                <nuxt-link to="/playlists" @click="toggleSidebar">
+                    Playlists
+                </nuxt-link>
+            </div>
+            <div class="border-b-2 mb-5 pb-3 border-b-[#404040] w-full text-center">
+                <nuxt-link to="/profile/prods/add" @click="toggleSidebar">
                     Vendez vos prods
                 </nuxt-link>
             </div>
             <div class="border-b-2 mb-5 pb-3 border-b-[#404040] w-full text-center">
-                <nuxt-link to="/profile/messages">
+                <nuxt-link to="/profile/messages" @click="toggleSidebar">
                     Messages
                 </nuxt-link>
             </div>
             <div class="border-b-2 mb-5 pb-3 border-b-[#404040] w-full text-center">
-                <nuxt-link to="/profile">
+                <nuxt-link to="/profile" @click="toggleSidebar">
                     Profil
                 </nuxt-link>
             </div>
 
         </div>
     </div>
+
+
+    <!-- Mobile Profile menu -->
+    <div class="flex flex-row justify-center fixed transform left-[8%] w-10/12  bg-[#292929] border-2 border-[#404040] rounded-2xl overflow-auto ease-in-out transition-all duration-300 z-30" :class="profileBarOpen ? 'translate-y-0 top-[100px]' : '-translate-y-full top-0'">
+        <ProfilePageSideBar @linkClicked="HandleProfileDropdown"/>
+    </div>
+
+
+
+
   </template>
   
   <script setup>
   import { ref } from 'vue';
 
 const sidebarOpen = ref(false);
+const profileBarOpen = ref(false);
 
 const toggleSidebar = () => {
   sidebarOpen.value = !sidebarOpen.value;
+};
+
+const HandleProfileDropdown = () => {
+
+    profileBarOpen.value = !profileBarOpen.value;
 };
 </script>
 

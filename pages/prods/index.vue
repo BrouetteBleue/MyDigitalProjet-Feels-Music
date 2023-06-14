@@ -1,19 +1,23 @@
 <template>
     <div class="flex flex-col justify-center items-center">
-        <div class="flex w-[80%] justify-end">
+
+        <div class="flex lg:hidden text-[#9E9E9E] text-xl lg:text-3xl font-extrabold text-start w-11/12">
+            Liste des beats
+        </div>
+
+        <div class="hidden lg:flex w-[80%] justify-end">
             <ButtonsSelect text="Popularité" class="w-[15%]"/>
         </div>
 
-        <div class="flex flex-row justify-between w-[80%] ">
-            <div class="flex flex-col justify-center items-center w-3/12 h-[16em] rounded-xl border-[1px] border-[#404040] bg-[#292929]">
+        <div class="flex flex-row justify-between w-[90%] ">
+            <div class="hidden lg:flex flex-col justify-center items-center w-3/12 h-[16em] rounded-xl border-[1px] border-[#404040] bg-[#292929]">
+              Filtrer par :
                 <ButtonsSelect text="Catégories"/>
                 <ButtonsSelect text="Style"/>
                 <input type="range"  min="0" max="100" class="text-[#CFCFCF] bg-[#292929]" >
             </div>
 
-
-
-            <div class="flex flex-col justify-between w-[70%]">
+            <div class="flex flex-row justify-between w-full mt-5">
                 <BarsTrackList />
             </div>
 

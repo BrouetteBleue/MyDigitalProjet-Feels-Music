@@ -34,3 +34,18 @@ v-bind = :
 
 pour passer une valeur (variable) a un attribu genre <img :src="imageSrc" />
 parreil pour les classe tu la deja utilisé 
+
+
+pour émettre un évènement depuis un composant vers son composant parent on utilise emit() :
+
+const emit = defineEmits(['monEvenement'])
+
+const handleEvent = () => {  // fonction pour trigger l'event dans le composant enfant
+    emit('monEvenement')
+  }
+
+
+// dans le composant parent :
+<monComposant @monEvenement="handleComponentEvent" />
+
+handleComponentEvent est le nom de la fonction qui va gérer l'event dans le composant parent

@@ -13,6 +13,7 @@
         <div class="fade z-0"></div>
     </header>
 
+    
     <div class="flex flex-col items-center justify-center mt-[-10px] mb-[2.5%] z-10">
         <h2 class="text-white text-2xl font-bold z-10">Nos services</h2>
 
@@ -40,50 +41,56 @@
         </div>
     </div>
 
-    <div class="flex flex-col items-center justify-center mt-12">
-        <h2 class="font-bold text-3xl">Pourquoi Feels Music ?</h2>
-        <div class="flex lg:flex-row flex-col justify-around items-center w-9/12 lg:mt-52 mt-28 mb-12">
-            <div class="relative lg:w-[30%] w-full p-4 text-left lg:mb-20 mb-60 rounded-2xl lg:h-[450px] h-[350px] bg-[#1F1F1F]">
-                <div class="absolute lg:w-[95%] w-[90%] h-[30%] lg:h-[45%]  items-center bg-[#404040] -mt-[28%] z-2 flex justify-center shadow-lg lg:rounded-2xl rounded-3xl text-orange-400">
-                    <icons-music-note class="w-[3em] h-[3em] lg:w-[5em] lg:h-[5em]" />
+    <div class="container mx-auto px-4 lg:px-0">
+        <div class="flex flex-col items-center justify-center mt-12">
+            <h2 class="font-bold text-3xl lg:mb-0 mb-10">Pourquoi Feels Music ?</h2>
+            <div class="flex lg:flex-row flex-col justify-around items-center lg:mt-52 mt-28 mb-12">
+                <div class="relative lg:w-[30%] w-full p-4 text-left lg:mb-20 mb-60 rounded-2xl lg:h-[450px]  bg-[#1F1F1F]">
+                    <div class="absolute lg:w-[95%] w-[90%] h-[30%] lg:h-[45%]  items-center bg-[#404040] sm:-mt-[32%] md:-mt-[18%]  lg:-mt-[28%] -mt-[25%] z-2 flex justify-center shadow-lg lg:rounded-2xl rounded-3xl text-orange-400">
+                        <icons-music-note class="w-[3em] h-[3em] lg:w-[5em] lg:h-[5em]" />
+                    </div>
+                    <div class="lg:w-11/12">
+                        <p class="text-white lg:text-start text-center font-semibold rounded-2xl text-xl lg:pt-36 pt-7 lg:pl-12 px-6 lg:px-0 pb-5">
+                            Nous proposons une grande variété de beats de qualité pour satisfaire tous les goûts musicaux, permettant ainsi aux artistes de trouver facilement le beat qui correspond à leur style et de créer des projets uniques et originaux.
+                        </p>
+                    </div>                              
                 </div>
-                <div class="lg:w-11/12">
-                    <p class="text-white lg:text-start text-center font-semibold rounded-2xl text-xl lg:pt-36 pt-7 lg:pl-12 px-6 lg:px-0 pb-5">
-                        Nous proposons une grande variété de beats de qualité pour satisfaire tous les goûts musicaux, permettant ainsi aux artistes de trouver facilement le beat qui correspond à leur style et de créer des projets uniques et originaux.
-                    </p>
-                </div>                              
-            </div>
-            <div class="relative lg:w-[30%]  text-left pt-1 lg:mb-20 mb-60 bg-[#F49743] text-black rounded-2xl shadow-lg lg:h-[450px] h-[300px]">
-                <div class="absolute lg:w-[95%] w-[85%] lg:h-[45%] h-[30%] lg:ml-3 ml-6 items-center bg-[#404040] -mt-[25%] z-2 flex justify-center shadow-lg rounded-2xl">
-                    <icons-light class="w-[3em] h-[3em] lg:w-[5em] lg:h-[5em]"/>
+                <div class="relative lg:w-[30%]  text-left pt-1 lg:mb-20 mb-60 bg-[#F49743] text-black rounded-2xl shadow-lg lg:h-[450px] h-[300px]">
+                    <div class="absolute lg:w-[95%] w-[85%] lg:h-[45%] h-[30%] lg:ml-3 ml-6 items-center bg-[#404040] -mt-[23%] z-2 flex justify-center shadow-lg rounded-2xl">
+                        <icons-light class="w-[3em] h-[3em] lg:w-[5em] lg:h-[5em]"/>
+                    </div>
+                    <div class="lg:w-11/12 ">
+                        <p class="text-black lg:text-start text-center font-semibold text-xl lg:pt-36 pt-7 lg:pl-12 px-6 lg:px-0 ">
+                            Nous mettons en valeur les petits beatmakers afin qu'ils aient plus de visibilité, car nous croyons en leur potentiel et souhaitons leur offrir une plateforme pour toucher un public plus large et développer leur fan base.
+                        </p>
+                    </div> 
                 </div>
-                <div class="lg:w-11/12 ">
-                    <p class="text-black lg:text-start text-center font-semibold text-xl lg:pt-36 pt-7 lg:pl-12 px-6 lg:px-0 ">
-                        Nous mettons en valeur les petits beatmakers afin qu'ils aient plus de visibilité, car nous croyons en leur potentiel et souhaitons leur offrir une plateforme pour toucher un public plus large et développer leur fan base.
-                    </p>
-                </div> 
-            </div>
-            <div class="relative lg:w-[30%] p-4 text-left lg:mb-20 mb-20 rounded-2xl lg:h-[450px] bg-[#1F1F1F]">
-                <div class="absolute lg:w-[95%] w-[90%] h-[30%] sm:h-[50%] lg:h-[45%]  items-center bg-[#404040] sm:-mt-[32%] md:-mt-[18%]  lg:-mt-[28%] -mt-[38%] z-2 flex justify-center shadow-lg rounded-2xl text-orange-400">
-                    <icons-dollar class="w-[3em] h-[3em] lg:w-[5em] lg:h-[5em]" />
+                <div class="relative lg:w-[30%] p-4 text-left lg:mb-20 mb-20 rounded-2xl lg:h-[450px] bg-[#1F1F1F]">
+                    <div class="absolute lg:w-[95%] w-[90%] h-[30%] sm:h-[50%] lg:h-[45%]  items-center bg-[#404040] sm:-mt-[32%] md:-mt-[18%]  lg:-mt-[28%] -mt-[28%] z-2 flex justify-center shadow-lg rounded-2xl text-orange-400">
+                        <icons-dollar class="w-[3em] h-[3em] lg:w-[5em] lg:h-[5em]" />
+                    </div>
+                    <div class="lg:w-11/12">
+                        <p class="text-white lg:text-start text-center font-semibold text-xl lg:pt-36 pt-7 lg:pl-12 px-6 lg:px-0">
+                            Nous permettons aux beatmakers de développer leur communauté et leur audience en leur offrant une vitrine pour présenter leur travail et en leur donnant la possibilité de se connecter avec des artistes du monde entier, favorisant ainsi les collaborations et les opportunités de carrière.
+                        </p>
+                    </div>             
                 </div>
-                <div class="lg:w-11/12">
-                    <p class="text-white lg:text-start text-center font-semibold text-xl lg:pt-36 pt-7 lg:pl-12 px-6 lg:px-0">
-                        Nous permettons aux beatmakers de développer leur communauté et leur audience en leur offrant une vitrine pour présenter leur travail et en leur donnant la possibilité de se connecter avec des artistes du monde entier, favorisant ainsi les collaborations et les opportunités de carrière.
-                    </p>
-                </div>             
             </div>
         </div>
-    </div>
 
+    </div>
+    
     <!-- div placed like the ones above -->
 
 
 
-    <div class="flex flex-col items-center justify-center">
-        <h2 class="text-center lg:text-left font-bold text-2xl lg:text-3xl mb-8">Dernières sorties</h2>
-        <BarsLatests />     
+    <div class="container mx-auto px-4 lg:px-0">
+        <div class="flex flex-col items-center justify-center">
+            <h2 class="text-center lg:text-left font-bold text-2xl lg:text-3xl mb-8">Dernières sorties</h2>
+            <BarsLatests />     
+        </div>
     </div>
+    
 
     <div class="flex flex-col items-center justify-center">
         <h2 class="text-center lg:text-left font-bold text-2xl lg:text-3xl mb-8">Les stars du moment</h2>

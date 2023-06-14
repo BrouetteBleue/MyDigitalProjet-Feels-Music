@@ -4,7 +4,7 @@
                     <h1 class="text-[#9E9E9E] text-3xl font-bold">Messages</h1>
                 </div>
                 <div class="flex flex-row w-full h-[800px] rounded-xl bg-[#292929] border-[1px] border-[#3D3D3D] py-10">
-                    <div class="flex flex-col w-[30%] overflow-y-auto ">
+                    <div class="flex flex-col w-11/12 lg:w-[30%] overflow-y-auto ">
                         <CardsMessageUserList Username="caca"/>
                         <CardsMessageUserList />
                         <CardsMessageUserList />
@@ -18,7 +18,7 @@
                         <CardsMessageUserList />
                     </div>
 
-                    <div class="flex flex-col justify-start w-[70%]">
+                    <div v-if="isLargeScreen" class="flex flex-col justify-start w-[70%]">
                         <div class="">
                             <nuxt-link to="/beatmakers/1">
                                 <CardsMessageUserList />
@@ -46,4 +46,30 @@
 </template>
 <script setup>
 
+import { ref, onMounted, onUnmounted } from 'vue';
+
+// Créer une variable réactive pour stocker si l'écran est grand ou non
+const isLargeScreen = ref(false);
+
+// Ajouter un écouteur d'événement pour détecter le redimensionnement de la fenêtre
+onMounted(() => {
+  // Exécuter ce code uniquement côté client
+  if (typeof window !== 'undefined') {
+    isLargeScreen.value = window.innerWidth >= 1024;
+    window.addEventListener('resize', updateScreenSize);
+  }
+});
+
+// Supprimer l'écouteur d'événement lorsque le composant est démonté
+onUnmounted(() => {
+  // Exécuter ce code uniquement côté client
+  if (typeof window !== 'undefined') {
+    window.removeEventListener('resize', updateScreenSize);
+  }
+});
+
+// Mettre à jour isLargeScreen basé sur la largeur de la fenêtre
+function updateScreenSize() {
+  isLargeScreen.value = window.innerWidth >= 1024;
+}
 </script>

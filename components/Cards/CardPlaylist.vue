@@ -1,13 +1,13 @@
 <template>
     <div class="flex flex-col justify-start">
-        <img class=" h-[88%]" src="@/assets/img/HARO536707.jpg" alt=""> 
+        <img class="h-[88%]" src="@/assets/img/HARO536707.jpg" alt=""> 
 
         <div class="flex flex-row justify-between items-center">
-            <div class="flex flex-col justify-start">
-                <div class="text-2xl font-normal mt-2">
+            <div class="flex flex-col justify-start lg:items-start items-center w-full">
+                <div class="text-lg lg:text-2xl font-normal mt-2">
                     Best life
                 </div>
-                <div v-if="props.CardType !== 'Acceuil'">
+                <div v-if="props.CardType !== 'Acceuil'" class="text-lg lg:text-2xl font-normal">
                     25 Tracks
                 </div>
             </div>
