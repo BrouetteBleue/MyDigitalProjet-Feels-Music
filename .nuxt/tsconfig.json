@@ -59,6 +59,9 @@
       "vue-demi": [
         "node_modules/nuxt/dist/app/compat/vue-demi"
       ],
+      "#vue-router": [
+        ".nuxt/vue-router"
+      ],
       "#imports": [
         ".nuxt/imports"
       ],
