@@ -4,22 +4,29 @@
             <div class="w-full text-center text-white font-normal text-5xl mt-20">
                 S'inscrire
             </div>
-
-            <div class="flex flex-col justify-center items-center w-7/12 mt-20 ">
-                    <InputsInputFormConnection text="Pseudo" class="mb-10"/>
-                    <InputsInputFormConnection text="Email" class="mb-10"/>
-                    <InputsInputFormConnection text="Mot de passe" class="mb-10"/>
-                    <InputsInputFormConnection text="Confirmer mot de passe" class="mb-10"/>
+            <div v-if="message">
+                <div class="w-full text-center text-[#FB923C] font-normal text-xl mt-5">
+                    {{ message }}
+                </div>
             </div>
+            <form class="flex flex-col justify-center items-center w-7/12 mt-10" method="POST">
+                <div >
+                    <InputsInputFormConnection v-model="pseudo" text="Pseudo" name="pseudo" :required=true class="mb-10" />
+                    <InputsInputFormConnection v-model="email" type="email" text="Email" name="email" :required=true class="mb-10"/>
+                    <InputsInputFormConnection v-model="password" type="password" text="Mot de passe" :required=true name="password" class="mb-10"/>
+                    <InputsInputFormConnection v-model="passwordConfirm" type="password" text="Confirmer mot de passe" :required=true name="passordConfirm" class="mb-10"/>
+                </div>
 
-            <div class="flex flex-row justify-between items-center w-7/12 mb-5">
-                <nuxt-link to="/connexion" class="text-[#969CA8]">
-                    Se connecter
-                </nuxt-link>
+                <div class="flex flex-row justify-between items-center w-full mb-5">
+                    <nuxt-link to="/connexion" class="text-[#969CA8]">
+                        Se connecter
+                    </nuxt-link>
 
-                <ButtonsAddToCartBtn text="S'inscrire" @Click="HandleInscription"/>
-            </div>
+                    <ButtonsAddToCartBtn text="S'inscrire" name="send" @click.prevent="HandleInscription"/>
+                </div>
+            </form>
 
+            
             <nuxt-link to="/" class="flex flex-row justify-end items-center w-7/12 mb-20 text-[#969CA8]">
                 <IconsArrowBack class="mr-3"/> Retourner a l'accueil
             </nuxt-link>
@@ -33,9 +40,49 @@
 
 <script setup>
 
+import { ref } from 'vue';
+
 definePageMeta({
   layout: "auth",
 });
 
+const pseudo = ref("")
+const email = ref("")
+const password = ref("")
+const passwordConfirm = ref("")
+
+const message = ref(false)
+
+
+const HandleInscription = async () => {
+
+    if(!pseudo.value || !email.value || !password.value || !passwordConfirm.value) return message.value = "Veuillez remplir tous les champs."
+
+    const alphanumericRegex = /^[a-zA-Z0-9\s]+$/;
+    if (!alphanumericRegex.test(pseudo.value) || !alphanumericRegex.test(password.value)) return message.value = "Les champs pseudo et mot de passe doivent contenir uniquement des caractères alphanumériques.";
+
+    if (password.value !== passwordConfirm.value) return message.value = "Les mots de passe ne sont pas identiques.";
+
+
+        $fetch("/api/account", {
+            method: "POST",
+            body: JSON.stringify({
+                pseudo: pseudo.value.trim(),
+                email: email.value.trim(),
+                password: password.value.trim(),
+                passwordConfirm: passwordConfirm.value.trim(),
+            }),
+        })
+        .then((response) => {
+            if (response && response.user) {
+                 navigateTo("/");
+            } else {
+                message.value = response.data.statusMessage;
+            }
+        })
+        .catch((error) => {
+            message.value = error.data.statusMessage; // pour accéder au contenu de l'erreur zzebi
+        });
+};
 
 </script>

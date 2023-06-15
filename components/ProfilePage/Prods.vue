@@ -36,5 +36,30 @@
             </div>
 </template>
 <script setup>
+    import { ref, onMounted, onUnmounted } from 'vue';
 
+// Créer une variable réactive pour stocker si l'écran est grand ou non
+const isLargeScreen = ref(false);
+
+// Ajouter un écouteur d'événement pour détecter le redimensionnement de la fenêtre
+onMounted(() => {
+  // Exécuter ce code uniquement côté client
+  if (typeof window !== 'undefined') {
+    isLargeScreen.value = window.innerWidth >= 1024;
+    window.addEventListener('resize', updateScreenSize);
+  }
+});
+
+// Supprimer l'écouteur d'événement lorsque le composant est démonté
+onUnmounted(() => {
+  // Exécuter ce code uniquement côté client
+  if (typeof window !== 'undefined') {
+    window.removeEventListener('resize', updateScreenSize);
+  }
+});
+
+// Mettre à jour isLargeScreen basé sur la largeur de la fenêtre
+function updateScreenSize() {
+  isLargeScreen.value = window.innerWidth >= 1024;
+}
 </script>
