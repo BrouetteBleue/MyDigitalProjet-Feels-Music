@@ -4,14 +4,19 @@
             <div class="w-full text-center text-white font-normal text-5xl mt-20">
                 Connexion
             </div>
+            <div v-if="message">
+                <div class="w-full text-center text-[#FB923C] font-normal text-xl mt-5">
+                    {{ message }}
+                </div>
+            </div>
 
-            <div class="flex flex-col justify-center items-center w-7/12 mt-20 ">
-                    <InputsInputFormConnection text="Email" class="mb-10"/>
-                    <InputsInputFormConnection text="Mot de passe" class="mb-10"/>
+            <div class="flex flex-col justify-center items-center w-7/12 mt-10 ">
+                    <InputsInputFormConnection v-model="email" type="email" text="Email" name="email" :required=true class="mb-10"/>
+                    <InputsInputFormConnection v-model="password" type="password" :required=true name="password" text="Mot de passe" class="mb-10"/>
             </div>
 
             <div class="flex flex-row justify-between items-center w-7/12 mb-5">
-                <nuxt-link to="/connexion" class="text-[#969CA8]">
+                <nuxt-link to="/inscription" class="text-[#969CA8]">
                     S'inscrire
                 </nuxt-link>
 
@@ -35,5 +40,38 @@ definePageMeta({
   layout: "auth",
 });
 
+import { ref } from 'vue';
+
+const email = ref("")
+const password = ref("")
+
+const message = ref(false)
+
+
+const HandleConnexion = async () => {
+
+    if(!email.value || !password.value) return message.value = "Veuillez remplir tous les champs."
+
+        $fetch("/api/auth", {
+            method: "POST",
+            credentials: 'include',
+            body: JSON.stringify({
+                email: email.value.trim(),
+                password: password.value.trim()
+            }),
+        })
+        .then((response) => {
+            if (response.statusCode === 201) {
+                sessionStorage.setItem('token', response.body.token);
+                sessionStorage.setItem('user', JSON.stringify(response.body.user.id));
+                 navigateTo("/");
+            } else {
+                message.value = response.data.statusMessage;
+            }
+        })
+        .catch((error) => {
+            message.value = error.data.statusMessage; // pour accéder au contenu de l'erreur zzebi
+        });
+};
 
 </script>

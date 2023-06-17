@@ -80,7 +80,7 @@
         </div>
        
         <div class="w-10/12 lg:w-6/12 flex flex-col">
-            <div class="flex flex-col items-center bg-[#292929] border-2 border-[#3D3D3D] rounded-xl pt-2 min-w-[115%] -ml-6"> <!-- song bar -->
+            <div class="flex flex-col items-center bg-[#292929] border-2 border-[#3D3D3D] rounded-xl pt-2 min-w-[115%] lg:min-w-full -ml-6 lg:-ml-0"> <!-- song bar -->
 
 
                 <div class="flex flex-row items-center">
@@ -248,12 +248,14 @@ let currentTrack = tracks[0];
         if (!audio) { // pour eviter les erreurs 500 au rechargement 
             audio = new Audio();
             audio.src = currentTrack.source;
+            audio.volume = 0.1;
+            document.getElementById("volume").value = 0.1;
 
             audio.onloadedmetadata = () => {
                 audio.oncanplay = () => {
                     // Code à exécuter lorsque l'audio peut être lu
-                    audio.volume = 0.1;
-                    document.getElementById("volume").value = 0.1;
+                    // audio.volume = 0.1;
+                    // document.getElementById("volume").value = 0.1;
 
                 };
             };
