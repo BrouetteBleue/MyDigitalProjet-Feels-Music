@@ -9,17 +9,14 @@
         </div>
 
 
-        <div class="flex flex-row flex-wrap justify-between lg:justify-center ">
-            <CardsCardRound  class="w-[48%] lg:w-[21%] mb-10" :idBeatmaker="1" :Beatmaker="true"/>
-            <CardsCardRound  class="w-[48%] lg:w-[21%] mb-10" :idBeatmaker="2" :Beatmaker="true"/>
-            <CardsCardRound  class="w-[48%] lg:w-[21%] mb-10" :idBeatmaker="3" :Beatmaker="true"/>
-            <CardsCardRound  class="w-[48%] lg:w-[21%] mb-10" :idBeatmaker="4" :Beatmaker="true"/>
-            <CardsCardRound  class="w-[48%] lg:w-[21%] mb-10" :idBeatmaker="5" :Beatmaker="true"/>
-            <CardsCardRound  class="w-[48%] lg:w-[21%] mb-10" :idBeatmaker="6" :Beatmaker="true"/>
-            <CardsCardRound  class="w-[48%] lg:w-[21%] mb-10" :idBeatmaker="7" :Beatmaker="true"/>
-            <CardsCardRound  class="w-[48%] lg:w-[21%] mb-10" :idBeatmaker="8" :Beatmaker="true"/>
-            <CardsCardRound  class="w-[48%] lg:w-[21%] mb-10" :idBeatmaker="9" :Beatmaker="true"/>
-            <CardsCardRound  class="w-[48%] lg:w-[21%] mb-10" :idBeatmaker="10" :Beatmaker="true"/>           
+        <div class="flex flex-row flex-wrap justify-between lg:justify-center w-full">
+            <CardsCardRound
+                v-for="beatmaker in beatmakers"
+                :key="beatmaker.id"
+                :idBeatmaker="beatmaker.pseudo"
+                :Beatmaker="true"
+                class="w-[48%] lg:w-[21%] mb-10"
+            />         
         </div>
 
         <div class="mt-10">
@@ -30,3 +27,46 @@
     
     </div>
 </template>
+
+<script setup>
+import { ref } from 'vue';
+const beatmakers = ref([]);
+
+// Créer une variable réactive pour stocker si l'écran est grand ou non
+const isLargeScreen = ref(false);
+
+onMounted(() => {
+    $fetch("http://localhost:3001/beatmakers", { 
+        method: "GET",
+    })
+    .then((response) => {
+        
+        beatmakers.value = response.data.users;
+    })
+    .catch((error) => {
+        console.error('An error occurred while fetching beatmakers:', error);
+    });
+
+
+
+    // Exécuter ce code uniquement côté client
+    if (typeof window !== 'undefined') {
+        isLargeScreen.value = window.innerWidth >= 1024;
+        window.addEventListener('resize', updateScreenSize);
+    }
+});
+
+// Supprimer l'écouteur d'événement lorsque le composant est démonté
+onUnmounted(() => {
+  // Exécuter ce code uniquement côté client
+  if (typeof window !== 'undefined') {
+    window.removeEventListener('resize', updateScreenSize);
+  }
+});
+
+// Mettre à jour isLargeScreen basé sur la largeur de la fenêtre
+function updateScreenSize() {
+  isLargeScreen.value = window.innerWidth >= 1024;
+}
+
+</script>

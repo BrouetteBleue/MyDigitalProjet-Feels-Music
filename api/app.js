@@ -5,16 +5,23 @@ const app = express();
 
 app.use(bodyParser.json());
 
-app.use(cors({
-    origin: 'http://localhost:3000' // Remplacez ceci par l'URL de votre front-end
-  }));
-
+const corsOptions = {
+  origin: 'http://localhost:3000', // ou mettez votre domaine de production si nécessaire
+  credentials: true, // cela permet d'envoyer des cookies
+};
+app.use(cors(corsOptions));
 
 const categoriesRoute = require('./src/routes/categoryRoute');
 categoriesRoute(app);
 
 const accountRoute = require('./src/routes/accountRoute');
 accountRoute(app);
+
+const productionRoute = require('./src/routes/prodRoute');
+productionRoute(app);
+
+const likeRoute = require('./src/routes/likeRoute');
+likeRoute(app);
 
 app.get('/test', (req, res) => {
   res.send('Hello, World!');

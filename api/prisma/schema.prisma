@@ -130,10 +130,9 @@ model production {
   title       String    @db.VarChar(255)
   sound       String    @db.VarChar(255)
   cover       String?   @db.VarChar(255)
-  description String?   @db.Text
-  likes       Int?
-  views       Int?
-  downloads   Int?
+  likes       Int?      @default(0)
+  views       Int?      @default(0)
+  downloads   Int?      @default(0)
   bpm         Int?
   length      String    @db.VarChar(10)
   price       Decimal   @db.Decimal(5, 2)

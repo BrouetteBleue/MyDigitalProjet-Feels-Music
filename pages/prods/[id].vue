@@ -10,23 +10,23 @@
                 <div class="flex flex-col lg:w-3/12 justify-start lg:ml-10">
                     <div class="flex flex-row lg:flex-col mt-5">
                         <div class="flex flex-row  mr-5">
-                        <IconsHeart class="mr-1 lg:mr-3 mb-3 w-[1.5em] h-[1.5em] text-white" /> 345
+                        <IconsHeart class="mr-1 lg:mr-3 mb-3 w-[1.5em] h-[1.5em] text-white" /> {{ data.likes }}
                         </div>
                         <div class="flex flex-row mr-5">
-                            <IconsEye class="mr-1 lg:mr-3 mb-3 w-[1.5em] h-[1.5em]" /> 3,4K
+                            <IconsEye class="mr-1 lg:mr-3 mb-3 w-[1.5em] h-[1.5em]" /> {{ data.views }}
                         </div>
                         <div class="flex flex-row mr-5">
-                            <IconsDownload class="mr-1 lg:mr-3 mb-3 w-[1.5em] h-[1.5em]"/> 112
+                            <IconsDownload class="mr-1 lg:mr-3 mb-3 w-[1.5em] h-[1.5em]"/> {{ data.downloads }}
                         </div>
                     </div>
                     
                     <!-- mobile -->
                     <div class="flex flex-row justify-center lg:hidden">
                         <div class="mr-5">
-                        120 BPM
+                        {{ data.bpm }} BPM
                         </div>
                         <div> 
-                            02/04/2023
+                           {{  data.created_at }}
                         </div>
                     </div> 
                     <!-- mobile -->
@@ -38,10 +38,10 @@
                     
                     <div class="pt-20 hidden lg:flex flex-col">
                         <div>
-                        120 BPM
+                            {{ data.bpm }} BPM
                         </div>
                         <div> 
-                            02/04/2023
+                            {{  data.created_at }}
                         </div>
                     </div> 
                     <!-- big -->
@@ -50,15 +50,15 @@
             </div>
             <div class="flex flex-col items-center lg:items-start pl-0 lg:pl-11">
                 <div class="text-2xl lg:text-4xl font-medium mb-3 lg:mb-6"> 
-                    Yeh im mad  
+                    {{  data.title }}
                 </div>
 
                 <div class="flex flex-row text-xl mb-6">
-                    <span class="mr-6">vitalee</span>   <ButtonsAddToCartBtn text="Contacter" iconName="Chat" />
+                    <span class="mr-6">{{ data.account?.pseudo}}</span>   <ButtonsAddToCartBtn text="Contacter" iconName="Chat" />
                 </div>
 
                 <div class="flex flex-row mb-4">
-                    <span class="text-[#878787] text-base">Catégorie:</span>  <span class="font-medium text-base ml-4">Hip-hop</span>
+                    <span class="text-[#878787] text-base">Catégorie:</span>  <span class="font-medium text-base ml-4">{{ data.category?.name}}</span>
                 </div>
 
                 <div class="flex flex-row flex-wrap justify-center">
@@ -70,7 +70,7 @@
                     <ButtonsKeyword text="type beat" class="mr-3 mb-3"/>
                 </div>
 
-                <ButtonsAddToCartBtn text="25,00€" iconName="Cart" class="mt-10 mb-5" />
+                <ButtonsAddToCartBtn :text="data.price +' €'" iconName="Cart" class="mt-10 mb-5" />
 
                 <button class="rounded-xl bg-[#181818] text-orange-400 mt-5 flex-row justify-evenly w-24 items-center font-medium flex lg:hidden">
                         share <IconsShare />
@@ -88,8 +88,9 @@
                         <img src="@/assets/img/HARO536707.jpg" alt="" class="w-3/12 mr-2 rounded-xl">
 
                         <div class="flex flex-col ">
-                            <span class="text-2xl font-medium">yeh im mad</span>
-                            <span class="text-orange-400">vitalee</span>
+                            <span class="text-2xl font-medium">{{ data.title }}</span>
+                            <span  class="text-orange-400">{{ data.account?.pseudo}}</span>
+                            <!-- <span v-else> loading</span> -->
                         </div>
                     </div>
 
@@ -118,7 +119,7 @@
                         </div>
 
                         <div>
-                            <ButtonsAddToCartBtn text="25,00€" iconName="Cart" class="mt-8 mb-5 invisible lg:visible" />
+                            <ButtonsAddToCartBtn :text="data.price +' €'" iconName="Cart" class="mt-8 mb-5 invisible lg:visible" />
                         </div>                       
                     </div>
                     
@@ -176,6 +177,35 @@
 <script setup>
 
 import { ref } from 'vue';
+
+const data = ref({});
+const prod = ref({});
+const route = useRoute();
+
+onMounted(async () => {
+    const param = route.params.id; // Assurez-vous que le nom de paramètre corresponde à celui défini dans votre fichier de route.
+    $fetch(`http://localhost:3001/production/${param}`, { 
+                method: "GET",
+            })
+            .then((response) => {
+				data.value = response.data.production;
+               
+                // prod.value = {
+				// 	pseudo: response.data.user.pseudo,
+				// 	country: response.data.user.country,
+				// 	avatar: response.data.user.avatar,
+				// 	phone: response.data.user.phone,
+				// 	email: response.data.user.email,
+				// 	instagram: response.data.user.instagram,
+				// 	productionsCount: response.data.user.productionsCount,
+				// 	openToWork: response.data.user.open_To_Work,
+				// };
+				console.log(data.value.account.pseudo);
+            })
+            .catch((error) => {
+                console.error('An error occurred while fetching beatmakers:', error);
+            });
+});
 
 
 let tracks = [

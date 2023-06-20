@@ -8,13 +8,14 @@ exports.getStyles = async (req, res) => {
     try {
         const styles = await prisma.style.findMany({
             select: {
+                id: true,
                 name: true
             }
         });
         
         const stylesNames = styles.map(style => style.name);
         
-        apiResponse(res, 200, 'OK', { stylesNames });
+        apiResponse(res, 200, 'OK', { styles });
 
     } catch (error) {
         console.error("Error fetching styles:", error);

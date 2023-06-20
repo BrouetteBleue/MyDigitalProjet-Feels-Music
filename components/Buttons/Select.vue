@@ -9,23 +9,30 @@ const props = defineProps({
     type: {
         type: String,
         default: "styles"
-    }
+    },
+    name: {
+        type: String,
+        default: ""
+    },
+    modelValue: [String, Number],
 });
 
 const data = ref([]);
 
-const test = import.meta.env.VITE_API_HOST;     // comme ça qu'on peut recuperer les variables d'environnement
+
 
 onMounted(async () => {
     try {
-        const url = test || "https://feelsmusic.fr/api/";
+        const url = "http://localhost:3001/";
+        // const url =  "https://feelsmusic.fr/api/";
         const response = await $fetch(url + props.type , { parseResponse: JSON.parse });
         
-        if (response.data.categoryNames) {
-            data.value = response.data.categoryNames;
-        } else if (response.data.stylesNames) {
-            data.value = response.data.stylesNames;
+        if (response.data.categories) {
+            data.value = response.data.categories;
+        } else if (response.data.styles) {
+            data.value = response.data.styles;
         }
+        // console.log(response.data.styles);
     } catch (error) {
         console.error('Erreur lors de la récupération des catégories:', error);
     }
@@ -36,12 +43,12 @@ onMounted(async () => {
 
 <template lang="">
     <div class="select-container w-10/12">
-        <select class="block w-full bg-[#292929] border-[1px] border-[#404040] text-md text-[#979797] font-semibold py-2 px-4 pl-5 pr-10 rounded-full focus-visible:outline-none shadow-sm">
+        <select @change="$emit('update:modelValue', $event.target.value)" :value="modelValue" class="block w-full bg-[#292929] border-[1px] border-[#404040] text-md text-[#979797] font-semibold py-2 px-4 pl-5 pr-10 rounded-full focus-visible:outline-none shadow-sm" :name="name">
         <option value="option1">{{ text }}</option>
-        <option v-for="element in data" :key="element" :value="element">{{ element }}</option>
+        <option v-for="element in data" :key="element.name" :value="element.id">{{ element.name }}</option>
         </select>
         <span class="select-arrow">
-            <IconsArrow class="w-5 h-5"/>
+            <IconsArrow class="w-5 h-5"/> 
         </span>
     </div>
 </template>

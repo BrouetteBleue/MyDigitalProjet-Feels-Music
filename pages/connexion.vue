@@ -41,6 +41,13 @@ definePageMeta({
 });
 
 import { ref } from 'vue';
+import { storeToRefs } from 'pinia'; // import storeToRefs helper hook from pinia
+import { useAuthStore } from '~/store/auth'; // import the auth store we just created
+
+const { authenticateUser } = useAuthStore(); // use authenticateUser action from  auth store
+
+const { authenticated } = storeToRefs(useAuthStore()); // make authenticated state reactive with storeToRefs
+
 
 const email = ref("")
 const password = ref("")
@@ -52,7 +59,21 @@ const HandleConnexion = async () => {
 
     if(!email.value || !password.value) return message.value = "Veuillez remplir tous les champs."
 
-        $fetch("/api/auth", {
+    // const user = ref({
+    //     email: email.value.trim(), 
+    //     password: password.value.trim(),
+    // });
+
+    // await authenticateUser(user.value);
+
+
+
+
+    // if (authenticated) {
+    //     navigateTo("/");
+    // }
+    
+        $fetch("http://localhost:3001/login", {
             method: "POST",
             credentials: 'include',
             body: JSON.stringify({
@@ -61,9 +82,10 @@ const HandleConnexion = async () => {
             }),
         })
         .then((response) => {
-            if (response.statusCode === 201) {
-                sessionStorage.setItem('token', response.body.token);
-                sessionStorage.setItem('user', JSON.stringify(response.body.user.id));
+            // console.log(response)
+            if (response.status === 201) {
+                localStorage.setItem('token', response.data.token);
+                localStorage.setItem('user', JSON.stringify(response.data.user.id));
                  navigateTo("/");
             } else {
                 message.value = response.data.statusMessage;

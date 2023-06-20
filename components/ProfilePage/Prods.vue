@@ -7,7 +7,7 @@
                     </nuxt-link>
                 </div>
                 <div v-if="isLargeScreen">
-                    <CardsCardTrack CardType="profil" :idProd="1" />
+                    <!-- <CardsCardTrack CardType="profil" :idProd="1" />
                     <CardsCardTrack CardType="profil" :idProd="2" />
                     <CardsCardTrack CardType="profil" :idProd="3" />
                     <CardsCardTrack CardType="profil" :idProd="4" />
@@ -15,10 +15,10 @@
                     <CardsCardTrack CardType="profil" :idProd="6" />
                     <CardsCardTrack CardType="profil" :idProd="7" />
                     <CardsCardTrack CardType="profil" :idProd="8" />
-                    <CardsCardTrack CardType="profil" :idProd="9" />
+                    <CardsCardTrack CardType="profil" :idProd="9" /> -->
                 </div>
-                <div v-if="!isLargeScreen" class="flex flex-row flex-wrap justify-between w-full">
-                    <CardsCardTrackMobile :idProd="1" />
+                <div v-else class="flex flex-row flex-wrap justify-between w-full">
+                    <!-- <CardsCardTrackMobile :idProd="1" />
                     <CardsCardTrackMobile :idProd="2" />
                     <CardsCardTrackMobile :idProd="3" />
                     <CardsCardTrackMobile :idProd="4" />
@@ -26,7 +26,7 @@
                     <CardsCardTrackMobile :idProd="6" />
                     <CardsCardTrackMobile :idProd="7" />
                     <CardsCardTrackMobile :idProd="8" />
-                    <CardsCardTrackMobile :idProd="9" />
+                    <CardsCardTrackMobile :idProd="9" /> -->
                 </div>
                 
                 <div class="text-center mt-5">

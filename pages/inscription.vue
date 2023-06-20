@@ -64,7 +64,7 @@ const HandleInscription = async () => {
     if (password.value !== passwordConfirm.value) return message.value = "Les mots de passe ne sont pas identiques.";
 
 
-        $fetch("/api/account", {
+        $fetch("http://localhost:3001/signin", {
             method: "POST",
             body: JSON.stringify({
                 pseudo: pseudo.value.trim(),
@@ -74,7 +74,9 @@ const HandleInscription = async () => {
             }),
         })
         .then((response) => {
-            if (response && response.user) {
+            if (response.status === 201) {
+                localStorage.setItem('token', response.data.token);
+                localStorage.setItem('user', JSON.stringify(response.data.user.id));
                  navigateTo("/");
             } else {
                 message.value = response.data.statusMessage;

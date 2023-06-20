@@ -8,13 +8,14 @@ exports.getCategories = async (req, res) => {
     try {
         const categories = await prisma.category.findMany({
             select: {
+                id: true,
                 name: true
             }
         });
         
         const categoryNames = categories.map(category => category.name);
         
-        apiResponse(res, 200, 'OK', { categoryNames });
+        apiResponse(res, 200, 'OK', { categories });
 
     } catch (error) {
         console.error("Error fetching categories:", error);

@@ -29,7 +29,7 @@
             default: false
         },
         idBeatmaker: {
-            type: Number,
+            type: String,
             required: true
         }
     })

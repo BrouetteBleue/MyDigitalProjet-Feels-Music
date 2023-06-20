@@ -42,6 +42,12 @@ exports.register = async (req, res) => {
 
         const token = jwt.sign({ userId: user.id }, process.env.JWT_KEY, { expiresIn: '1h' });
 
+         // Définir un cookie avec le token JWT
+         res.cookie('token', token, {
+            httpOnly: true, // Le cookie ne sera pas accessible via JavaScript côté client
+            secure: true, // Le cookie sera envoyé uniquement via HTTPS
+            sameSite: 'strict' // Restriction CSRF
+        });
 
         apiResponse(res, 201, 'User created', { user, token });
     } catch (error) {
@@ -64,6 +70,13 @@ exports.login = async (req, res) => {
         if (user) {
             const token = jwt.sign({ userId: user.id }, process.env.JWT_KEY , { expiresIn: '1h' });
     
+             // Définir un cookie avec le token JWT
+             res.cookie('token', token, {
+                httpOnly: true, // Le cookie ne sera pas accessible via JavaScript côté client
+                secure: true, // Le cookie sera envoyé uniquement via HTTPS
+                sameSite: 'strict' // Restriction CSRF
+            });
+
                 apiResponse(res, 201, 'OK', { user, token });
             }else{
                 apiResponse(res, 404, "Aucun compte ne correspond à ces identifiants.");
@@ -121,15 +134,50 @@ exports.getUserByUsername = async (req, res) => {
         // Récupérer l'utilisateur de la base de données par son nom d'utilisateur
         const user = await prisma.account.findMany({
 
-            select: {
-                pseudo: true,
+            include: {
+                _count: {
+                  select: { production: true },
+                },
                 production: {
-                  
+                    select: { 
+                        id: true, 
+                        title: true, 
+                        category: { 
+                            select: { 
+                                name: true 
+                            } 
+                        }, 
+                        style: { 
+                            select: { 
+                                name: true 
+                            } 
+                        }, 
+                        price: true  },
                 },
               },
 
             where: { pseudo: username }, // J'assume que le nom d'utilisateur est stocké dans une colonne appelée "pseudo"
         });
+
+
+        const usersWithProductionCount = user.map(user => ({
+            id: user.id,
+            pseudo: user.pseudo,
+            email: user.email,
+            country: user.country,
+            avatar: user.avatar,
+            instagrom: user.insta,
+            openToWork: user.open_to_work,
+            phone: user.phone,
+            productionsCount: user._count.production,
+            productions: user.production.map(prod => ({
+                id: prod.id,
+                title: prod.title,
+                category: prod.category.name,
+                style: prod.style.name,
+                price: prod.price
+            })),
+        }));
 
         // Si l'utilisateur n'est pas trouvé
         if (!user) {
@@ -137,7 +185,7 @@ exports.getUserByUsername = async (req, res) => {
         }
 
         // Répondre avec les informations de l'utilisateur
-        apiResponse(res, 200, 'Informations de l’utilisateur récupérées avec succès.', { user });
+        apiResponse(res, 200, 'Informations de l’utilisateur récupérées avec succès.', { user: usersWithProductionCount[0] });
 
     } catch (error) {
         // Journalisation de l'erreur pour le débogage
@@ -145,5 +193,48 @@ exports.getUserByUsername = async (req, res) => {
 
         // Répondre avec une erreur interne du serveur
         apiResponse(res, 500, 'Une erreur est survenue lors de la récupération des informations de l’utilisateur.');
+    }
+};
+
+exports.getBeatmakers = async (req, res) => {
+
+    try {
+        // Récupérer les utilisateurs de la base de données
+        const users = await prisma.account.findMany({
+            where: {
+                production: {
+                    some: {}
+                }
+            },
+            include: {
+                _count: {
+                  select: { production: true },
+                },
+              },
+        });
+
+        const usersWithProductionCount = users.map(user => ({
+            id: user.id,
+            pseudo: user.pseudo,
+            country: user.country,
+            avatar: user.avatar,
+            productionsCount: user._count.production,
+        }));
+
+        // Si aucun utilisateur n'est trouvé
+        if (!usersWithProductionCount || usersWithProductionCount.length === 0) {
+            return apiResponse(res, 404, 'Aucun utilisateur avec des productions trouvé.');
+        }
+
+        // Répondre avec les informations des utilisateurs
+        apiResponse(res, 200, 'Utilisateurs avec des productions récupérés avec succès.', { users: usersWithProductionCount });
+
+
+    } catch (error) {
+        // Journalisation de l'erreur pour le débogage
+        console.error(error);
+
+        // Répondre avec une erreur interne du serveur
+        apiResponse(res, 500, 'Une erreur est survenue lors de la récupération des utilisateurs avec des productions.');
     }
 };

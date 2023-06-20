@@ -12,13 +12,35 @@
         <div class="flex flex-row justify-between w-[90%] ">
             <div class="hidden lg:flex flex-col justify-center items-center w-3/12 h-[16em] rounded-xl border-[1px] border-[#404040] bg-[#292929]">
               Filtrer par :
-                <ButtonsSelect text="Catégories"/>
-                <ButtonsSelect text="Style"/>
+              <ButtonsSelect  class="w-1/2 lg:w-[30%] mr-5 rounded-full" text="Catégorie" type="categories" name="category_id"/>
+              <ButtonsSelect  class="w-1/2 lg:w-[30%]" text="Style" type="styles" name="style_id"/>
                 <input type="range"  min="0" max="100" class="text-[#CFCFCF] bg-[#292929]" >
             </div>
 
             <div class="flex flex-row justify-between w-full mt-5">
-                <BarsTrackList />
+              <div class="w-full flex flex-row justify-center items-center mb-28">
+                <div class="hidden lg:flex flex-col w-10/12" v-if="isLargeScreen">
+                  <CardsCardTrack 
+                    v-for="prod in data"
+                    :key="prod.id"
+                    :beatmaker="prod.account"
+                    :production="prod"
+                    :Beatmaker="true"
+                  />
+                </div>
+
+                <div class="flex lg:hidden flex-row flex-wrap justify-between w-full" v-else>
+                  <CardsCardTrackMobile 
+                    v-for="prod in data"
+                    :key="prod.id"
+                    :beatmaker="prod.account"
+                    :production="prod"
+                    :Beatmaker="true"
+                  />
+                </div>  
+
+
+              </div>
             </div>
 
         </div>
@@ -27,6 +49,52 @@
     </div>
 </template>
 
+
+<script setup>
+
+import { ref, onMounted, onUnmounted } from 'vue';
+
+const data = ref({});
+const prod = ref({});
+const beatmaker = ref({});
+// Créer une variable réactive pour stocker si l'écran est grand ou non
+const isLargeScreen = ref(false);
+
+onMounted(async () => {
+    $fetch(`http://localhost:3001/productions`, { 
+        method: "GET",
+    })
+    .then((response) => {
+        data.value = response.data.cleanProductions;
+    })
+    .catch((error) => {
+        console.error('An error occurred while fetching beatmakers:', error);
+    });
+
+    // Exécuter ce code uniquement côté client
+    if (typeof window !== 'undefined') {
+        isLargeScreen.value = window.innerWidth >= 1024;
+        window.addEventListener('resize', updateScreenSize);
+    }
+});
+
+
+
+// Supprimer l'écouteur d'événement lorsque le composant est démonté
+onUnmounted(() => {
+  // Exécuter ce code uniquement côté client
+  if (typeof window !== 'undefined') {
+    window.removeEventListener('resize', updateScreenSize);
+  }
+});
+
+// Mettre à jour isLargeScreen basé sur la largeur de la fenêtre
+function updateScreenSize() {
+  isLargeScreen.value = window.innerWidth >= 1024;
+}
+
+
+</script>
 
 
 

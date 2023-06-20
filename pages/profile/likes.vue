@@ -9,5 +9,12 @@
 </template>
 
 <script setup>
-
+onBeforeMount(() => {
+    if (process.client) {
+        let token = localStorage.getItem("token")
+        if(!token) {
+            navigateTo("/connexion")
+        }
+    }
+})
 </script>
