@@ -1,35 +1,35 @@
 'use strict';
-const Comment = require('../models/commentModel');
+const Chat_message = require('../models/chat_messageModel');
 
 exports.findAll = function(req, res){
-    Comment.findAll(function(err, comment){
+    Chat_message.findAll(function(err, chat_message){
         console.log('controller')
         if (err)
         res.send(err);
-        console.log('res', comment);
-        res.send(comment);
+        console.log('res', chat_message);
+        res.send(chat_message);
     });
 };
 
 exports.create = function(req, res) {
-    const new_comment = new Comment(req.body);
+    const new_chat_message = new Chat_message(req.body);
     //handles null error
     if(req.body.constructor === Object && Object.keys(req.body).length === 0){
       res.status(400).send({ error:true, message: 'Please provide all required field' });
     }else{
-        Comment.create(new_comment, function(err, comment) {
+        Chat_message.create(new_chat_message, function(err, chat_message) {
             if (err)
             res.send(err);
-            res.json({error:false,message:"Commentaire créé !",data:comment});
+            res.json({error:false,message:"Message créé !",data:chat_message});
         });
     }
 };
 
 exports.findById = function(req, res) {
-    Comment.findById(req.params.id, function(err, comment) {
+    Chat_message.findById(req.params.id, function(err, chat_message) {
       if (err)
       res.send(err);
-      res.json(comment);
+      res.json(chat_message);
     });
 };
     
@@ -37,18 +37,18 @@ exports.update = function(req, res) {
       if(req.body.constructor === Object && Object.keys(req.body).length === 0){
         res.status(400).send({ error:true, message: 'Please provide all required field' });
       }else{
-        Comment.update(req.params.id, new Comment(req.body), function(err, comment) {
+        Chat_message.update(req.params.id, new Chat_message(req.body), function(err, chat_message) {
        if (err)
        res.send(err);
-       res.json({ error:false, message: 'Commentaire modifié' });
+       res.json({ error:false, message: 'Message modifié' });
     });
     }
 };
 
 exports.delete = function(req, res) {
-    Comment.delete( req.params.id, function(err, comment) {
+    Chat_message.delete( req.params.id, function(err, chat_message) {
       if (err)
       res.send(err);
-      res.json({ error:false, message: 'Commentaire supprimé' });
+      res.json({ error:false, message: 'Message supprimé' });
     });
 };

@@ -1,9 +1,6 @@
-const Buy = require('../models/buyModel');
-const Production = require('../models/productionModel');
-const Account = require('../models/accountModel');
 
-exports.listAllBuys = (req, res) => {
-    Buy.find({production_id: req.params.production_id, account_id: req.params.account_id}, (error, buys) => {
+exports.listAllCommands = (req, res) => {
+    Command.find({production_id: req.params.production_id, account_id: req.params.account_id}, (error, commands) => {
         if (error) {
             res.status(500);
             console.log(error);
@@ -11,12 +8,12 @@ exports.listAllBuys = (req, res) => {
         }
         else {
             res.status(200);
-            res.json(buys);
+            res.json(commands);
         }
     })
 }
 
-exports.createABuy = (req, res) => {
+exports.createACommand = (req, res) => {
     Production.findById(req.prams.production_id, (error, production),
     Account.findById(req.prams.account_id, (error, account)   => {
         if (error) {
@@ -25,9 +22,9 @@ exports.createABuy = (req, res) => {
             res.json({ message: "Reqûete invalide." });
         }
         else {
-            let newBuy = new Buy({...req.body, production_id: req.params.production_id, account_id: req.params.account_id});
+            let newCommand = new Command({...req.body, production_id: req.params.production_id, account_id: req.params.account_id});
           
-            newBuy.save((error, buy) => {
+            newCommand.save((error, command) => {
                 if (error) {
                     res.status(401);
                     console.log(error);
@@ -35,15 +32,15 @@ exports.createABuy = (req, res) => {
                 }
                 else {
                     res.status(201);
-                    res.json(buy);
+                    res.json(command);
                 }
             })
         }
     }))
 }
 
-exports.getABuy = (req, res) => {
-    Buy.findById(req.params.buy_id, (error, buy) => {
+exports.getACommand = (req, res) => {
+    Command.findById(req.params.command_id, (error, command) => {
         if (error) {
             res.status(500);
             console.log(error);
@@ -51,13 +48,13 @@ exports.getABuy = (req, res) => {
         }
         else {
             res.status(200);
-            res.json(buy);
+            res.json(command);
         }
     })
 }
 
-exports.updateABuy = (req, res) => {
-    Buy.findByIdAndUpdate(req.params.buy_id, req.body, { new: true }, (error, buy) => {
+exports.updateACommand = (req, res) => {
+    Command.findByIdAndUpdate(req.params.command_id, req.body, { new: true }, (error, command) => {
         if (error) {
             res.status(500);
             console.log(error);
@@ -65,7 +62,7 @@ exports.updateABuy = (req, res) => {
         }
         else {
             res.status(200);
-            res.json(buy);
+            res.json(command);
         }
     })
 }

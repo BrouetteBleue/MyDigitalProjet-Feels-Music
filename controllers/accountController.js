@@ -1,112 +1,54 @@
+'use strict';
 const Account = require('../models/accountModel');
-const jwt = require('jsonwebtoken');
 
- 
-exports.accountRegister = (req, res) => {
-    let newAccount = new Account (req.body);
+exports.findAll = function(req, res){
+    Account.findAll(function(err, account){
+        console.log('controller')
+        if (err)
+        res.send(err);
+        console.log('res', account);
+        res.send(account);
+    });
+};
 
-    newAccount.save((error, account) => {
-        if (error) {
-            res.status(401);
-            console.log(error);
-            res.json({ message: "Reqûete invalide." });
-        }
-        else {
-            res.status(201);
-            res.json({ message: `Utilisateur créé : ${account.email}`});
-        }
-    })
-}
+exports.create = function(req, res) {
+    const new_account = new Account(req.body);
+    //handles null error
+    if(req.body.constructor === Object && Object.keys(req.body).length === 0){
+      res.status(400).send({ error:true, message: 'Please provide all required field' });
+    }else{
+        Account.create(new_account, function(err, account) {
+            if (err)
+            res.send(err);
+            res.json({error:false,message:"Compte créé !",data:account});
+        });
+    }
+};
 
-exports.loginRegister = (req, res) => {
-    //find account
-    Account.findOne({email : req.body.email}, (error, account) => {
-        if (error || account == null) {
-            res.status(500);
-            console.log(error);
-            res.json({ message: "Utilisateur inconnu." });
-        }
-        else {
-            //account found
-            if(account.email == req.body.email && account.password == req.body.password) {
-                let accountData = {
-                    id: account._id,
-                    emaim: account.email,
-                    role: "admin"
-                }
-                jwt.sign(accountData, process.env.JWT_KEY, {expiresIn : "30days"}, (error, token) => {
-                    if (error) {
-                        res.status(500);
-                        console.log(error);
-                        res.json({ message: "Impossible de générer le token." });
-                    }
-                    else {
-                        res.status(200);
-                        res.json({token})
-                    }
-                })
-            }
-            else{
-                res.status(401);
-                console.log(error);
-                res.json({message: "Email ou mot de passe incorrect"})
-            }
-        }
-    })
-}
+exports.findById = function(req, res) {
+    Account.findById(req.params.id, function(err, account) {
+      if (err)
+      res.send(err);
+      res.json(account);
+    });
+};
+    
+exports.update = function(req, res) {
+      if(req.body.constructor === Object && Object.keys(req.body).length === 0){
+        res.status(400).send({ error:true, message: 'Please provide all required field' });
+      }else{
+        Account.update(req.params.id, new Account(req.body), function(err, account) {
+       if (err)
+       res.send(err);
+       res.json({ error:false, message: 'Compte modifié' });
+    });
+    }
+};
 
-exports.listAllAccounts = (req, res) => {
-    Account.find({}, (error, accounts) => {
-        if (error) {
-            res.status(500);
-            console.log(error);
-            res.json({ message: "Erreur serveur." });
-        }
-        else {
-            res.status(200);
-            res.json(accounts);
-        }
-    })
-} 
-
-exports.getAAccount = (req, res) => {
-    Account.findById(req.params.account_id, (error, account) => {
-        if (error) {
-            res.status(500);
-            console.log(error);
-            res.json({ message: "Erreur serveur." });
-        }
-        else {
-            res.status(200);
-            res.json(account);
-        }
-    })
-}
-
-exports.updateAAccount = (req, res) => {
-    Account.findByIdAndUpdate(req.params.account_id, req.body, { new: true }, (error, account) => {
-        if (error) {
-            res.status(500);
-            console.log(error);
-            res.json({ message: "Erreur serveur." });
-        }
-        else {
-            res.status(200);
-            res.json(account);
-        }
-    })
-}
-
-exports.deleteAAccount = (req, res) => {
-    Account.findByIdAndRemove(req.params.account_id, (error) => {
-        if (error) {
-            res.status(500);
-            console.log(error);
-            res.json({ message: "Erreur serveur." });
-        }
-        else {
-            res.status(200);
-            res.json({message: "Compte supprimé"});
-        }
-    })
-}
+exports.delete = function(req, res) {
+    Account.delete( req.params.id, function(err, account) {
+      if (err)
+      res.send(err);
+      res.json({ error:false, message: 'Compte supprimé' });
+    });
+};

@@ -1,35 +1,35 @@
 'use strict';
-const Comment = require('../models/commentModel');
+const Playlist = require('../models/playlistModel');
 
 exports.findAll = function(req, res){
-    Comment.findAll(function(err, comment){
+    Playlist.findAll(function(err, playlist){
         console.log('controller')
         if (err)
         res.send(err);
-        console.log('res', comment);
-        res.send(comment);
+        console.log('res', playlist);
+        res.send(playlist);
     });
 };
 
 exports.create = function(req, res) {
-    const new_comment = new Comment(req.body);
+    const new_playlist = new Playlist(req.body);
     //handles null error
     if(req.body.constructor === Object && Object.keys(req.body).length === 0){
       res.status(400).send({ error:true, message: 'Please provide all required field' });
     }else{
-        Comment.create(new_comment, function(err, comment) {
+        Playlist.create(new_playlist, function(err, playlist) {
             if (err)
             res.send(err);
-            res.json({error:false,message:"Commentaire créé !",data:comment});
+            res.json({error:false,message:"Playlist créé !",data:playlist});
         });
     }
 };
 
 exports.findById = function(req, res) {
-    Comment.findById(req.params.id, function(err, comment) {
+    Playlist.findById(req.params.id, function(err, playlist) {
       if (err)
       res.send(err);
-      res.json(comment);
+      res.json(playlist);
     });
 };
     
@@ -37,18 +37,18 @@ exports.update = function(req, res) {
       if(req.body.constructor === Object && Object.keys(req.body).length === 0){
         res.status(400).send({ error:true, message: 'Please provide all required field' });
       }else{
-        Comment.update(req.params.id, new Comment(req.body), function(err, comment) {
+        Playlist.update(req.params.id, new Playlist(req.body), function(err, playlist) {
        if (err)
        res.send(err);
-       res.json({ error:false, message: 'Commentaire modifié' });
+       res.json({ error:false, message: 'Playlist modifié' });
     });
     }
 };
 
 exports.delete = function(req, res) {
-    Comment.delete( req.params.id, function(err, comment) {
+    Playlist.delete( req.params.id, function(err, playlist) {
       if (err)
       res.send(err);
-      res.json({ error:false, message: 'Commentaire supprimé' });
+      res.json({ error:false, message: 'Playlist supprimé' });
     });
 };

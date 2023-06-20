@@ -1,3 +1,4 @@
+const express = require('express');
 module.exports = (server) => {
     
     const chat_messageController = require("../controllers/chat_messageController");

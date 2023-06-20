@@ -1,73 +1,54 @@
-const Categorie = require('../models/categorieModel');
+'use strict';
+const Category = require('../models/categoryModel');
 
-exports.listAllCategories = (req, res) => {
-    Categorie.find({}, (error, categories) => {
-        if (error) {
-            res.status(500);
-            console.log(error);
-            res.json({ message: "Erreur serveur." });
-        }
-        else {
-            res.status(200);
-            res.json(categories);
-        }
-    })
-} 
+exports.findAll = function(req, res){
+    Category.findAll(function(err, category){
+        console.log('controller')
+        if (err)
+        res.send(err);
+        console.log('res', category);
+        res.send(category);
+    });
+};
 
-exports.createACategorie = (req, res) => {
-    let newCategorie = new Categorie(req.body);
+exports.create = function(req, res) {
+    const new_category = new Category(req.body);
+    //handles null error
+    if(req.body.constructor === Object && Object.keys(req.body).length === 0){
+      res.status(400).send({ error:true, message: 'Please provide all required field' });
+    }else{
+        Category.create(new_category, function(err, category) {
+            if (err)
+            res.send(err);
+            res.json({error:false,message:"Catégorie créé !",data:category});
+        });
+    }
+};
 
-    newCategorie.save((error, categorie) => {
-        if (error) {
-            res.status(401);
-            console.log(error);
-            res.json({ message: "Reqûete invalide." });
-        }
-        else {
-            res.status(201);
-            res.json(categorie);
-        }
-    })
-}
+exports.findById = function(req, res) {
+    Category.findById(req.params.id, function(err, category) {
+      if (err)
+      res.send(err);
+      res.json(category);
+    });
+};
+    
+exports.update = function(req, res) {
+      if(req.body.constructor === Object && Object.keys(req.body).length === 0){
+        res.status(400).send({ error:true, message: 'Please provide all required field' });
+      }else{
+        Category.update(req.params.id, new Category(req.body), function(err, category) {
+       if (err)
+       res.send(err);
+       res.json({ error:false, message: 'Catégorie modifié' });
+    });
+    }
+};
 
-exports.getACategorie = (req, res) => {
-    Categorie.findById(req.params.categorie_id, (error, categorie) => {
-        if (error) {
-            res.status(500);
-            console.log(error);
-            res.json({ message: "Erreur serveur." });
-        }
-        else {
-            res.status(200);
-            res.json(categorie);
-        }
-    })
-}
-
-exports.updateACategorie = (req, res) => {
-    Categorie.findByIdAndUpdate(req.params.categorie_id, req.body, { new: true }, (error, categorie) => {
-        if (error) {
-            res.status(500);
-            console.log(error);
-            res.json({ message: "Erreur serveur." });
-        }
-        else {
-            res.status(200);
-            res.json(categorie);
-        }
-    })
-}
-
-exports.deleteACategorie = (req, res) => {
-    Categorie.findByIdAndRemove(req.params.categorie_id, (error) => {
-        if (error) {
-            res.status(500);
-            console.log(error);
-            res.json({ message: "Erreur serveur." });
-        }
-        else {
-            res.status(200);
-            res.json({message: "Categorie supprimé"});
-        }
-    })
-}
+exports.delete = function(req, res) {
+    Category.delete( req.params.id, function(err, category) {
+      if (err)
+      res.send(err);
+      res.json({ error:false, message: 'Catégorie supprimé' });
+    });
+};

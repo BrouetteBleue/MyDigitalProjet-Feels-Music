@@ -1,35 +1,35 @@
 'use strict';
-const Comment = require('../models/commentModel');
+const Style = require('../models/styleModel');
 
 exports.findAll = function(req, res){
-    Comment.findAll(function(err, comment){
+    Style.findAll(function(err, style){
         console.log('controller')
         if (err)
         res.send(err);
-        console.log('res', comment);
-        res.send(comment);
+        console.log('res', style);
+        res.send(style);
     });
 };
 
 exports.create = function(req, res) {
-    const new_comment = new Comment(req.body);
+    const new_style = new Style(req.body);
     //handles null error
     if(req.body.constructor === Object && Object.keys(req.body).length === 0){
       res.status(400).send({ error:true, message: 'Please provide all required field' });
     }else{
-        Comment.create(new_comment, function(err, comment) {
+        Style.create(new_style, function(err, style) {
             if (err)
             res.send(err);
-            res.json({error:false,message:"Commentaire créé !",data:comment});
+            res.json({error:false,message:"Style créé !",data:style});
         });
     }
 };
 
 exports.findById = function(req, res) {
-    Comment.findById(req.params.id, function(err, comment) {
+    Style.findById(req.params.id, function(err, style) {
       if (err)
       res.send(err);
-      res.json(comment);
+      res.json(style);
     });
 };
     
@@ -37,18 +37,18 @@ exports.update = function(req, res) {
       if(req.body.constructor === Object && Object.keys(req.body).length === 0){
         res.status(400).send({ error:true, message: 'Please provide all required field' });
       }else{
-        Comment.update(req.params.id, new Comment(req.body), function(err, comment) {
+        Style.update(req.params.id, new Style(req.body), function(err, style) {
        if (err)
        res.send(err);
-       res.json({ error:false, message: 'Commentaire modifié' });
+       res.json({ error:false, message: 'Style modifié' });
     });
     }
 };
 
 exports.delete = function(req, res) {
-    Comment.delete( req.params.id, function(err, comment) {
+    Style.delete( req.params.id, function(err, style) {
       if (err)
       res.send(err);
-      res.json({ error:false, message: 'Commentaire supprimé' });
+      res.json({ error:false, message: 'Style supprimé' });
     });
 };

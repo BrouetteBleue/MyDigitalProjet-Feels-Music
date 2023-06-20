@@ -1,3 +1,4 @@
+const express = require('express');
 module.exports = (server) => {
     
     const commentController = require("../controllers/commentController");
