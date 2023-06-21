@@ -12,8 +12,8 @@
         <div class="flex flex-row justify-between w-[90%] ">
             <div class="hidden lg:flex flex-col justify-center items-center w-3/12 h-[16em] rounded-xl border-[1px] border-[#404040] bg-[#292929]">
               Filtrer par :
-              <ButtonsSelect  class="w-1/2 lg:w-[30%] mr-5 rounded-full" text="Catégorie" type="categories" name="category_id"/>
-              <ButtonsSelect  class="w-1/2 lg:w-[30%]" text="Style" type="styles" name="style_id"/>
+              <ButtonsSelect v-model="selectedCategoryId" text="Catégorie" type="categories" name="category_id"/>
+              <ButtonsSelect v-model="selectedStyleId" text="Style" type="styles" name="style_id"/>
                 <input type="range"  min="0" max="100" class="text-[#CFCFCF] bg-[#292929]" >
             </div>
 
@@ -57,6 +57,10 @@ import { ref, onMounted, onUnmounted } from 'vue';
 const data = ref({});
 const prod = ref({});
 const beatmaker = ref({});
+
+const selectedCategoryId = ref("option1");
+const selectedStyleId = ref("option1");
+
 // Créer une variable réactive pour stocker si l'écran est grand ou non
 const isLargeScreen = ref(false);
 

@@ -5,6 +5,7 @@ module.exports = (server) => {
 
     server.route("/like") 
     .post(jwtMiddleware.verifyToken,likeController.like)
-    .delete(jwtMiddleware.verifyToken,likeController.unlike);
+    .delete(jwtMiddleware.verifyToken,likeController.unlike)
+    .get(jwtMiddleware.verifyToken,likeController.getUserLikes);
 
 };

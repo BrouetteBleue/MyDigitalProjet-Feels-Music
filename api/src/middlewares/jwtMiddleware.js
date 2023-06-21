@@ -12,6 +12,8 @@ exports.verifyToken = (req, res, next) => {
                 apiResponse(res, 403, 'accès interdit : token invalide');
             }
             else{
+                req.user = decoded;
+                
                 next();
             }
         });

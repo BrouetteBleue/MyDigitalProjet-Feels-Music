@@ -23,6 +23,10 @@ productionRoute(app);
 const likeRoute = require('./src/routes/likeRoute');
 likeRoute(app);
 
+const commentRoute = require('./src/routes/commentRoute');
+commentRoute(app);
+
+
 app.get('/test', (req, res) => {
   res.send('Hello, World!');
 });

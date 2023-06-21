@@ -70,8 +70,8 @@ import { ref, onMounted, onUnmounted } from 'vue';
         cover: null
     });
 
-    const selectedCategoryId = ref(null);
-    const selectedStyleId = ref(null);
+    const selectedCategoryId = ref("option1");
+    const selectedStyleId = ref("option1");
 
     let imageSrc = ref(null);
     let deleteBtn = ref(false);

@@ -49,3 +49,52 @@ exports.unlike = async (req, res) => {
         apiResponse(res, 500, "Couldn't unlike production");
     }
 };
+
+
+exports.getUserLikes = async (req, res) => {
+    const userId = req.user.userId;
+
+    // Vérifier si l'id de l'utilisateur est fourni
+    if (!userId) {
+        return apiResponse(res, 400, "L'id de l'utilisateur est requis.");
+    }
+
+    try {
+        // Récupérer les likes de l'utilisateur de la base de données
+        const likes = await prisma.like.findMany({
+            where: {
+                account_id: parseInt(userId)
+            },
+            include: {
+                production: {
+                    select: {
+                        id: true,
+                        title: true,
+                        account: {
+                            select: {
+                                pseudo: true
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // Transformer les données pour n'inclure que les informations nécessaires
+        const userLikes = likes.map(like => ({
+            productionId: like.production.id,
+            productionTitle: like.production.title,
+            userPseudo: like.production.account.pseudo
+        }));
+
+        // Répondre avec les likes de l'utilisateur
+        apiResponse(res, 200, 'Likes de l’utilisateur récupérés avec succès.', { userLikes });
+
+    } catch (error) {
+        // Journalisation de l'erreur pour le débogage
+        console.error(error);
+
+        // Répondre avec une erreur interne du serveur
+        apiResponse(res, 500, 'Une erreur est survenue lors de la récupération des likes de l’utilisateur.');
+    }
+};
