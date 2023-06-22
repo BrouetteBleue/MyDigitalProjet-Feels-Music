@@ -4,8 +4,8 @@ module.exports = (server) => {
     const jwtMiddleware = require("../middlewares/jwtMiddleware");
 
     server.route("/like") 
-    .post(jwtMiddleware.verifyToken,likeController.like)
-    .delete(jwtMiddleware.verifyToken,likeController.unlike)
-    .get(jwtMiddleware.verifyToken,likeController.getUserLikes);
+    .post(jwtMiddleware.verifyTokenRequired,likeController.like)
+    .delete(jwtMiddleware.verifyTokenRequired,likeController.unlike)
+    .get(jwtMiddleware.verifyTokenRequired,likeController.getUserLikes);
 
 };

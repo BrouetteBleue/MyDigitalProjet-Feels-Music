@@ -126,20 +126,45 @@ exports.getProductionDetails = async (req, res) => {
 
 exports.getProductions = async (req, res) => {
     try {
-        // Récupérer toutes les productions de la base de données
-        const productions = await prisma.production.findMany({
+        const userId = req.user?.userId; 
+
+        const limit = req.query.limit ? parseInt(req.query.limit) : undefined;
+        const latest = req.query.latest === 'true' ? true : false;
+
+        let prismaOptions = {
             include: { 
                 category: {
-                    select: { name: true }
+                    select: { name: true, id: true }
                 },     
                 style: {
-                    select: { name: true }
+                    select: { name: true , id: true}
                 },   
                 account: {
                     select: { pseudo: true, country: true}
-                }    
+                },
             },
-        });
+            take: limit 
+        };
+
+        if (latest) {
+            prismaOptions.orderBy = {
+                created_at: 'desc'
+            };
+        }
+
+        const productions = await prisma.production.findMany(prismaOptions);
+
+        // Si un utilisateur est connecté, récupérez tous ses "likes"
+        let userLikes = [];
+        if (userId) {
+            userLikes = await prisma.like.findMany({
+                where: { account_id: userId },
+                select: { production_id: true } 
+            });
+        }
+
+        // Transformez les "likes" en un ensemble pour une recherche plus rapide
+        const likedProductionsSet = new Set(userLikes.map(like => like.production_id));
 
         const cleanProductions = productions.map(prod => {
             return {
@@ -147,21 +172,20 @@ exports.getProductions = async (req, res) => {
                 title: prod.title,
                 cover: prod.cover,
                 category: prod.category.name,
+                categoryId: prod.category.id,
                 style: prod.style.name,
+                styleId: prod.style.id,
                 price: prod.price,
                 length: prod.length,
                 account: prod.account,
+                isLiked: likedProductionsSet.has(prod.id) // Vérifiez si la production est dans l'ensemble des productions aimées
             }
         });
 
-        // Répondre avec les détails de la production
         apiResponse(res, 200, 'Productions récupérées avec succès.', { cleanProductions });
 
     } catch (error) {
-        // Journalisation de l'erreur pour le débogage
         console.error(error);
-
-        // Répondre avec une erreur interne du serveur
         apiResponse(res, 500, 'Une erreur est survenue lors de la récupération des productions.');
     }
 }

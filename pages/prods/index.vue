@@ -21,7 +21,7 @@
               <div class="w-full flex flex-row justify-center items-center mb-28">
                 <div class="hidden lg:flex flex-col w-10/12" v-if="isLargeScreen">
                   <CardsCardTrack 
-                    v-for="prod in data"
+                    v-for="prod in filteredProductions"
                     :key="prod.id"
                     :beatmaker="prod.account"
                     :production="prod"
@@ -31,7 +31,7 @@
 
                 <div class="flex lg:hidden flex-row flex-wrap justify-between w-full" v-else>
                   <CardsCardTrackMobile 
-                    v-for="prod in data"
+                    v-for="prod in filteredProductions"
                     :key="prod.id"
                     :beatmaker="prod.account"
                     :production="prod"
@@ -55,8 +55,8 @@
 import { ref, onMounted, onUnmounted } from 'vue';
 
 const data = ref({});
-const prod = ref({});
-const beatmaker = ref({});
+const allProductions = ref([]);
+const filteredProductions = ref([]);
 
 const selectedCategoryId = ref("option1");
 const selectedStyleId = ref("option1");
@@ -67,9 +67,15 @@ const isLargeScreen = ref(false);
 onMounted(async () => {
     $fetch(`http://localhost:3001/productions`, { 
         method: "GET",
+        headers: {
+          Accept: 'application/json',
+          Authorization: `${localStorage.getItem('token')}`
+        }
     })
     .then((response) => {
         data.value = response.data.cleanProductions;
+        allProductions.value = response.data.cleanProductions;
+        filteredProductions.value = response.data.cleanProductions;
     })
     .catch((error) => {
         console.error('An error occurred while fetching beatmakers:', error);
@@ -82,7 +88,15 @@ onMounted(async () => {
     }
 });
 
-
+watchEffect(() => {
+  if (selectedCategoryId.value !== 'option1') {
+    filteredProductions.value = allProductions.value.filter(prod => prod.categoryId == selectedCategoryId.value);
+  } else if (selectedStyleId.value !== 'option1') {
+    filteredProductions.value = allProductions.value.filter(prod => prod.styleId == selectedStyleId.value);
+  } else {
+    filteredProductions.value = [...allProductions.value];
+  }
+});
 
 // Supprimer l'écouteur d'événement lorsque le composant est démonté
 onUnmounted(() => {

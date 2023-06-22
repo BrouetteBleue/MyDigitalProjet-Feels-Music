@@ -4,12 +4,12 @@ module.exports = (server) => {
     const jwtMiddleware = require("../middlewares/jwtMiddleware");
 
     server.post("/uploadProduction", 
-        jwtMiddleware.verifyToken,
+        jwtMiddleware.verifyTokenRequired,
         productionController.uploadMiddleware,
         productionController.uploadProduction
     );
 
     server.get("/production/:prod", productionController.getProductionDetails);
 
-    server.get("/productions", productionController.getProductions);
+    server.get("/productions", jwtMiddleware.verifyTokenOptional,productionController.getProductions);
 };

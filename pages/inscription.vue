@@ -9,12 +9,16 @@
                     {{ message }}
                 </div>
             </div>
-            <form class="flex flex-col justify-center items-center w-7/12 mt-10" method="POST">
+            <form class="flex flex-col justify-center items-start w-7/12 mt-10" method="POST">
                 <div >
                     <InputsInputFormConnection v-model="pseudo" text="Pseudo" name="pseudo" :required=true class="mb-10" />
                     <InputsInputFormConnection v-model="email" type="email" text="Email" name="email" :required=true class="mb-10"/>
                     <InputsInputFormConnection v-model="password" type="password" text="Mot de passe" :required=true name="password" class="mb-10"/>
                     <InputsInputFormConnection v-model="passwordConfirm" type="password" text="Confirmer mot de passe" :required=true name="passordConfirm" class="mb-10"/>
+                </div>
+
+                <div class="mb-5">
+                    <input type="checkbox" name="cgv" v-model="cgv" required> J'accepte les conditions générales de vente et d'utilisation
                 </div>
 
                 <div class="flex flex-row justify-between items-center w-full mb-5">
@@ -50,6 +54,7 @@ const pseudo = ref("")
 const email = ref("")
 const password = ref("")
 const passwordConfirm = ref("")
+const cgv = ref(false)
 
 const message = ref(false)
 
@@ -63,6 +68,7 @@ const HandleInscription = async () => {
 
     if (password.value !== passwordConfirm.value) return message.value = "Les mots de passe ne sont pas identiques.";
 
+    if (!cgv.value) return message.value = "Veuillez accepter les conditions générales de vente et d'utilisation.";
 
         $fetch("http://localhost:3001/signin", {
             method: "POST",

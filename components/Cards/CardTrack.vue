@@ -1,5 +1,7 @@
 <script setup>
 
+import { ref, onMounted, onUnmounted } from 'vue';
+
     const props = defineProps({
         CardType: {
             type: String,
@@ -14,6 +16,31 @@
             required: true
         }
     })
+
+    const isLiked = ref(props.production.isLiked);
+
+    const handleLike = () => {
+        $fetch(`http://localhost:3001/like`, { 
+            method: "POST",
+            headers: {
+                Accept: 'application/json',
+                Authorization: `${localStorage.getItem('token')}`
+            },
+            body: JSON.stringify({
+                production: props.production.id
+            }),
+        })
+        .then((response) => {
+            if (response.status === 201) {
+                isLiked.value = true;
+            } else if (response.status === 200) {
+                isLiked.value = false;
+            }
+        })
+        .catch((error) => {
+            console.error('An error occurred while liking the production', error);
+        });
+        }
 
 </script>
 
@@ -39,22 +66,22 @@
                 
 
                 <div class="flex flex-row" v-if="props.CardType == 'normal'">
-                    <button>
-                        <IconsHeart class="mx-10" />
+                    <button @click.prevent="handleLike">
+                        <IconsHeart class="mx-10" v-if="!isLiked"/> <IconsHeartFilled class="mx-10 text-[#F49743] w-[2em] h-[2em]" v-else/>
                     </button>
                     <ButtonsAddToCartBtn :text="production.price" iconName="Cart" /> 
                 </div>
 
                 <div class="flex flex-row"  v-else-if="props.CardType == 'commande'">
-                    <button>
-                        <IconsHeart class="mx-10" />
+                    <button @click.prevent="handleLike">
+                        <IconsHeart class="mx-10" v-if="!isLiked"/> <IconsHeartFilled class="mx-10 text-[#F49743] w-[2em] h-[2em]" v-else/>
                     </button>
                 </div>
 
 
                 <div class="flex flex-row" v-else-if="props.CardType == 'profil'">
-                    <button>
-                        <IconsHeart class="mx-5"/>
+                    <button @click.prevent="handleLike">
+                        <IconsHeart class="mx-5" v-if="!isLiked"/> <IconsHeartFilled class="mx-5 text-[#F49743] w-[2em] h-[2em]" v-else/>
                     </button>
                     <nuxt-link :to="`profile/prods/${production.id}`">
                         <IconsPen class="mx-5 w-[2.3em] h-[2.3em] text-[#9E9E9E]" />
@@ -74,7 +101,6 @@
     </nuxt-link>
     
 </template>
-
 
 <style lang=""> 
     

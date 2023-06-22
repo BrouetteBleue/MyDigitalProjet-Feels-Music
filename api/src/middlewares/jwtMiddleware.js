@@ -3,7 +3,21 @@ const { apiResponse } = require('../config/utils');
 
 const jwtKey = process.env.JWT_KEY;
 
-exports.verifyToken = (req, res, next) => {
+exports.verifyTokenOptional = (req, res, next) => {
+    const token = req.headers['authorization'];
+
+    if (token) {
+        jwt.verify(token, jwtKey, (err, decoded) => {
+            if (!err) {
+                req.user = decoded;
+            }
+        });
+    }
+
+    next();
+};
+
+exports.verifyTokenRequired = (req, res, next) => {
     const token = req.headers['authorization'];
 
     if(token){

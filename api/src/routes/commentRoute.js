@@ -4,7 +4,7 @@ module.exports = (server) => {
     const jwtMiddleware = require("../middlewares/jwtMiddleware");
 
     server.route("/comment") 
-    .post(jwtMiddleware.verifyToken,commentController.createComment)
+    .post(jwtMiddleware.verifyTokenRequired,commentController.createComment)
 
     server.route("/comment/:productionId")
     .get(commentController.getCommentsByProduction);

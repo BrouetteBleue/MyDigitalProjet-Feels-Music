@@ -199,8 +199,8 @@ exports.getUserByUsername = async (req, res) => {
 exports.getBeatmakers = async (req, res) => {
 
     try {
-        // Récupérer les utilisateurs de la base de données
-        const users = await prisma.account.findMany({
+        const limit = req.query.limit ? parseInt(req.query.limit) : undefined;
+        const prismaOptions= {
             where: {
                 production: {
                     some: {}
@@ -211,7 +211,11 @@ exports.getBeatmakers = async (req, res) => {
                   select: { production: true },
                 },
               },
-        });
+            take: limit,
+        }
+
+        const users = await prisma.account.findMany(prismaOptions);
+        
 
         const usersWithProductionCount = users.map(user => ({
             id: user.id,

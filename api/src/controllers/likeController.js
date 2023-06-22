@@ -4,19 +4,40 @@ const { apiResponse } = require('../config/utils');
 const prisma = new PrismaClient();
 
 exports.like = async (req, res) => {
+    const userId = req.user.userId;
     const body = req.body;
 
     try {
-        const like = await prisma.like.create({
-            data: {
-                account_id: body.account,
+        const existingLike = await prisma.like.findFirst({
+            where: {
+                account_id: userId,
                 production_id: body.production,
             },
         });
 
-        apiResponse(res, 201, 'Liked', { like });
+        // Si un "like" existe déjà, le supprimer
+        if (existingLike) {
+            await prisma.like.delete({
+                where: { id: existingLike.id },
+            });
+            apiResponse(res, 200, 'Unliked', { like: null });
+        } 
+        // Sinon, créer un nouveau "like"
+        else {
+            const like = await prisma.like.create({
+                data: {
+                    account_id: userId,
+                    production_id: body.production,
+                },
+            });
+
+            console.log(like);
+
+            apiResponse(res, 201, 'Liked', { like });
+        }
     } catch (error) {
-        apiResponse(res, 500, "Couldn't like production");
+        console.error(error);
+        apiResponse(res, 500, "Couldn't like or unlike production");
     }
 };
 
@@ -70,6 +91,16 @@ exports.getUserLikes = async (req, res) => {
                     select: {
                         id: true,
                         title: true,
+                        category: {
+                            select: {
+                                name: true
+                            }
+                        },
+                        style: {
+                            select: {
+                                name: true
+                            }
+                        },
                         account: {
                             select: {
                                 pseudo: true
@@ -82,9 +113,15 @@ exports.getUserLikes = async (req, res) => {
 
         // Transformer les données pour n'inclure que les informations nécessaires
         const userLikes = likes.map(like => ({
-            productionId: like.production.id,
-            productionTitle: like.production.title,
-            userPseudo: like.production.account.pseudo
+            production: {
+                id: like.production.id,
+                title: like.production.title,
+                category: like.production.category.name,
+                style: like.production.style.name,
+            },
+            beatmaker: {
+                pseudo: like.production.account.pseudo
+            }
         }));
 
         // Répondre avec les likes de l'utilisateur

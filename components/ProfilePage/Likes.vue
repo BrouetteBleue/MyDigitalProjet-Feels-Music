@@ -4,27 +4,27 @@
                     <h1 class="text-[#9E9E9E] text-3xl font-bold">Titres likés</h1>
                 </div>
 
-                <div v-if="isLargeScreen" class="flex flex-col">
-                    <CardsCardTrack :idProd="1" CardType="like"/>
-                    <CardsCardTrack :idProd="2" CardType="like"/>
-                    <CardsCardTrack :idProd="3" CardType="like"/>
-                    <CardsCardTrack :idProd="4" CardType="like"/>
-                    <CardsCardTrack :idProd="5" CardType="like"/>
-                    <CardsCardTrack :idProd="6" CardType="like"/>
-                    <CardsCardTrack :idProd="7" CardType="like"/>
-                    <CardsCardTrack :idProd="8" CardType="like"/>
-                </div>
+                <div class="w-full flex flex-row justify-center items-center mb-28">
+                  <div class="hidden lg:flex flex-col w-10/12" v-if="isLargeScreen">
+                    <CardsCardTrack 
+                      v-for="prod in data"
+                      :key="prod.production.id"
+                      :beatmaker="prod.beatmaker"
+                      :production="prod.production"
+                      :CardType="'like'"
+                    />
+                  </div>
 
-                <div v-if="!isLargeScreen" class="flex flex-row flex-wrap justify-between w-full">
-                    <CardsCardTrackMobile :idProd="1" CardType="like" class="mb-5"/>
-                    <CardsCardTrackMobile :idProd="2" CardType="like" class="mb-5"/>
-                    <CardsCardTrackMobile :idProd="3" CardType="like" class="mb-5"/>
-                    <CardsCardTrackMobile :idProd="4" CardType="like" class="mb-5"/>
-                    <CardsCardTrackMobile :idProd="5" CardType="like" class="mb-5"/>
-                    <CardsCardTrackMobile :idProd="6" CardType="like" class="mb-5"/>
-                    <CardsCardTrackMobile :idProd="7" CardType="like" class="mb-5"/>
-                    <CardsCardTrackMobile :idProd="8" CardType="like" class="mb-5"/>
-                </div>
+                  <div class="flex lg:hidden flex-row flex-wrap justify-between w-full" v-else>
+                    <CardsCardTrackMobile 
+                      v-for="prod in data"
+                      :key="prod.production.id"
+                      :beatmaker="prod.beatmaker"
+                      :production="prod.production"
+                      :CardType="'like'"
+                    />
+                  </div>  
+              </div>
                 
                 <div class="text-center mt-5">
                     Voir plus
@@ -35,6 +35,35 @@
 <script setup>
     
 import { ref, onMounted, onUnmounted } from 'vue';
+
+const data = ref({});
+
+onMounted(async () => {
+    $fetch(`http://localhost:3001/like`, { 
+        method: "GET",
+        headers: {
+          Accept: 'application/json',
+          Authorization: `${localStorage.getItem('token')}`
+        }
+
+    })
+    .then((response) => {
+        data.value = response.data.userLikes;
+    })
+    .catch((error) => {
+        console.error('An error occurred while fetching beatmakers:', error);
+    });
+
+    // Exécuter ce code uniquement côté client
+    if (typeof window !== 'undefined') {
+        isLargeScreen.value = window.innerWidth >= 1024;
+        window.addEventListener('resize', updateScreenSize);
+    }
+});
+
+
+
+
 
 // Créer une variable réactive pour stocker si l'écran est grand ou non
 const isLargeScreen = ref(false);

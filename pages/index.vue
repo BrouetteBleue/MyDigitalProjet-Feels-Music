@@ -87,14 +87,32 @@
     <div class="container mx-auto px-4 lg:px-0">
         <div class="flex flex-col items-center justify-center">
             <h2 class="text-center lg:text-left font-bold text-2xl lg:text-3xl mb-8">Dernières sorties</h2>
-            <BarsLatests />     
-        </div>
+            <div class="w-full flex justify-center items-center mb-28">
+                <div class="flex flex-row space-x-12 lg:space-x-0 lg:justify-between w-[78%] sm:w-auto lg:overflow-hidden overflow-x-auto pb-10">
+                     <CardsCardSquare 
+                        v-for="prod in latestTracks"
+                        :key="prod.id"
+                        :beatmaker="prod.account"
+                        :production="prod"
+                    />   
+                </div> 
+            </div>
+        </div>           
     </div>
     
 
     <div class="flex flex-col items-center justify-center">
-        <h2 class="text-center lg:text-left font-bold text-2xl lg:text-3xl mb-8">Les stars du moment</h2>
-        <BarsCurrentStars/>     
+        <h2 class="text-center lg:text-left font-bold text-2xl lg:text-3xl mb-16">Les stars du moment</h2>
+        <div class="w-full flex flex-row justify-center items-center mb-36">
+            <div class="flex flex-row lg:space-x-0 lg:justify-evenly w-[78%] lg:overflow-hidden overflow-x-auto pb-10">  
+                <CardsCardRound 
+                    class="flex-shrink-0 w-4/5 sm:w-2/5 lg:w-[22%]" 
+                    v-for="beatmaker in currentStars"
+                    :key="beatmaker.pseudo"
+                    :beatmaker="beatmaker"
+                />
+            </div>
+        </div>    
     </div>
 
     <div class="flex flex-col items-center justify-start">
@@ -105,3 +123,40 @@
         <BarsTrendPlaylist/>     
     </div>
 </template>
+
+<script setup>
+
+import { ref, onMounted } from 'vue';
+
+const latestTracks = ref({});
+const currentStars = ref({});
+
+
+onMounted(async () => {
+    $fetch(`http://localhost:3001/productions?latest=true&limit=4`, { 
+        method: "GET",
+    })
+    .then((response) => {
+        latestTracks.value = response.data.cleanProductions;
+    })
+    .catch((error) => {
+        console.error('An error occurred while fetching beatmakers:', error);
+    });
+
+    $fetch(`http://localhost:3001/beatmakers?limit=4`, { 
+        method: "GET",
+    })
+    .then((response) => {
+        currentStars.value = response.data.users;
+    })
+    .catch((error) => {
+        console.error('An error occurred while fetching beatmakers:', error);
+    });
+
+
+});
+
+
+
+
+</script>
