@@ -70,7 +70,9 @@ const HandleInscription = async () => {
 
     if (!cgv.value) return message.value = "Veuillez accepter les conditions générales de vente et d'utilisation.";
 
-        $fetch("http://localhost:3001/signin", {
+    // const url = "http://localhost:3001/";
+    const url =  "https://feelsmusic.fr/api/";
+        $fetch(url +"signin", {
             method: "POST",
             body: JSON.stringify({
                 pseudo: pseudo.value.trim(),

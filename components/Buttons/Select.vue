@@ -23,8 +23,8 @@ const data = ref([]);
 
 onMounted(async () => {
     try {
-        const url = "http://localhost:3001/";
-        // const url =  "https://feelsmusic.fr/api/";
+        // const url = "http://localhost:3001/";
+        const url =  "https://feelsmusic.fr/api/";
         const response = await $fetch(url + props.type , { parseResponse: JSON.parse });
         
         if (response.data.categories) {

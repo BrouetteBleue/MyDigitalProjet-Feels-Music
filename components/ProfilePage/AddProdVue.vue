@@ -95,7 +95,9 @@ import { ref, onMounted, onUnmounted } from 'vue';
 
     const handleAdd = async () => {
         try {
-        const apiUrl = "http://localhost:3001/uploadProduction"; // Remplacez par l'URL de votre API
+        // const url = "http://localhost:3001/uploadProduction";
+        const url =  "https://feelsmusic.fr/api/uploadProduction";
+       
         const formDataToSend = new FormData();
         
         for (const [key, value] of Object.entries(formData)) {
@@ -107,7 +109,7 @@ import { ref, onMounted, onUnmounted } from 'vue';
 
         const token = localStorage.getItem('token');
 
-        const response = await $fetch(apiUrl, {
+        const response = await $fetch(url, {
             method: 'POST',
             body: formDataToSend,
             headers: {

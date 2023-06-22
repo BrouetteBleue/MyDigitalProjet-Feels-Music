@@ -12,9 +12,8 @@
         <div class="flex flex-row flex-wrap justify-between lg:justify-center w-full">
             <CardsCardRound
                 v-for="beatmaker in beatmakers"
-                :key="beatmaker.id"
-                :idBeatmaker="beatmaker.pseudo"
-                :Beatmaker="true"
+                :key="beatmaker.pseudo"
+                :beatmaker="beatmaker"
                 class="w-[48%] lg:w-[21%] mb-10"
             />         
         </div>
@@ -36,7 +35,9 @@ const beatmakers = ref([]);
 const isLargeScreen = ref(false);
 
 onMounted(() => {
-    $fetch("http://localhost:3001/beatmakers", { 
+    // const url = "http://localhost:3001/";
+    const url =  "https://feelsmusic.fr/api/";
+    $fetch(url+"beatmakers", { 
         method: "GET",
     })
     .then((response) => {

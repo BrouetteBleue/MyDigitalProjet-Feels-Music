@@ -17,7 +17,20 @@
 onBeforeMount(() => {
     if (process.client) {
         let token = localStorage.getItem("token")
-        if(!token) {
+        
+        if (token) {
+            const [, payload,] = token.split('.');
+            const decodedPayload = JSON.parse(atob(payload));
+            const expirationDate = decodedPayload.exp;
+
+            console.log(expirationDate)
+            if (expirationDate < new Date().getTime() / 1000) {
+                localStorage.removeItem('token');
+                localStorage.removeItem('user');
+                navigateTo("/connexion")
+            }
+        }else {
+            console.log("no token")
             navigateTo("/connexion")
         }
     }

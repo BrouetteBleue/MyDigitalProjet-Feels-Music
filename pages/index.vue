@@ -133,7 +133,9 @@ const currentStars = ref({});
 
 
 onMounted(async () => {
-    $fetch(`http://localhost:3001/productions?latest=true&limit=4`, { 
+    // const url = "http://localhost:3001/";
+    const url =  "https://feelsmusic.fr/api/";
+    $fetch(url + 'productions?latest=true&limit=4', { 
         method: "GET",
     })
     .then((response) => {
@@ -143,7 +145,7 @@ onMounted(async () => {
         console.error('An error occurred while fetching beatmakers:', error);
     });
 
-    $fetch(`http://localhost:3001/beatmakers?limit=4`, { 
+    $fetch(url + "beatmakers?limit=4", { 
         method: "GET",
     })
     .then((response) => {

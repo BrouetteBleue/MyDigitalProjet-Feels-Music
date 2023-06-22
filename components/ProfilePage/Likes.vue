@@ -39,7 +39,9 @@ import { ref, onMounted, onUnmounted } from 'vue';
 const data = ref({});
 
 onMounted(async () => {
-    $fetch(`http://localhost:3001/like`, { 
+    // const url = "http://localhost:3001/";
+    const url =  "https://feelsmusic.fr/api/";
+    $fetch(url +'like', { 
         method: "GET",
         headers: {
           Accept: 'application/json',

@@ -41,12 +41,6 @@ definePageMeta({
 });
 
 import { ref } from 'vue';
-import { storeToRefs } from 'pinia'; // import storeToRefs helper hook from pinia
-import { useAuthStore } from '~/store/auth'; // import the auth store we just created
-
-const { authenticateUser } = useAuthStore(); // use authenticateUser action from  auth store
-
-const { authenticated } = storeToRefs(useAuthStore()); // make authenticated state reactive with storeToRefs
 
 
 const email = ref("")
@@ -72,8 +66,9 @@ const HandleConnexion = async () => {
     // if (authenticated) {
     //     navigateTo("/");
     // }
-    
-        $fetch("http://localhost:3001/login", {
+        // const url = "http://localhost:3001/";
+        const url =  "https://feelsmusic.fr/api/";
+        $fetch(url+"login", {
             method: "POST",
             credentials: 'include',
             body: JSON.stringify({

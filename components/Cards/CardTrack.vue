@@ -1,6 +1,9 @@
 <script setup>
 
 import { ref, onMounted, onUnmounted } from 'vue';
+import { useCartStore } from '@/stores/cart';
+
+const cartStore = useCartStore();
 
     const props = defineProps({
         CardType: {
@@ -20,7 +23,9 @@ import { ref, onMounted, onUnmounted } from 'vue';
     const isLiked = ref(props.production.isLiked);
 
     const handleLike = () => {
-        $fetch(`http://localhost:3001/like`, { 
+        // const url = "http://localhost:3001/";
+        const url =  "https://feelsmusic.fr/api/";
+        $fetch(url + 'like', { 
             method: "POST",
             headers: {
                 Accept: 'application/json',
@@ -61,15 +66,21 @@ import { ref, onMounted, onUnmounted } from 'vue';
                 </div> 
             </div> 
             <div class="flex flex-row justify-end items-center mt-2 w-6/12" v-if="props.CardType !== 'like'">
-                <ButtonsCategoryBtn :text="production.style" class="mr-5"/>
-                <ButtonsCategoryBtn :text="production.category"/>
+                <div class="flex flex-row">
+                    <ButtonsCategoryBtn :text="production.style" class="mr-5 py-1"/>
+                    <ButtonsCategoryBtn :text="production.category" class="py-1"/>
+                </div>
+                
                 
 
                 <div class="flex flex-row" v-if="props.CardType == 'normal'">
                     <button @click.prevent="handleLike">
                         <IconsHeart class="mx-10" v-if="!isLiked"/> <IconsHeartFilled class="mx-10 text-[#F49743] w-[2em] h-[2em]" v-else/>
                     </button>
-                    <ButtonsAddToCartBtn :text="production.price" iconName="Cart" /> 
+                    <button @click.prevent="cartStore.addItem(production)">
+                        <ButtonsAddToCartBtn :text="production.price + ' €'" iconName="Cart" /> 
+                    </button>
+                    
                 </div>
 
                 <div class="flex flex-row"  v-else-if="props.CardType == 'commande'">

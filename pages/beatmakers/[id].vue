@@ -89,7 +89,9 @@ const route = useRoute();
 
 onMounted(async () => {
     const username = route.params.id; // Assurez-vous que le nom de paramètre corresponde à celui défini dans votre fichier de route.
-    $fetch(`http://localhost:3001/user/${username}`, { 
+    // const url = "http://localhost:3001/";
+	const url =  "https://feelsmusic.fr/api/";
+	$fetch(url + `user/${username}`, { 
                 method: "GET",
             })
             .then((response) => {
