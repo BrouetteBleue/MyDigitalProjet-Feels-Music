@@ -6,10 +6,10 @@
             </div>
             <div class="flex flex-col">
                 <div class="text-xl lg:text-2xl font-semibold mt-2">
-                    yeh im mad
+                    {{ production.title }}
                 </div>
                 <div class="text-xl lg:text-2xl text-[#F49C4D] font-semibold mt-2">
-                    vitalee
+                    {{ production.account.pseudo}}
                 </div>
             </div>
         </div>
@@ -19,7 +19,7 @@
                     MP3
                 </div>
                 <div class="text-[#F49C4D] lg:ml-20">
-                    39.99€
+                    {{ production.price }} € 
                 </div>
             </div>
             <div class="text-[#949494] w-full lg:mt-5 lg:w-[12%] flex flex-row justify-end">
@@ -34,7 +34,19 @@
 </template>
 
 <script setup>
+
+import { useCartStore } from '@/stores/cart';
+const cartStore = useCartStore();
+
+
+    const props = defineProps({
+        production: {
+            type: Object,
+            required: true
+        }
+    })
+
     const HandleRemove = () => {
-        
+        cartStore.removeItem(props.production)
     }
 </script>

@@ -15,19 +15,19 @@
       </div>
   
       <!-- Navigation pour les grands écrans -->
-      <div class="hidden lg:flex lg:w-[95%]  pt-7 justify-between">
-        <div class="flex flex-row justify-between w-[25%]">
-            <div class="w-[50%] pt-1 text-center text-xl">
+      <div class="hidden lg:flex lg:w-[95%] items-center justify-between">
+        <div class="flex flex-row justify-between items w-[25%]">
+            <div class="w-[33%] pt-1 text-center text-xl">
                 <nuxt-link to="/prods">
                     Tracks
                 </nuxt-link>
             </div>
-            <div class="w-[50%] pt-1 text-center text-xl">
+            <div class="w-[33%] pt-1 text-center text-xl">
                 <nuxt-link to="/beatmakers">
                     Artistes
                 </nuxt-link>
             </div>
-            <div class="w-[50%] pt-1 text-center text-xl">
+            <div class="w-[33%] h-2/5 pt-1 text-center text-xl">
                 <nuxt-link to="/playlists">
                     Playlists
                 </nuxt-link>
@@ -36,9 +36,9 @@
         
         <SearchBar />
 
-        <div class="w-[13%] ">
+        <div class="lg:w-[18%] xl:w-[15%] 2xl:w-[13%] ">
           <nuxt-link to="/profile/prods/add">
-            <ButtonsRoundedButton text="Vendez vos prods" />
+            <ButtonsRoundedButton text="Vendez vos prods" class="flex-shrink" />
           </nuxt-link>
         </div>
         <div class="flex flex-row justify-between w-[15%]">

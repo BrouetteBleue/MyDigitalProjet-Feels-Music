@@ -7,7 +7,7 @@
                     </nuxt-link>
                 </div>
                 <div v-if="isLargeScreen">
-                    <CardsCardTrack CardType="profil" :idProd="1" />
+                    <!-- <CardsCardTrack CardType="profil" :idProd="1" />
                     <CardsCardTrack CardType="profil" :idProd="2" />
                     <CardsCardTrack CardType="profil" :idProd="3" />
                     <CardsCardTrack CardType="profil" :idProd="4" />
@@ -15,10 +15,10 @@
                     <CardsCardTrack CardType="profil" :idProd="6" />
                     <CardsCardTrack CardType="profil" :idProd="7" />
                     <CardsCardTrack CardType="profil" :idProd="8" />
-                    <CardsCardTrack CardType="profil" :idProd="9" />
+                    <CardsCardTrack CardType="profil" :idProd="9" /> -->
                 </div>
-                <div v-if="!isLargeScreen" class="flex flex-row flex-wrap justify-between w-full">
-                    <CardsCardTrackMobile :idProd="1" />
+                <div v-else class="flex flex-row flex-wrap justify-between w-full">
+                    <!-- <CardsCardTrackMobile :idProd="1" />
                     <CardsCardTrackMobile :idProd="2" />
                     <CardsCardTrackMobile :idProd="3" />
                     <CardsCardTrackMobile :idProd="4" />
@@ -26,7 +26,7 @@
                     <CardsCardTrackMobile :idProd="6" />
                     <CardsCardTrackMobile :idProd="7" />
                     <CardsCardTrackMobile :idProd="8" />
-                    <CardsCardTrackMobile :idProd="9" />
+                    <CardsCardTrackMobile :idProd="9" /> -->
                 </div>
                 
                 <div class="text-center mt-5">
@@ -36,5 +36,30 @@
             </div>
 </template>
 <script setup>
+    import { ref, onMounted, onUnmounted } from 'vue';
 
+// Créer une variable réactive pour stocker si l'écran est grand ou non
+const isLargeScreen = ref(false);
+
+// Ajouter un écouteur d'événement pour détecter le redimensionnement de la fenêtre
+onMounted(() => {
+  // Exécuter ce code uniquement côté client
+  if (typeof window !== 'undefined') {
+    isLargeScreen.value = window.innerWidth >= 1024;
+    window.addEventListener('resize', updateScreenSize);
+  }
+});
+
+// Supprimer l'écouteur d'événement lorsque le composant est démonté
+onUnmounted(() => {
+  // Exécuter ce code uniquement côté client
+  if (typeof window !== 'undefined') {
+    window.removeEventListener('resize', updateScreenSize);
+  }
+});
+
+// Mettre à jour isLargeScreen basé sur la largeur de la fenêtre
+function updateScreenSize() {
+  isLargeScreen.value = window.innerWidth >= 1024;
+}
 </script>
