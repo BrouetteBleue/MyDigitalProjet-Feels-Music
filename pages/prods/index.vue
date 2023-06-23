@@ -65,8 +65,8 @@ const selectedStyleId = ref("option1");
 const isLargeScreen = ref(false);
 
 onMounted(async () => {
-  // const url = "http://localhost:3001/";
-  const url =  "https://feelsmusic.fr/api/";
+  const url = "http://localhost:3001/";
+  // const url =  "https://feelsmusic.fr/api/";
     $fetch(url + 'productions', { 
         method: "GET",
         headers: {

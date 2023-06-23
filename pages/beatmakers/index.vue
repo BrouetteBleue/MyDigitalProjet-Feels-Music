@@ -35,8 +35,8 @@ const beatmakers = ref([]);
 const isLargeScreen = ref(false);
 
 onMounted(() => {
-    // const url = "http://localhost:3001/";
-    const url =  "https://feelsmusic.fr/api/";
+    const url = "http://localhost:3001/";
+    // const url =  "https://feelsmusic.fr/api/";
     $fetch(url+"beatmakers", { 
         method: "GET",
     })

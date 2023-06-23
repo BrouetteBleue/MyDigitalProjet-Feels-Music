@@ -23,8 +23,8 @@ const cartStore = useCartStore();
     const isLiked = ref(props.production.isLiked);
 
     const handleLike = () => {
-        // const url = "http://localhost:3001/";
-        const url =  "https://feelsmusic.fr/api/";
+        const url = "http://localhost:3001/";
+        // const url =  "https://feelsmusic.fr/api/";
         $fetch(url + 'like', { 
             method: "POST",
             headers: {

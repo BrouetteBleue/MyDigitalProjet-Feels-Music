@@ -133,8 +133,8 @@ const currentStars = ref({});
 
 
 onMounted(async () => {
-    // const url = "http://localhost:3001/";
-    const url =  "https://feelsmusic.fr/api/";
+    const url = "http://localhost:3001/";
+    // const url =  "https://feelsmusic.fr/api/";
     $fetch(url + 'productions?latest=true&limit=4', { 
         method: "GET",
     })

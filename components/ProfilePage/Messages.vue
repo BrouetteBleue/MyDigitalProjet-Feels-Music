@@ -5,17 +5,13 @@
                 </div>
                 <div class="flex flex-row w-full h-[800px] rounded-xl bg-[#292929] border-[1px] border-[#3D3D3D] py-10">
                     <div class="flex flex-col w-11/12 lg:w-[30%] overflow-y-auto ">
-                        <CardsMessageUserList Username="caca"/>
-                        <CardsMessageUserList />
-                        <CardsMessageUserList />
-                        <CardsMessageUserList />
-                        <CardsMessageUserList />
-                        <CardsMessageUserList />
-                        <CardsMessageUserList />
-                        <CardsMessageUserList />
-                        <CardsMessageUserList />
-                        <CardsMessageUserList />
-                        <CardsMessageUserList />
+                        <CardsMessageUserList Username="Utilisateur 1"/>
+                        <CardsMessageUserList Username="Utilisateur 2"/>
+                        <CardsMessageUserList Username="Utilisateur 3"/>
+                        <CardsMessageUserList Username="Utilisateur 4"/>
+                        <CardsMessageUserList Username="Utilisateur 5"/>
+                        <CardsMessageUserList Username="Utilisateur 6"/>
+
                     </div>
 
                     <div v-if="isLargeScreen" class="flex flex-col justify-start w-[70%]">

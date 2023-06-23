@@ -95,8 +95,8 @@ import { ref, onMounted, onUnmounted } from 'vue';
 
     const handleAdd = async () => {
         try {
-        // const url = "http://localhost:3001/uploadProduction";
-        const url =  "https://feelsmusic.fr/api/uploadProduction";
+        const url = "http://localhost:3001/uploadProduction";
+        // const url =  "https://feelsmusic.fr/api/uploadProduction";
        
         const formDataToSend = new FormData();
         
