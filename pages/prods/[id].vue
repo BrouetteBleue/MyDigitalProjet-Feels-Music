@@ -80,8 +80,7 @@
         </div>
        
         <div class="w-10/12 lg:w-6/12 flex flex-col">
-            <div class="flex flex-col items-center bg-[#292929] border-2 border-[#3D3D3D] rounded-xl pt-2 min-w-[115%] -ml-6"> <!-- song bar -->
-
+            <div class="flex flex-col items-center bg-[#292929] border-2 border-[#3D3D3D] rounded-xl pt-2 min-w-[115%] lg:min-w-full -ml-6 lg:-ml-0">
 
                 <div class="flex flex-row items-center">
                     <div class="flex flex-row w-4/12 items-center px-2 invisible lg:visible">

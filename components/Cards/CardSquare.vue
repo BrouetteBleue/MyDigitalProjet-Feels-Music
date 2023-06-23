@@ -1,6 +1,6 @@
 <template lang="">
     <div>
-        <img class="rounded-xl" src="@/assets/img/HARO536707.jpg" alt=""> 
+        <img class="rounded-xl h-[350px] w-full" :src="imageSrc" alt=""> 
         <div class="text-2xl font-semibold mt-2">
             yeh im mad
         </div>
@@ -16,7 +16,14 @@
 </template>
 
 <script setup>
+const props = defineProps({
+    img: {
+        type: Number,
+        default: 1
+    }
+})
 
+const imageSrc = computed(() => `/img/${props.img}.jpg`);
 </script>
 <style lang="">
     
