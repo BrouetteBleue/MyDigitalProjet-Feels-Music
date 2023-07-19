@@ -19,7 +19,6 @@
                     <div class="flex flex-row flex-wrap w-11/12 lg:w-full justify-center">
                         <input type="text" class="w-full lg:mx-[5%] rounded-xl border-[1px] bg-transparent border-[#3D3D3D] lg:mr-[5%] mb-5 lg:mb-10 px-3 py-2" placeholder="Adresse e-mail">
                     </div>
-
                     <div class="flex flex-row flex-wrap w-11/12 lg:w-full justify-center">
                         <input type="text" class="w-full lg:w-[40%] rounded-xl border-[1px] bg-transparent border-[#3D3D3D] lg:mr-[5%] mb-5 lg:mb-10 px-3 py-2" placeholder="Pays">
                         <input type="text" class="w-full lg:w-[40%] rounded-xl border-[1px] bg-transparent border-[#3D3D3D] lg:ml-[5%] mb-5 lg:mb-10 px-3 py-2" placeholder="Instagram">

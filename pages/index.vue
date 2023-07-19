@@ -104,14 +104,14 @@
     <div class="flex flex-col items-center justify-center">
         <h2 class="text-center lg:text-left font-bold text-2xl lg:text-3xl mb-16">Les stars du moment</h2>
         <div class="w-full flex flex-row justify-center items-center mb-36">
-            <div class="flex flex-row lg:space-x-0 lg:justify-evenly w-[78%] lg:overflow-hidden overflow-x-auto pb-10">  
-                <CardsCardRound 
-                    class="flex-shrink-0 w-4/5 sm:w-2/5 lg:w-[22%]" 
-                    v-for="beatmaker in currentStars"
-                    :key="beatmaker.pseudo"
-                    :beatmaker="beatmaker"
-                />
-            </div>
+<div class="flex flex-row lg:space-x-0 lg:justify-evenly w-[78%] lg:overflow-hidden overflow-x-auto pb-10">  
+    <CardsCardRound 
+        class="flex-shrink-0 w-4/5 sm:w-2/5 lg:w-[22%]" 
+        v-for="beatmaker in currentStars"
+        :key="beatmaker.pseudo"
+        :beatmaker="beatmaker"
+    />
+</div>
         </div>    
     </div>
 
@@ -134,7 +134,6 @@ const currentStars = ref({});
 
 onMounted(async () => {
     const url = "http://localhost:3001/";
-    // const url =  "https://feelsmusic.fr/api/";
     $fetch(url + 'productions?latest=true&limit=4', { 
         method: "GET",
     })

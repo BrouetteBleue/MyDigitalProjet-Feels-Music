@@ -10,7 +10,7 @@
             </div>
             <div class="flex flex-col items-center justify-center mt-2"> 
                 <nuxt-link :to="`/beatmakers/${beatmaker.pseudo}`">
-                    {{ beatmaker.country }}, {{ beatmaker.peudo }}
+                    {{ beatmaker.country }}, {{ beatmaker.pseudo }}
                 </nuxt-link>
                 <div v-if="CardType == 'beatmaker'" class="">
                     {{ beatmaker.productionsCount }} tracks
@@ -33,11 +33,4 @@
             default: 'normal'
         },
     })
-
-
-
-
 </script>
-<style lang="">
-    
-</style>
